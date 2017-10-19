@@ -3,6 +3,7 @@ import { NavController, AlertController, LoadingController, Loading } from 'ioni
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {TabsPage} from "../tabs/tabs";
 import {RegisterPage} from "../register/register";
+import { Pro } from '@ionic/pro';
 
 /**
  * DevDactic tutorial for the LoginPage page.
@@ -31,6 +32,8 @@ export class LoginPage {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
         if (allowed) {
+          Pro.getApp().monitoring.log('Login successfull', { level: 'info' })
+
           this.nav.setRoot(TabsPage);
         } else {
           this.showError("Access Denied");
