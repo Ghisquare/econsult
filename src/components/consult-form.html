@@ -1,0 +1,142 @@
+<div>
+  <div *ngIf="!consultation">
+    <form [formGroup]="consultForm" (ngSubmit)="onSubmit()" novalidate>
+      <ion-list ion-text no-lines>
+        <ion-item-group>
+          <ion-item-divider><h2 color="secondary">Médecin contact</h2></ion-item-divider>
+            <ion-item>
+              <ion-label>Spécialité</ion-label>
+              <ion-select interface="popover" formControlName="specialty">
+                <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)" >{{specialty.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item *ngIf="contacts">
+            <ion-label>Medecin contact</ion-label>
+            <ion-select interface="popover" formControlName="contact">
+              <ion-option *ngFor="let contact of contacts" value="{{contact.id}}" (ionSelect)="onSelectContact(contact)" [disabled]="!contact.online">{{contact.forname}} {{contact.name}} <ion-icon *ngIf="contact.online" name="wifi" icon-end></ion-icon></ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
+
+        <!--          <specialty-select></specialty-select>
+                  <contact-select specialty="[selectedSpecialty]"></contact-select>-->
+        <ion-item-group>
+          <ion-item-divider><h2 color="secondary">Description du cas</h2></ion-item-divider>
+          <ion-item>
+            <ion-label>Patient anonyme</ion-label>
+            <ion-checkbox checked="true" formControlName="anonymous_patient" (ionChange)="doAnonymous()"></ion-checkbox>
+          </ion-item>
+          <ion-item-group *ngIf="isAnonymousPatient">
+            <ion-list radio-group formControlName="sex" class="inline" no-lines>
+              <ion-list-header item-start>
+                Sexe
+              </ion-list-header>
+              <ion-item>
+                <ion-label>Masculin</ion-label>
+                <ion-radio value="0"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Féminin</ion-label>
+                 <ion-radio value="1"></ion-radio>
+              </ion-item>
+            </ion-list>
+          <ion-item>
+            <ion-label>age: </ion-label>
+            <ion-input type="number" min="0" max="125" formControlName="age"></ion-input>
+          </ion-item>
+        </ion-item-group>
+        <ion-item-group *ngIf="!isAnonymousPatient">
+          <ion-item-divider>Données du patient</ion-item-divider>
+          <ion-item ion-text>
+            <ion-label>Nom</ion-label>
+            <ion-input type="text" name="patient_name" required formControlName="patient_name"></ion-input>
+          </ion-item>
+          <ion-item ion-text>
+            <ion-label>Prénom</ion-label>
+            <ion-input type="text" name="patient_forname" required formControlName="patient_forname"></ion-input>
+          </ion-item>
+          <ion-item ion-text>
+            <ion-label>Numéro de sécurité sociale</ion-label>
+            <ion-input type="text" name="patient_identification" required formControlName="patient_identification"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Date de naissance</ion-label>
+            <ion-datetime displayFormat="MM/DD/YYYY" formControlName="patient_birthdate"></ion-datetime>
+          </ion-item>
+          <ion-list radio-group formControlName="sex" class="inline" no-lines>
+            <ion-list-header item-start>
+              Sexe
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Masculin</ion-label>
+              <ion-radio value="0"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label>Féminin</ion-label>
+              <ion-radio value="1"></ion-radio>
+            </ion-item>
+          </ion-list>
+        </ion-item-group>
+
+          <ion-item>
+          <ion-label>Description des symptomes </ion-label>
+          <ion-textarea placeholder="décrivez le cas clinique" formControlName="description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-buttons><button type="button" ion-button color="primary"  (click)="presentActionSheet()">Ajouter une photo</button></ion-buttons>
+        </ion-item>
+        <ion-item [hidden]="images[0] === null">
+           <ion-label>Photos</ion-label></ion-item>
+           <ion-list [hidden]="images[0] === null">
+             <ion-item *ngFor="let image of images; let i = index">
+               <ion-thumbnail item-start>
+                 <img src="{{pathForImage(image)}}">
+               </ion-thumbnail>
+               <ion-buttons>
+                 <button ion-button (click)="deleteImage(i)" type="button"><ion-icon item-end name="close"></ion-icon>Supprimer</button>
+                 <button ion-button (click)="showImage(i)" type="button"><ion-icon item-end name="show"></ion-icon>Voir</button>
+               </ion-buttons>
+
+             </ion-item>
+           </ion-list>
+
+        <ion-item>
+
+          <ion-label>Antécedents</ion-label>
+          <ion-textarea placeholder="antécédents s'il y lieu" formControlName="antecedent"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>Traitements en cours</ion-label>
+          <ion-textarea placeholder="traitements en cours s'il y lieu" formControlName="traitementEnCours"></ion-textarea>
+        </ion-item>
+        <ion-item-group class="inline">
+          <ion-item>
+            <ion-label>Début des symptomes</ion-label>
+            <ion-input type="number" min="0" max="60" formControlName="debut_symptome"></ion-input>
+          </ion-item>
+          <ion-item ion-text >
+            <ion-select formControlName="debut_symptome_unit" interface="popover">
+              <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
+      </ion-item-group>
+      </ion-list>
+      <ion-buttons>
+        <button type="submit" ion-button color="secondary" icon-end>Envoyer
+          <ion-icon name="send"></ion-icon></button>
+        <button type="reset" ion-button color="light" icon-end>Effacer
+          <ion-icon name="close"></ion-icon></button>
+      </ion-buttons>
+    </form>
+    <!--    <p>Form value: {{ consultForm.value | json }}</p>
+        <p>Form status: {{ consultForm.status | json }}</p>-->
+
+  </div>
+      <div *ngIf="consultation">
+        Votre demande de consultation a bien été envoyé
+
+        <!--AJOUTER RESUME DEMANDE-->
+    <button ion-button (click)="goHome()">OK</button>
+  </div>
+  </div>

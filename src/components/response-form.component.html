@@ -1,0 +1,49 @@
+<div>
+     <form [formGroup]="responseForm" (ngSubmit)="onSubmit()" novalidate>
+      <ion-list>
+        <ion-item>
+          <ion-label>Votre avis: </ion-label>
+          <ion-textarea placeholder="votre réponse à la demande de consultation" formControlName="response"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label>Traitement à initier: </ion-label>
+          <ion-textarea placeholder="traitement à initier s'il y a lieu" formControlName="treatment"></ion-textarea>
+        </ion-item>
+         <ion-item >
+            <label>
+              Délai de consultation conseillé
+            </label></ion-item>
+        <ion-item-group class="inline">
+           <ion-list class="inline" radio-group formControlName="status">
+            <ion-item ion-text *ngFor="let status of responseStatus; let i = index">
+              <ion-label>{{status}}</ion-label>
+              <ion-radio value="{{i}}"></ion-radio>
+            </ion-item>
+           </ion-list>
+
+          <ion-item *ngIf="responseForm.value.status > 0" >
+            <ion-input type="number" min="0" max="60" formControlName="rdv_number"></ion-input>
+          </ion-item>
+          <ion-item ion-text *ngIf="responseForm.value.status > 0" >
+            <ion-select formControlName="rdv_unit" interface="popover">
+              <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
+
+      </ion-list>
+      <ion-buttons>
+        <button type="submit" ion-button color="secondary" icon-end>Envoyer
+          <ion-icon name="send"></ion-icon></button>
+        <button type="reset" ion-button color="light" icon-end>Effacer
+          <ion-icon name="close"></ion-icon></button>
+      </ion-buttons>
+    </form>
+    <p>Form value: {{ responseForm.value | json }}</p>
+    <p>Form status: {{ responseForm.status | json }}</p>
+  </div>
+ <!-- <div *ngIf="consultation">
+    Votre demande de consultation a bien été envoyé
+    AJOUTER RESUME DEMANDE
+    <button ion-button (click)="goHome()">OK</button>
+  </div>-->

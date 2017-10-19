@@ -1,0 +1,61 @@
+<!--<div *ngIf="consultation">
+  <h2>Détail de la consultation n° {{consultation.id}} </h2>
+  <div><label>id: </label>{{consultation.id}}</div>
+  <div>
+    <label>age: </label>
+    <ion-list radio-group [(ngModel)]="consultation.sexe">
+      <ion-list-header>
+        Sexe
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Masculin</ion-label>
+        <ion-radio value="0"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Féminin</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <ion-input type="number" [(ngModel)]="consultation.age" />
+    <label>name: </label>
+    <ion-textarea placeholder="name"></ion-textarea>
+  </div>
+</div>-->
+
+<div *ngIf="!consultation">
+  <h2>Créer une demande de consultation </h2>
+  <div>
+    <ion-list>
+        <ion-list radio-group>
+          <ion-list-header item-start>
+            Sexe
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Masculin</ion-label>
+            <ion-radio value="0"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Féminin</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+        </ion-list>
+      <ion-item>
+        <ion-label>age: </ion-label>
+        <ion-input type="number" min="0" max="125"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>description du cas: </ion-label>
+        <ion-textarea placeholder="description du cas"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <button ion-button icon-right>
+          Consulter
+          <ion-icon name="send" ></ion-icon>
+        </button>
+      </ion-item>
+    </ion-list>
+  </div>
+</div>

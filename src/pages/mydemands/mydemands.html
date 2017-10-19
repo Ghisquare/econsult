@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <logout-button></logout-button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Je donne un avis</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+<div *ngIf="!selectedDemand; else responseForm">
+    <ion-list>
+      <button ion-item *ngFor="let demand of demands" (click)="itemTapped($event, demand)">
+        {{demand.id}}
+        <div class="item-note" item-right>
+          {{demand.description}}
+        </div>
+      </button>
+    </ion-list>
+</div>
+  <!--Eventuellement séparer component response-->
+<ng-template #responseForm>
+  <div *ngIf="selectedDemand.xchangeStatus== 0; else responseSubmitted">
+    <demand-resume [consultation]="selectedDemand"></demand-resume>
+    <response-form [consultation]="selectedDemand"></response-form>
+  </div>
+  <ng-template #responseSubmitted>
+    <h1 ion-text color="primary">Merci</h1>
+    <p>Votre réponse à bien été envoyé à M.{{selectedDemand.author.name}}</p>
+    <button ion-button (click)="goHome()">OK</button>
+  </ng-template>
+  </ng-template>
+</ion-content>

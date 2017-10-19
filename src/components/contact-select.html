@@ -1,0 +1,10 @@
+<div *ngIf="specialty">
+  <ion-list>
+    <ion-item>
+      <ion-label>Medecin contact</ion-label>
+      <ion-select>
+        <ion-option *ngFor="let contact of contacts" value="{{contact.id}}">{{contact.name}} en ligne: {{contact.online}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+</div>

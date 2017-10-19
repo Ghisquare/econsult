@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 @Component({
-  selector: 'page-list',
-  templateUrl: 'list.html'
+  selector: 'page-consult',
+  templateUrl: 'consult.html'
 })
-export class ListPage {
+export class ConsultPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
@@ -21,8 +21,8 @@ export class ListPage {
     this.items = [];
     for (let i = 1; i < 11; i++) {
       this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
+        title: 'Consultation ' + i,
+        note: 'docteur #' + i,
         icon: this.icons[Math.floor(Math.random() * this.icons.length)]
       });
     }
@@ -30,7 +30,7 @@ export class ListPage {
 
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
-    this.navCtrl.push(ListPage, {
+    this.navCtrl.push(ConsultPage, {
       item: item
     });
   }

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <logout-button></logout-button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Consulter</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <h2>Demande de consultation en attente</h2>
+  <ion-list>
+    <button ion-item *ngFor="let consultation of consultations">
+      {{consultation.id}}
+      <div class="item-note" item-right>
+        {{consultation.description}}
+      </div>
+    </button>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,132 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title ion-text><ion-icon item-start name="home"></ion-icon>
+      Application Santé Collaborative - S'enregister</ion-title>  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form *ngIf="!user" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label>Vous êtes</ion-label>
+        <ion-select interface="popover" formControlName="userType">
+          <ion-option ion-text *ngFor="let type of userTypes; let i = index" value="{{i}}" (ionSelect)="onSelectType(i)">{{type}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="selectedType == 0">
+        <ion-label>Date de naissance</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="selectedType == 1">
+        <ion-label>Profession</ion-label>
+        <ion-select interface="popover" formControlName="profession">
+          <ion-option *ngFor="let profession of professions" value="{{profession.id}}" (ionSelect)="onSelectProfession(profession)">{{profession.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-list *ngIf="selectedType == 2" radio-group formControlName="generalist" class="inline" no-lines>
+        <ion-item>
+          <ion-label>Généraliste</ion-label>
+          <ion-radio value="0" (ionSelect)="doGeneralist()"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Spécialiste</ion-label>
+          <ion-radio value="1" (ionSelect)="doSpecialist()"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <ion-item *ngIf="isSpecialist == true">
+        <ion-label>Spécialité</ion-label>
+        <ion-select interface="popover" formControlName="specialty">
+          <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)">{{specialty.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="selectedType > 0">
+        <ion-label>J'accepte les demandes directes de patients</ion-label>
+        <ion-checkbox formControlName="accept_patient"></ion-checkbox>
+      </ion-item>
+
+
+      <ion-list radio-group formControlName="sex" class="inline" no-lines>
+          <ion-item>
+            <ion-label>
+              Sexe
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Masculin</ion-label>
+            <ion-radio value="0"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Féminin</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+        </ion-list>
+      <ion-item ion-text>
+          <ion-label>Votre nom</ion-label>
+          <ion-input type="text" name="name" required formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item ion-text>
+        <ion-label>Votre prénom</ion-label>
+        <ion-input type="text" name="forname" required formControlName="forname"></ion-input>
+      </ion-item>
+      <ion-item ion-text>
+        <ion-label>{{identificationTitle}}</ion-label>
+        <ion-input type="text" name="identification" required formControlName="identification"></ion-input>
+      </ion-item>
+      <ion-item ion-text>
+        <ion-label>Votre email</ion-label>
+        <ion-input type="email" name="email" required formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item ion-text>
+        <ion-label>Votre mot de passe</ion-label>
+        <ion-input type="password" name="password" required formControlName="pwd"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-item ion-text>
+        <ion-label>Votre téléphone</ion-label>
+        <ion-input type="text" name="tel" required formControlName="tel"></ion-input>
+      </ion-item>
+      <ion-item ion-text>
+        <ion-label>Identifiant Skype</ion-label> (si utilisé)
+        <ion-input type="text" name="skype" required formControlName="skype"></ion-input>
+      </ion-item>
+      <ion-item ion-text>
+        <ion-label>Identifiant Facetime</ion-label> (si utilisé)
+        <ion-input type="text" name="facetime" required formControlName="facetime"></ion-input>
+      </ion-item>
+
+      <!--    <ion-item ion-text>
+            <ion-label>Confirmez votre email</ion-label>
+            <ion-input type="email" name="email_confirm" required></ion-input>
+          </ion-item>-->
+
+<!--    <ion-item ion-text>
+      <ion-label>Confirmez votre mot de passe</ion-label>
+      <ion-input type="password" name="password_confirm" required></ion-input>
+    </ion-item>-->
+    <ion-buttons>
+      <button type="submit" ion-button color="secondary" icon-end>Envoyer
+        <ion-icon name="send"></ion-icon></button>
+      <button type="reset" ion-button color="light" icon-end>Effacer
+        <ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+
+  </form>
+  <!--  <p>Form value: {{ registerForm.value | json }}</p>
+    <p>Form status: {{ registerForm.status | json }}</p>-->
+
+    <div *ngIf="user">
+      Merci {{user.forname}} {{user.name}}, votre profil a bien été créé.<br />
+      Vous pouvez maintenant utiliser l'application.
+    <button ion-button (click)="goHome()">OK</button>
+  </div>
+
+</ion-content>
