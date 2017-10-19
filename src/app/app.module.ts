@@ -40,7 +40,17 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
+import { Pro } from '@ionic/pro';
 
+const IonicPro = Pro.init('b1148716', {
+  appVersion: "0.0.1"
+});
+
+export class MyErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    IonicPro.monitoring.handleNewError(err);
+  }
+}
 
 //import {ConsultListPage} from "../pages/consultlist/consultlist";
 
@@ -94,7 +104,7 @@ import {ShowPhotoPage} from "../pages/show-photo/show-photo";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    {provide: ErrorHandler, useClass: MyErrorHandler},
     AuthService,
     UserService,
     SpecialtyService,

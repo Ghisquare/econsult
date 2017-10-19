@@ -8,7 +8,7 @@
       <h3 ion-text color="primary">Spécialité</h3><p>{{authorSpecialty}}</p>
       <ion-buttons *ngIf="question">
         <button ion-button (click)="launchTelCall()"><ion-icon item-start name="call" ></ion-icon>Appel tél</button>
-        <a [href]="sanitizeSkype()" *ngIf="consultation.author.skype"><button  ion-button (click)="launchSkypeCall()"><ion-icon item-start name="logo-skype"></ion-icon>Appel skype</button></a>
+        <a [href]="sanitizeSkype()" *ngIf="consultation.author.skype"><button  ion-button><ion-icon item-start name="logo-skype"></ion-icon>Appel skype</button></a>
       </ion-buttons>
 
     </ion-item>

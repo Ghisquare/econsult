@@ -2,9 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CallNumber } from '@ionic-native/call-number';
 
 
-import { User } from '../app/model/user';
-import { UserService } from '../providers/user.service';
-import {Specialty} from "../app/model/specialty";
 import {Consultation} from "../app/model/consultation";
 import {sexText, getSpecialtyName} from "../app/functions";
 import {responseStatus} from "../app/functions"
