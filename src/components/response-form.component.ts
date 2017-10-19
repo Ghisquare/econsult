@@ -1,11 +1,8 @@
 import {Component, Input, OnInit}                     from '@angular/core';
 import {FormBuilder, FormGroup, Validators}   from '@angular/forms';
 import {Consultation}                         from "../app/model/consultation";
-import {UserService} from "../providers/user.service";
 import {ConsultationService} from "../providers/consultation.service";
-import {AuthService} from "../providers/auth-service/auth-service";
-import {Loading, LoadingController, NavController} from "ionic-angular";
-import {TabsPage} from "../pages/tabs/tabs";
+import {Loading, LoadingController} from "ionic-angular";
 import {responseStatus} from "../app/functions"
 
 @Component({
@@ -21,9 +18,8 @@ export class ResponseFormComponent implements OnInit{
   timeUnits: Array<any>;
 
 
-  constructor(private fb: FormBuilder, private userService: UserService,
-              private authService: AuthService, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
-            private navCtrl: NavController) { // <--- inject FormBuilder
+  constructor(private fb: FormBuilder, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
+            ) { // <--- inject FormBuilder
     this.createForm();
     this.timeUnits = consultationService.getTimeUnits();
   }

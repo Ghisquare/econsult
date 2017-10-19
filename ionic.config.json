@@ -1,5 +1,8 @@
 {
   "name": "E-Consult",
   "app_id": "b1148716",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }

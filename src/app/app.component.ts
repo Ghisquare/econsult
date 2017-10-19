@@ -1,17 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
-import { ConsultPage } from '../pages/consult/consult';
-import { ConsultListPage } from '../pages/consultlist/consultlist';
-import { TabsPage } from '../pages/tabs/tabs';
-import { MyDemandsPage } from '../pages/mydemands/mydemands';
 import {Consultation} from "./model/consultation";
 import {User} from "./model/user";
-import {ConsultFormComponent} from "../components/consult-form.component";
 import { ConsultationService } from '../providers/consultation.service';
 import {UserService} from "../providers/user.service";
 

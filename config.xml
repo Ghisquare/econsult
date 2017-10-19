@@ -90,7 +90,6 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
-    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
     <plugin name="cordova-plugin-ionic" spec="^2.0.1">
         <variable name="APP_ID" value="b1148716" />
         <variable name="CHANNEL_NAME" value="Testchannel" />
