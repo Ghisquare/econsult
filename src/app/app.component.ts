@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import {AlertController, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -8,6 +8,8 @@ import {Consultation} from "./model/consultation";
 import {User} from "./model/user";
 import { ConsultationService } from '../providers/consultation.service';
 import {UserService} from "../providers/user.service";
+import {AuthService} from "../providers/auth-service/auth-service";
+import {TabsPage} from "../pages/tabs/tabs";
 
 @Component({
   templateUrl: 'app.html',
@@ -24,7 +26,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private consultationService: ConsultationService
+  constructor(public platform: Platform, private alertCtrl: AlertController, private auth: AuthService, public statusBar: StatusBar, public splashScreen: SplashScreen, private consultationService: ConsultationService
     , private userService: UserService) {
     this.initializeApp();
 
@@ -35,7 +37,22 @@ export class MyApp {
   }
 
   getUsers(): void {
-    this.userService.getUsers().then(users => this.users = users);
+    this.userService.getUsers().then(users => {
+      this.users = users;
+      //AUTO LOGIN : comment to have login
+      this.auth.login({ email: 'gb@gb.com', password: 'gb' }).subscribe(allowed => {
+          if (allowed) {
+
+            this.nav.setRoot(TabsPage);
+          } else {
+            this.showError("Access Denied");
+          }
+        },
+        error => {
+          this.showError(error);
+        });
+
+    });
   }
 
   initializeApp() {
@@ -47,6 +64,17 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+
+  showError(text) {
+
+    let alert = this.alertCtrl.create({
+      title: 'Fail',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present(prompt);
   }
 
   openPage(page) {

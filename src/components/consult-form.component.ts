@@ -4,7 +4,7 @@ import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 
-import {FormBuilder, FormGroup, Validators}   from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl }   from '@angular/forms';
 import {Consultation}                         from "../app/model/consultation";
 import {Specialty}                            from "../app/model/specialty";
 import {SpecialtyService} from "../providers/specialty.service";
@@ -20,6 +20,8 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {Patient} from "../app/model/patient";
 import {PatientService} from "../providers/patient.service";
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
+import {Image} from "../app/model/image";
+import {ImageService} from "../providers/image.service";
 
 declare var cordova: any;
 
@@ -31,8 +33,6 @@ export class ConsultFormComponent implements OnInit{
   loading: Loading;
   consultation: Consultation;
   patient: Patient;
-
-  consultations : Consultation[];//for debbugging
 
   specialties: Specialty[];
   contacts: User[];
@@ -49,14 +49,23 @@ export class ConsultFormComponent implements OnInit{
               private authService: AuthService, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
             private navCtrl: NavController, private  patientService: PatientService, private camera: Camera,
               private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform,
-              public modalCtrl: ModalController) { // <--- inject FormBuilder
+              public modalCtrl: ModalController, private imgService: ImageService) { // <--- inject FormBuilder
     this.createForm();
     this.timeUnits = consultationService.getTimeUnits();
-    console.log(this.timeUnits);
   }
 
   public deleteImage(index){
     this.file.removeFile(cordova.file.dataDirectory, this.images[index]).then(success => {
+      this.consultForm.removeControl('image' + this.images);
+      if (index + 1 < this.images.length) {
+        for(let i = index; i < this.images.length - 1; i++) {// need to move control value up
+          let oldValue = this.consultForm.controls['image' + (i + 1)].value;
+          console.log('old value:' + oldValue);
+          this.consultForm.controls['image' + (i)].setValue(oldValue);
+        }
+      }
+      this.consultForm.removeControl('image' + (this.images.length - 1));
+
       this.images.splice(index, 1);
     }, error => {
       this.presentToast('Error while storing file.');
@@ -67,7 +76,6 @@ export class ConsultFormComponent implements OnInit{
   public showImage(index){
     const photoModal = this.modalCtrl.create(ShowPhotoPage, { imageFile:  this.pathForImage(this.images[index]) });
     photoModal.present();
-
   }
 
   public presentActionSheet() {
@@ -135,6 +143,8 @@ export class ConsultFormComponent implements OnInit{
 // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+      let controlName = 'image' + this.images.length;
+      this.consultForm.addControl(controlName, new FormControl("", Validators.required));
       this.images.push(newFileName);
     }, error => {
       this.presentToast('Error while storing file.');
@@ -152,11 +162,7 @@ export class ConsultFormComponent implements OnInit{
 
 // Always get the accurate path to your apps folder
   public pathForImage(img) {
-    if (img === null) {
-      return '';
-    } else {
-      return cordova.file.dataDirectory + img;
-    }
+    return this.imgService.pathForImage(img);
   }
 
   createForm() {
@@ -193,7 +199,7 @@ export class ConsultFormComponent implements OnInit{
     this.selectedContact = contact;
   }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.specialtyService.getSpecialties().then(specialties => this.specialties = specialties);
   }
 
@@ -213,8 +219,6 @@ export class ConsultFormComponent implements OnInit{
     } else {
       this.doSaveConsultation();
     }
-
-    //console.log("form submitted" + this.consultation.id);
   }
 
   doSaveConsultation(){
@@ -222,7 +226,22 @@ export class ConsultFormComponent implements OnInit{
     this.consultationService.createConsultation(this.consultation).then(consultation => {
       this.consultation = consultation;
       console.log("ConsultationData: " + JSON.stringify(this.consultation));
-      this.loading.dismiss();
+      for(let i = 0; i < this.images.length; i++) {
+        let saveImage = new Image();
+        saveImage.uri = this.images[i];
+        saveImage.description = this.consultForm.controls['image' + i].value;
+        saveImage.consultation_id = this.consultation.id;
+        console.log("Saved Image before: " + JSON.stringify(saveImage));
+
+        this.imgService.createImage(saveImage).then(image => {
+          saveImage = image;
+          console.log("Saved Image: " + JSON.stringify(saveImage));
+          if(i == this.images.length - 1) this.loading.dismiss();
+        });
+
+      }
+      if(this.images.length == 0) this.loading.dismiss();
+
     });
   }
 
@@ -242,6 +261,8 @@ export class ConsultFormComponent implements OnInit{
   prepareSaveConsultation(): Consultation{
     const formModel = this.consultForm.value;
     const saveConsultation = new Consultation();
+    saveConsultation.date_creation = new Date();
+    console.log("DateCreation" + saveConsultation.date_creation );
     saveConsultation.sex = formModel.sex;
     saveConsultation.age = formModel.age;
     saveConsultation.description = formModel.description;

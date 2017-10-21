@@ -22,7 +22,23 @@
     <h3 ion-text color="primary">traitements en cours: </h3> <p>{{consultation.traitementEnCours}}</p>
     <h3 ion-text color="primary">début des symptomes: </h3> <p>{{consultation.debut_symptome}} {{symptomeUnit}}</p>
   </ion-item>
-</ion-list>
+  <ion-item *ngIf="images.length > 0">
+    <ion-label>Photos</ion-label>
+  </ion-item>
+  <ion-list>
+    <ion-item-group *ngFor="let image of images; let i = index">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="{{pathForImage(image.uri)}}">
+        </ion-thumbnail>
+        <p>{{image.description}}</p>
+        <button ion-button (click)="showImage(i)">Agrandir</button>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+
+  </ion-list>
+
 <ion-list *ngIf="response">
   <ion-item>
     <h2 ion-text color="secondary">Réponse de M. {{consultation.contact.name}}</h2>

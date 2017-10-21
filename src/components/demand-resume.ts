@@ -7,6 +7,10 @@ import {sexText, getSpecialtyName} from "../app/functions";
 import {responseStatus} from "../app/functions"
 import {ConsultationService} from "../providers/consultation.service";
 import {DomSanitizer} from "@angular/platform-browser";
+import {ImageService} from "../providers/image.service";
+import {Image} from "../app/model/image";
+import {ShowPhotoPage} from "../pages/show-photo/show-photo";
+import {ModalController} from "ionic-angular";
 
 
 @Component({
@@ -26,9 +30,11 @@ export class DemandResumeComponent implements OnInit {
   symptomeUnit: string;
   telNumber: string;
   skype: string;
+  images: Array<Image>;
 
 
-  constructor(private consultationService: ConsultationService, private callNumber: CallNumber, private sanitizer:DomSanitizer) {
+  constructor(private consultationService: ConsultationService, private callNumber: CallNumber, private sanitizer:DomSanitizer,
+              private imgService: ImageService, private modalCtrl: ModalController) {
     // If we navigated to this page, we will have an item available as a nav param
   }
 
@@ -45,7 +51,11 @@ export class DemandResumeComponent implements OnInit {
   ngOnInit(): void {
  //   this.userService.getUsersBySpecialty(this.specialty.id).then(users => this.contacts = users);
  //   console.log("c-select.OnInit" + this.specialty.id);
-    console.log(this.consultation.id);
+    this.imgService.getImagesByConsultationId(this.consultation.id).then(images => {
+      this.images = images;
+      console.log("images:" + images);
+    });
+
     this.sexTexte = sexText(this.consultation.sex);
     this.authorSpecialty = getSpecialtyName(this.consultation.author.specialty_id);
     if(this.question) {
@@ -76,4 +86,12 @@ export class DemandResumeComponent implements OnInit {
       .catch(() => console.log('Error launching dialer'));
   }
 
+  public pathForImage(img) {
+    return this.imgService.pathForImage(img);
+  }
+
+  public showImage(index){
+    const photoModal = this.modalCtrl.create(ShowPhotoPage, { imageFile:  this.pathForImage(this.images[index].uri) });
+    photoModal.present();
+  }
 }

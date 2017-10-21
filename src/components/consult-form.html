@@ -57,7 +57,7 @@
           </ion-item>
           <ion-item ion-text>
             <ion-label>Numéro de sécurité sociale</ion-label>
-            <ion-input type="text" name="patient_identification" required formControlName="patient_identification"></ion-input>
+            <ion-input type="text" required formControlName="patient_identification"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label>Date de naissance</ion-label>
@@ -85,19 +85,24 @@
         <ion-item>
           <ion-buttons><button type="button" ion-button color="primary"  (click)="presentActionSheet()">Ajouter une photo</button></ion-buttons>
         </ion-item>
-        <ion-item [hidden]="images[0] === null">
+        <ion-item *ngIf="images.length > 0">
            <ion-label>Photos</ion-label></ion-item>
-           <ion-list [hidden]="images[0] === null">
-             <ion-item *ngFor="let image of images; let i = index">
-               <ion-thumbnail item-start>
-                 <img src="{{pathForImage(image)}}">
-               </ion-thumbnail>
-               <ion-buttons>
-                 <button ion-button (click)="deleteImage(i)" type="button"><ion-icon item-end name="close"></ion-icon>Supprimer</button>
-                 <button ion-button (click)="showImage(i)" type="button"><ion-icon item-end name="show"></ion-icon>Voir</button>
-               </ion-buttons>
+           <ion-list>
+             <ion-item-group *ngFor="let image of images; let i = index">
+               <ion-item>
+                 <ion-thumbnail item-start>
+                   <img src="{{pathForImage(image)}}">
+                 </ion-thumbnail>
+                 <ion-input type="text" formControlName="image{{i}}" placeholder="description de l'image"></ion-input>
+               </ion-item>
+               <ion-item>
+                 <ion-buttons>
+                   <button ion-button (click)="deleteImage(i)" type="button"><ion-icon item-end name="close"></ion-icon>Supprimer</button>
+                   <button ion-button (click)="showImage(i)" type="button"><ion-icon item-end name="show"></ion-icon>Voir</button>
+                 </ion-buttons>
 
-             </ion-item>
+               </ion-item>
+               </ion-item-group>
            </ion-list>
 
         <ion-item>
@@ -129,8 +134,8 @@
           <ion-icon name="close"></ion-icon></button>
       </ion-buttons>
     </form>
-    <!--    <p>Form value: {{ consultForm.value | json }}</p>
-        <p>Form status: {{ consultForm.status | json }}</p>-->
+        <p>Form value: {{ consultForm.value | json }}</p>
+        <p>Form status: {{ consultForm.status | json }}</p>
 
   </div>
       <div *ngIf="consultation">

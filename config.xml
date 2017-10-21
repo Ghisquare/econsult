@@ -97,4 +97,5 @@
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
         <variable name="MAX_STORE" value="2" />
     </plugin>
+    <allow-navigation href="http://192.168.1.8:8100" />
 </widget>

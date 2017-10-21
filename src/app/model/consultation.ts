@@ -2,6 +2,11 @@ import {User} from "./user";
 import {Patient} from "./patient";
 
 export class Consultation {
+  id: number;
+
+  date_creation: Date;
+  date_response: Date;
+  date_close: Date;
 
   sex: number;
   age: number;
@@ -15,7 +20,6 @@ export class Consultation {
   author: User;
   contact_id: number;
   contact: User;
-  id: number;
   response: string;
   treatment: string;
   rdvStatus: number;

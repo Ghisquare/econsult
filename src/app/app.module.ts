@@ -41,6 +41,7 @@ import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
 import { Pro } from '@ionic/pro';
+import {ImageService} from "../providers/image.service";
 
 const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
@@ -110,6 +111,7 @@ export class MyErrorHandler implements ErrorHandler {
     SpecialtyService,
     ProfessionService,
     PatientService,
+    ImageService,
     CallNumber,
     File,
     Transfer,
