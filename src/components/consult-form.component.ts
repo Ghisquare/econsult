@@ -1,4 +1,4 @@
-import {Component, Input, OnInit}                     from '@angular/core';
+import {Component, ErrorHandler, Input, OnInit}                     from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
@@ -52,7 +52,7 @@ export class ConsultFormComponent implements OnInit{
               private authService: AuthService, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
             private navCtrl: NavController, private  patientService: PatientService, private camera: Camera,
               private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform,
-              public modalCtrl: ModalController, private imgService: ImageService, private myErrorHandler: MyErrorHandler) { // <--- inject FormBuilder
+              public modalCtrl: ModalController, private imgService: ImageService, private myErrorHandler: ErrorHandler) { // <--- inject FormBuilder
     this.createForm();
     this.timeUnits = consultationService.getTimeUnits();
   }
