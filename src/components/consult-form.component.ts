@@ -152,7 +152,7 @@ export class ConsultFormComponent implements OnInit{
 
 // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
-    Pro.getApp().monitoring.log("copyFileToLocalDir("+namePath+", "+currentName +", "+newFileName+")");
+    Pro.getApp().monitoring.log("copyFileToLocalDir("+namePath+", "+currentName +", "+newFileName+")cordova.file.dataDirectory:" +cordova.file.dataDirectory);
 
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       Pro.getApp().monitoring.log("This.copyfile success. Length" + this.images.length);
