@@ -155,10 +155,15 @@ export class ConsultFormComponent implements OnInit{
     Pro.getApp().monitoring.log("copyFileToLocalDir("+namePath+", "+currentName +", "+newFileName+")");
 
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
+      Pro.getApp().monitoring.log("This.copyfile success. Length" + this.images.length);
+
       let controlName = 'image' + this.images.length;
       this.consultForm.addControl(controlName, new FormControl("", Validators.required));
       this.images.push(newFileName);
+      Pro.getApp().monitoring.log("Error while storing file.");
+
     }, error => {
+      Pro.getApp().monitoring.log("Error while storing file. Length" + this.images.length);
       this.myErrorHandler.handleError(error);
       this.presentToast('Error while storing file.');
     });
@@ -215,8 +220,6 @@ export class ConsultFormComponent implements OnInit{
   ngOnInit(): void {
     this.specialtyService.getSpecialties().then(specialties => {
       this.specialties = specialties;
-      this.presentToast('onInit: test toast.');
-
     });
   }
 
