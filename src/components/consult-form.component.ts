@@ -22,6 +22,9 @@ import {PatientService} from "../providers/patient.service";
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
 import {Image} from "../app/model/image";
 import {ImageService} from "../providers/image.service";
+import {MyErrorHandler} from "../app/app.module";
+import { Pro } from '@ionic/pro';
+
 
 declare var cordova: any;
 
@@ -49,7 +52,7 @@ export class ConsultFormComponent implements OnInit{
               private authService: AuthService, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
             private navCtrl: NavController, private  patientService: PatientService, private camera: Camera,
               private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform,
-              public modalCtrl: ModalController, private imgService: ImageService) { // <--- inject FormBuilder
+              public modalCtrl: ModalController, private imgService: ImageService, private myErrorHandler: MyErrorHandler) { // <--- inject FormBuilder
     this.createForm();
     this.timeUnits = consultationService.getTimeUnits();
   }
@@ -114,8 +117,12 @@ export class ConsultFormComponent implements OnInit{
 
     // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
+      Pro.getApp().monitoring.log("Take picture-sourceType" + sourceType + "path" + imagePath);
+
+
       // Special handling for Android library
       if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+        Pro.getApp().monitoring.log("this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
         this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
@@ -123,11 +130,14 @@ export class ConsultFormComponent implements OnInit{
             this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
           });
       } else {
+        Pro.getApp().monitoring.log("NOT this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
+
         var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
         this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
       }
     }, (err) => {
+      this.myErrorHandler.handleError(err);
       this.presentToast('Error while selecting image.');
     });
   }
@@ -142,11 +152,14 @@ export class ConsultFormComponent implements OnInit{
 
 // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
+    Pro.getApp().monitoring.log("copyFileToLocalDir("+namePath+", "+currentName +", "+newFileName+")");
+
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
       let controlName = 'image' + this.images.length;
       this.consultForm.addControl(controlName, new FormControl("", Validators.required));
       this.images.push(newFileName);
     }, error => {
+      this.myErrorHandler.handleError(error);
       this.presentToast('Error while storing file.');
     });
   }
@@ -200,7 +213,11 @@ export class ConsultFormComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.specialtyService.getSpecialties().then(specialties => this.specialties = specialties);
+    this.specialtyService.getSpecialties().then(specialties => {
+      this.specialties = specialties;
+      this.presentToast('onInit: test toast.');
+
+    });
   }
 
   onSubmit() {
