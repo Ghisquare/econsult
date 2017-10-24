@@ -281,7 +281,7 @@ export class ConsultFormComponent implements OnInit{
   prepareSaveConsultation(): Consultation{
     const formModel = this.consultForm.value;
     const saveConsultation = new Consultation();
-    saveConsultation.date_creation = new Date();
+    saveConsultation.date_creation = Date.now();
     console.log("DateCreation" + saveConsultation.date_creation );
     saveConsultation.sex = formModel.sex;
     saveConsultation.age = formModel.age;

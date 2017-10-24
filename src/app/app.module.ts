@@ -42,6 +42,7 @@ import { FilePath } from '@ionic-native/file-path';
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
 import { Pro } from '@ionic/pro';
 import {ImageService} from "../providers/image.service";
+import {ContactButtonsComponent} from "../components/contact-buttons";
 
 const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
@@ -70,6 +71,7 @@ export class MyErrorHandler implements ErrorHandler {
     DemandResumeComponent,
     PatientResumeComponent,
     ResponseFormComponent,
+    ContactButtonsComponent,
     TabsPage,
     LogoutButton,
     RegisterPage,

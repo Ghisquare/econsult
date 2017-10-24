@@ -1,17 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CallNumber } from '@ionic-native/call-number';
 
 
 import {Consultation} from "../app/model/consultation";
-import {sexText, getSpecialtyName} from "../app/functions";
+import {sexText, getSpecialtyName, afficheDate} from "../app/functions";
 import {responseStatus} from "../app/functions"
 import {ConsultationService} from "../providers/consultation.service";
-import {DomSanitizer} from "@angular/platform-browser";
 import {ImageService} from "../providers/image.service";
 import {Image} from "../app/model/image";
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
 import {ModalController} from "ionic-angular";
-
 
 @Component({
   selector: 'demand-resume',
@@ -28,19 +25,15 @@ export class DemandResumeComponent implements OnInit {
   nomTitreMedecin: string;
   statusText: string;
   symptomeUnit: string;
-  telNumber: string;
-  skype: string;
-  images: Array<Image>;
+  images: Array<Image> = [];
+  dateAffiche: string;
 
 
-  constructor(private consultationService: ConsultationService, private callNumber: CallNumber, private sanitizer:DomSanitizer,
+  constructor(private consultationService: ConsultationService,
               private imgService: ImageService, private modalCtrl: ModalController) {
     // If we navigated to this page, we will have an item available as a nav param
   }
 
-  sanitizeSkype(){
-    return this.sanitizer.bypassSecurityTrustUrl('skype:'+this.skype+'?call');
-  }
  /* itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(ConsultListPage, {
@@ -53,7 +46,7 @@ export class DemandResumeComponent implements OnInit {
  //   console.log("c-select.OnInit" + this.specialty.id);
     this.imgService.getImagesByConsultationId(this.consultation.id).then(images => {
       this.images = images;
-      console.log("images:" + images);
+      //console.log("images:" + images);
     });
 
     this.sexTexte = sexText(this.consultation.sex);
@@ -62,15 +55,16 @@ export class DemandResumeComponent implements OnInit {
       this.titreMedecin = "Médecin demandant";
       this.nomTitreMedecin = this.consultation.author.forname + " " + this.consultation.author.name;
       this.authorSpecialty = getSpecialtyName(this.consultation.author.specialty_id);
-      this.telNumber = this.consultation.author.tel;
-      this.skype = this.consultation.author.skype;
+      var options = {
+        year: "numeric", month: "numeric",
+        day: "numeric", hour: "2-digit", minute: "2-digit"
+      };
+      this.dateAffiche = afficheDate(this.consultation.date_creation);
     } else {
       this.titreMedecin = "Médecin contacté";
       this.nomTitreMedecin = this.consultation.contact.forname + " " + this.consultation.contact.name;
       this.authorSpecialty = getSpecialtyName(this.consultation.contact.specialty_id);
-      this.telNumber = this.consultation.contact.tel;
-      this.skype = this.consultation.contact.skype;
-
+      this.dateAffiche =  afficheDate(this.consultation.date_response);
     }
     if(this.consultation.rdvStatus == 0) {
       this.statusText = responseStatus[this.consultation.rdvStatus];
@@ -78,12 +72,6 @@ export class DemandResumeComponent implements OnInit {
       this.statusText = responseStatus[1] + " " + this.consultation.rdvStatus + " " + this.consultationService.getTimeUnit(this.consultation.rdvUnit);
     }
     this.symptomeUnit = this.consultationService.getTimeUnit(this.consultation.debut_symptome_unit);
-  }
-
-  launchTelCall(){
-    this.callNumber.callNumber(this.telNumber, true)
-      .then(() => console.log('Launched dialer!'))
-      .catch(() => console.log('Error launching dialer'));
   }
 
   public pathForImage(img) {

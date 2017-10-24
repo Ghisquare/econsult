@@ -47,6 +47,7 @@ export class MyResponsesPage implements OnInit {
     let consultation = this.selectedResponse;
     console.log(" let consultation");
     consultation.xchangeStatus = 2;
+    consultation.date_close = Date.now();
     console.log("consultation.xchangeStatus = 2");
 
     this.consultationService.update(consultation).then(consultation => {

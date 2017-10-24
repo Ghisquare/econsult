@@ -1,12 +1,13 @@
 import {User} from "./user";
 import {Patient} from "./patient";
+import {Timestamp} from "rxjs/Rx";
 
 export class Consultation {
   id: number;
 
-  date_creation: Date;
-  date_response: Date;
-  date_close: Date;
+  date_creation: number;
+  date_response: number;
+  date_close: number;
 
   sex: number;
   age: number;

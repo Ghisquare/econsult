@@ -77,11 +77,22 @@
             </ion-item>
           </ion-list>
         </ion-item-group>
-
-          <ion-item>
+        <ion-item>
           <ion-label stacked>Description des symptomes </ion-label>
           <ion-textarea placeholder="décrivez le cas clinique" formControlName="description"></ion-textarea>
         </ion-item>
+        <ion-item-group class="inline">
+          <ion-item>
+            <ion-label stacked>Début des symptomes</ion-label>
+            <ion-input type="number" min="0" max="60" formControlName="debut_symptome"></ion-input>
+          </ion-item>
+          <ion-item ion-text >
+            <ion-label stacked></ion-label>
+            <ion-select formControlName="debut_symptome_unit" interface="popover">
+              <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-item-group>
         <ion-item>
           <ion-buttons><button type="button" ion-button color="primary"  (click)="presentActionSheet()">Ajouter une photo</button></ion-buttons>
         </ion-item>
@@ -114,18 +125,7 @@
           <ion-label stacked>Traitements en cours</ion-label>
           <ion-textarea placeholder="traitements en cours s'il y lieu" formControlName="traitementEnCours"></ion-textarea>
         </ion-item>
-        <ion-item-group class="inline">
-          <ion-item>
-            <ion-label stacked>Début des symptomes</ion-label>
-            <ion-input type="number" min="0" max="60" formControlName="debut_symptome"></ion-input>
-          </ion-item>
-          <ion-item ion-text >
-            <ion-label stacked></ion-label>
-            <ion-select formControlName="debut_symptome_unit" interface="popover">
-              <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-item-group>
+
       </ion-item-group>
       </ion-list>
       <ion-buttons>

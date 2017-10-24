@@ -1,3 +1,13 @@
+import * as moment from 'moment';
+
+export function afficheDate(ts: number): string {
+  console.log("TS" + ts);
+  var result =  moment(ts).format("DD/MM/YY HH:mm");
+  console.log("result" + result);
+  return result;
+}
+
+
 export function sexText(sexCode: number): string {
     let sexText = ['Masculin', 'Féminin'];
     console.log('getSexeText()' + sexText[sexCode]);

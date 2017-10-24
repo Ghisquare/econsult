@@ -17,11 +17,17 @@
 
 ion-item-group.inline, ion-list.inline {display:flex}
 
-ion-list.inline ion-item, ion-list.inline ion-list-header {
+div.inline h3, div.inline p {
+  display: inline;
+  font-size: 1em;
+  text-align: justify;
 }
+
 
 .text-input {
   border: 1px;
   border-style: solid;
   border-color: #cccccc;
 }
+
+p {color: #666}

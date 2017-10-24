@@ -1,30 +1,26 @@
 <h1 ion-text color="primary" *ngIf="question">Demande de consultation</h1>
 <h1 ion-text color="primary" *ngIf="!question">Votre demande de consultation</h1>
 
-<ion-list>
-    <ion-item>
-      <h2 ion-text color="secondary">{{titreMedecin}}</h2>
-      <p>{{nomTitreMedecin}}</p>
-      <h3 ion-text color="primary">Spécialité</h3><p>{{authorSpecialty}}</p>
-      <ion-buttons *ngIf="question">
-        <button ion-button (click)="launchTelCall()"><ion-icon item-start name="call" ></ion-icon>Appel tél</button>
-        <a [href]="sanitizeSkype()" *ngIf="consultation.author.skype"><button  ion-button><ion-icon item-start name="logo-skype"></ion-icon>Appel skype</button></a>
-      </ion-buttons>
 
-    </ion-item>
-  <ion-item>
-    <h2 ion-text color="secondary">Description du cas</h2>
-    <patient-resume *ngIf="consultation.patient" [patient]="consultation.patient"></patient-resume>
-    <div *ngIf="!consultation.patient"><h3 ion-text color="primary">age: </h3> <p>{{consultation.age}}</p>
-    <h3 ion-text color="primary">sexe: </h3> <p>{{sexTexte}}</p></div>
-    <h3 ion-text color="primary">description clinique: </h3> <p>{{consultation.description}}</p>
-    <h3 ion-text color="primary">antécedents: </h3> <p>{{consultation.antecedent}}</p>
-    <h3 ion-text color="primary">traitements en cours: </h3> <p>{{consultation.traitementEnCours}}</p>
-    <h3 ion-text color="primary">début des symptomes: </h3> <p>{{consultation.debut_symptome}} {{symptomeUnit}}</p>
-  </ion-item>
-  <ion-item *ngIf="images.length > 0">
+<h2 ion-text color="secondary">{{titreMedecin}}</h2>
+<p>{{nomTitreMedecin}}</p>
+<div class="inline"><h3 ion-text color="primary">Spécialité: </h3><p>{{authorSpecialty}}</p></div>
+<div class="inline"><h3 ion-text color="primary">Envoyé le: </h3><p>{{dateAffiche}}</p></div>
+
+
+<h2 ion-text color="secondary">Description du cas</h2>
+<patient-resume *ngIf="consultation.patient" [patient]="consultation.patient"></patient-resume>
+<div *ngIf="!consultation.patient">
+  <div class="inline"><h3 ion-text color="primary">age: </h3> <p>{{consultation.age}}</p></div>
+  <div class="inline"> <h3 ion-text color="primary">sexe: </h3> <p>{{sexTexte}}</p></div>
+</div>
+<div class="inline"><h3 ion-text color="primary">description clinique: </h3> <p>{{consultation.description}}</p></div>
+<div class="inline"><h3 ion-text color="primary">antécedents: </h3> <p>{{consultation.antecedent}}</p></div>
+<div class="inline"><h3 ion-text color="primary">traitements en cours: </h3> <p>{{consultation.traitementEnCours}}</p></div>
+<div class="inline"><h3 ion-text color="primary">début des symptomes: </h3> <p>{{consultation.debut_symptome}} {{symptomeUnit}}</p></div>
+  <div *ngIf="images.length > 0">
     <ion-label>Photos</ion-label>
-  </ion-item>
+  </div>
   <ion-list>
     <ion-item-group *ngFor="let image of images; let i = index">
       <ion-item>
@@ -35,8 +31,6 @@
         <button ion-button (click)="showImage(i)">Agrandir</button>
       </ion-item>
     </ion-item-group>
-  </ion-list>
-
   </ion-list>
 
 <ion-list *ngIf="response">

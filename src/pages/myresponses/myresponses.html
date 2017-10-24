@@ -8,7 +8,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 <div *ngIf="!selectedResponse; else responseView">
     <ion-list>
       <button ion-item *ngFor="let demand of demands" (click)="itemTapped($event, demand)">
