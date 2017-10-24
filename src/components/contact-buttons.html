@@ -1,0 +1,7 @@
+<ion-buttons>
+  <h3 color="secondary" ion-text>Contacter {{contact.forname}} {{contact.name}}</h3>
+  <button ion-button (click)="launchTelCall()" type="button" icon-end>Appel tél <ion-icon name="call" ></ion-icon></button>
+  <a [href]="sanitizeSkype()" *ngIf="contact.skype"><button  ion-button type="button" icon-end>Appel skype <ion-icon name="logo-skype"></ion-icon></button></a>
+</ion-buttons>
+
+
