@@ -1,6 +1,5 @@
 import {User} from "./user";
 import {Patient} from "./patient";
-import {Timestamp} from "rxjs/Rx";
 
 export class Consultation {
   id: number;
@@ -51,5 +50,9 @@ export class Consultation {
   //code couleur Orange / Bleu
   constructor() {
 
+  }
+
+  public getAuthorName():string {
+    return this.author.forname + " " + this.author.name;
   }
 }

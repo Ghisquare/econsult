@@ -41,18 +41,18 @@ export class ConsultationService {
 
   }
 
-  getConsultationsByAuthor(author: User): Promise<Consultation[]>{
-    const url = `${this.consultationsUrl}/?author=${author.id}`;
+  getConsultationsByAuthorStatus(author: User, status: number): Promise<Consultation[]>{
+    const url = `${this.consultationsUrl}/?xchangeStatus=${status}&author_id=${author.id}`;
     console.log('getConsultationsByAuthor - url: ' + url);
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as Consultation[])
       .catch(this.handleError);
   }
-
+//A FAIRE FONCTION GLOBAL getConsultations (contact, status, author: boolean
   getResponsesByXchangeStatus(author: User, status: number): Promise<Consultation[]>{
     const url = `${this.consultationsUrl}/?xchangeStatus=${status}&author_id=${author.id}`;
-    console.log('getConsultationsByAuthor - url: ' + url);
+    console.log('getResponsesByXchangeStatus - url: ' + url);
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as Consultation[])

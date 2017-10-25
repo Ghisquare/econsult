@@ -4,6 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Consultation } from '../../app/model/consultation';
 import { ConsultationService } from '../../providers/consultation.service';
 import {AuthService} from "../../providers/auth-service/auth-service";
+import {afficheDate} from "../../app/functions";
 
 @Component({
   selector: 'page-consult-list',
@@ -15,6 +16,7 @@ export class ConsultListPage implements OnInit {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private consultationService: ConsultationService, private authService: AuthService) {
     // If we navigated to this page, we will have an item available as a nav param
+    console.log("construct ConsultListPage no Init ?");
   }
 
   itemTapped(event, item) {
@@ -25,6 +27,14 @@ export class ConsultListPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.consultationService.getConsultationsByAuthor(this.authService.getUserInfo()).then(consultations => this.consultations = consultations);
+    this.consultationService.getResponsesByXchangeStatus(this.authService.getUserInfo(), 0)
+      .then(consultations => {
+        this.consultations = consultations
+      });
+  }
+
+  afficheDate(ts: number) {
+    return afficheDate(ts);
+
   }
 }

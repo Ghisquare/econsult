@@ -5,6 +5,7 @@ import {AuthService} from "../../providers/auth-service/auth-service";
 import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
 import {TabsPage} from "../tabs/tabs";
+import {afficheDate} from "../../app/functions";
 
 @Component({
   selector: 'page-mydemands',
@@ -33,5 +34,10 @@ export class MyDemandsPage implements OnInit {
   }
   goHome(){
     this.navCtrl.setRoot(TabsPage);
+  }
+
+  afficheDate(ts: number) {
+    return afficheDate(ts);
+
   }
 }

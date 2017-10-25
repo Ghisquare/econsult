@@ -140,9 +140,11 @@
 
   </div>
       <div *ngIf="consultation">
-        Votre demande de consultation a bien été envoyé
+        <p ion-text>Votre demande de consultation a bien été envoyée</p>
 
-        <!--AJOUTER RESUME DEMANDE-->
+        <h2 ion-text color="primary">Résumé de votre demande</h2>
+
+        <demand-resume [consultation]="consultation" [question]="false"></demand-resume>
     <button ion-button (click)="goHome()">OK</button>
   </div>
-  </div>
+</div>

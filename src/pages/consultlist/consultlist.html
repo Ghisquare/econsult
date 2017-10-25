@@ -9,13 +9,14 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Demande de consultation en attente</h2>
+  <h1 ion-text color="primary">Mes demandes de consultation en attente</h1>
   <ion-list>
     <button ion-item *ngFor="let consultation of consultations">
-      {{consultation.id}}
-      <div class="item-note" item-right>
+      <div class="inline"><h3 ion-text color="primary">envoyé à </h3><p>{{consultation.contact.forname}} {{consultation.contact.name}}</p></div>
+      <p ion-text> le {{afficheDate(consultation.date_creation)}}</p>
+      <p ion-text>
         {{consultation.description}}
-      </div>
+      </p>
     </button>
   </ion-list>
 </ion-content>

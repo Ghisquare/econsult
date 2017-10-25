@@ -5,6 +5,7 @@ import {AuthService} from "../../providers/auth-service/auth-service";
 import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
 import {TabsPage} from "../tabs/tabs";
+import {afficheDate} from "../../app/functions";
 
 @Component({
   selector: 'page-myresponses',
@@ -28,6 +29,7 @@ export class MyResponsesPage implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("call: this.consultationService.getResponsesByXchangeStatus("+this.authService.getUserInfo()+", 1)");
     this.consultationService.getResponsesByXchangeStatus(this.authService.getUserInfo(), 1).then(consultations => {
       this.responses = consultations;
       if(consultations.length == 1) this.selectedResponse = consultations[0];
@@ -63,6 +65,9 @@ export class MyResponsesPage implements OnInit {
       content: 'Please wait...',
     });
     this.loading.present();
+  }
+  afficheDate(ts: number) {
+    return afficheDate(ts);
   }
 
 }
