@@ -22,8 +22,9 @@ ion-item-group.inline, ion-list.inline {
 
 div.inline h3, div.inline p {
   display: inline;
-  font-size: 1em;
+  font-size: 1.4rem;
   text-align: justify;
+  margin: 0 0 2px;
 }
 
 h3.separator {
@@ -48,3 +49,5 @@ input::placeholder, textarea::placeholder {
 }
 
 .label-md[stacked] {font-size: 1.6rem;}
+
+.item-radio ion-label {font-style: italic;}

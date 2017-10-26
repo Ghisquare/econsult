@@ -3,7 +3,7 @@
       <ion-list>
         <ion-item>
           <ion-label stacked>Votre avis</ion-label>
-          <ion-textarea placeholder="votre réponse à la demande de consultation" formControlName="response"></ion-textarea>
+          <ion-textarea placeholder="votre diagnostic" formControlName="response"></ion-textarea>
         </ion-item>
         <ion-item>
           <ion-label stacked>Traitement à initier</ion-label>
@@ -17,7 +17,7 @@
         <ion-item-group>
            <ion-list class="inline" radio-group formControlName="status">
             <ion-item ion-text *ngFor="let status of responseStatus; let i = index">
-              <ion-label stacked>{{status}}</ion-label>
+              <ion-label>{{status}}</ion-label>
               <ion-radio value="{{i}}"></ion-radio>
             </ion-item>
            </ion-list>
@@ -34,9 +34,10 @@
           </ion-item-group>
         </ion-item-group>
 
-      </ion-list>
+
        <contact-buttons [contact]="consultation.author"></contact-buttons>
-      <ion-buttons>
+       </ion-list>
+       <ion-buttons>
         <button type="submit" ion-button color="secondary" icon-end>Envoyer
           <ion-icon name="send"></ion-icon></button>
         <button type="reset" ion-button color="light" icon-end>Effacer

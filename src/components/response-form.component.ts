@@ -30,7 +30,7 @@ export class ResponseFormComponent implements OnInit{
       response: ['', Validators.required ], // <--- the FormControl called "name"
       treatment: ['', Validators.required ], // <--- the FormControl called "name"
       status: ['', Validators.required ], // <--- the FormControl called "name"
-      rdv_number: ['', Validators.required ], // <--- the FormControl called "name"
+      rdv_number: ['1', Validators.required ], // <--- the FormControl called "name"
       rdv_unit: ['0', Validators.required ], // <--- the FormControl called "name"
     });
   }

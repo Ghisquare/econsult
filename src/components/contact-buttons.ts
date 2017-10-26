@@ -11,6 +11,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class ContactButtonsComponent {
   @Input() contact: User;
+  showButtons: boolean = false;
 //  @Input() question: boolean = true;
 //  @Input() response: boolean = false;
 
@@ -25,5 +26,8 @@ export class ContactButtonsComponent {
     this.callNumber.callNumber(this.contact.tel, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
+  }
+  doShowButtons(show: boolean) {
+    this.showButtons = show;
   }
 }
