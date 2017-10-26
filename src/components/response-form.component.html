@@ -1,4 +1,3 @@
-<div>
   <h3 color="secondary" ion-text>Votre réponse</h3>
      <form [formGroup]="responseForm" (ngSubmit)="onSubmit()" novalidate>
       <ion-list>
@@ -46,7 +45,6 @@
     </form>
     <p>Form value: {{ responseForm.value | json }}</p>
     <p>Form status: {{ responseForm.status | json }}</p>
-  </div>
  <!-- <div *ngIf="consultation">
     Votre demande de consultation a bien été envoyé
     AJOUTER RESUME DEMANDE

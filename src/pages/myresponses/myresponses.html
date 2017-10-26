@@ -9,7 +9,6 @@
 </ion-header>
 
 <ion-content padding>
-<div *ngIf="!selectedResponse; else responseView">
   <h1 ion-text color="primary">Réponses à vos demandes de consultations</h1>
     <ion-list>
       <button ion-item *ngFor="let response of responses" (click)="itemTapped($event, response)">
@@ -20,17 +19,4 @@
         </p>
       </button>
     </ion-list>
-</div>
-<ng-template #responseView>
-  <h1 ion-text color="primary">Réponse à votre demande de consultation</h1>
-  <div *ngIf="selectedResponse.xchangeStatus== 1; else thanks">
-    <demand-resume [consultation]="selectedResponse" [response]="true" [question]="false"></demand-resume>
-    <button ion-button (click)="closeConsultation()">Fermer la consultation</button>
-  </div>
-  <ng-template #thanks>
-    <h1 ion-text color="primary">Merci</h1>
-    <p>La consultation a été fermée</p>
-    <button ion-button (click)="goHome()">OK</button>
-  </ng-template>
-  </ng-template>
 </ion-content>

@@ -16,6 +16,7 @@ export class ResponseFormComponent implements OnInit{
   responseStatus: Array<string>;
   responseForm: FormGroup;
   timeUnits: Array<any>;
+  closed: boolean = false;
 
 
   constructor(private fb: FormBuilder, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
@@ -44,8 +45,8 @@ export class ResponseFormComponent implements OnInit{
 
     this.prepareUpdateConsultation();
     this.consultationService.update(this.consultation).then(consultation => {
-      this.consultation = consultation;
       this.loading.dismiss();
+      this.consultation = consultation;
 
     });
     //console.log("form submitted" + this.consultation.id);
@@ -65,7 +66,6 @@ export class ResponseFormComponent implements OnInit{
     }
     this.consultation.xchangeStatus = 1;
     console.log("prepareUpdateConsultation" + JSON.stringify(this.consultation));
-
   }
 
   showLoading() {

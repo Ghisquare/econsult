@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <logout-button></logout-button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Je donne un avis</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h1 ion-text color="primary">Consultations en attente de votre réponse</h1>
+
+  <ion-list>
+      <button ion-item *ngFor="let demand of demands" (click)="itemTapped($event, demand)">
+        <div class="inline"><h3 ion-text color="primary">envoyé par </h3><p>{{demand.author.forname}} {{demand.author.name}}</p></div>
+        <p ion-text> le {{afficheDate(demand.date_creation)}}</p>
+        <p ion-text>
+          {{demand.description}}
+        </p>
+      </button>
+    </ion-list>
+</ion-content>

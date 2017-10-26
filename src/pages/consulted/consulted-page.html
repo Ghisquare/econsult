@@ -9,21 +9,6 @@
 </ion-header>
 
 <ion-content padding>
-<div *ngIf="!selectedDemand; else responseForm">
-  <h1 ion-text color="primary">Consultations en attente de votre réponse</h1>
-
-  <ion-list>
-      <button ion-item *ngFor="let demand of demands" (click)="itemTapped($event, demand)">
-        <div class="inline"><h3 ion-text color="primary">envoyé par </h3><p>{{demand.author.forname}} {{demand.author.name}}</p></div>
-        <p ion-text> le {{afficheDate(demand.date_creation)}}</p>
-        <p ion-text>
-          {{demand.description}}
-        </p>
-      </button>
-    </ion-list>
-</div>
-  <!--Eventuellement séparer component response-->
-<ng-template #responseForm>
   <h1 ion-text color="primary">Demande de consultation</h1>
 
   <div *ngIf="selectedDemand.xchangeStatus== 0; else responseSubmitted">
@@ -33,7 +18,7 @@
   <ng-template #responseSubmitted>
     <h1 ion-text color="primary">Merci</h1>
     <p>Votre réponse à bien été envoyé à M.{{selectedDemand.author.name}}</p>
+    <p>INSERER RESUME REPONSE</p>
     <button ion-button (click)="goHome()">OK</button>
-  </ng-template>
   </ng-template>
 </ion-content>

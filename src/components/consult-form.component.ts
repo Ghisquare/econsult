@@ -24,6 +24,7 @@ import {Image} from "../app/model/image";
 import {ImageService} from "../providers/image.service";
 import {MyErrorHandler} from "../app/app.module";
 import { Pro } from '@ionic/pro';
+import {age} from "../app/functions";
 
 
 declare var cordova: any;
@@ -45,6 +46,8 @@ export class ConsultFormComponent implements OnInit{
   isAnonymousPatient: boolean = true;
   timeUnits: Array<any>;
   images: Array<string> = [];
+  closed: boolean = false;
+
 
 
 
@@ -193,7 +196,7 @@ export class ConsultFormComponent implements OnInit{
       description: ['', Validators.required ], // <--- the FormControl called "name"
       antecedent: ['' ], // <--- the FormControl called "name"
       traitementEnCours: ['' ], // <--- the FormControl called "name"
-      debut_symptome: ['' ], // <--- the FormControl called "name"
+      debut_symptome: ['0' ], // <--- the FormControl called "name"
       debut_symptome_unit: ['0' ], // <--- the FormControl called "name"
       patient_name: ['', Validators.required ],
       patient_forname: ['', Validators.required ],
@@ -256,13 +259,19 @@ export class ConsultFormComponent implements OnInit{
         this.imgService.createImage(saveImage).then(image => {
           saveImage = image;
           console.log("Saved Image: " + JSON.stringify(saveImage));
-          if(i == this.images.length - 1) this.loading.dismiss();
+          if(i == this.images.length - 1) this.closeForm();
         });
 
       }
-      if(this.images.length == 0) this.loading.dismiss();
+      if(this.images.length == 0) this.closeForm();
 
     });
+  }
+
+  closeForm() {
+    console.log("consult-form.close")
+    this.loading.dismiss();
+    this.closed = true;
   }
 
   prepareSavePatient(): Patient{
@@ -299,7 +308,7 @@ export class ConsultFormComponent implements OnInit{
     if (!this.isAnonymousPatient) {
       saveConsultation.patient_id = this.patient.id;
       saveConsultation.patient = this.patient;
-      saveConsultation.age = 101; //A FAIRE CALCUL AGE EN FONCTION DATE DE NAISSANCE
+      saveConsultation.age = age(this.patient.birthdate); //A FAIRE CALCUL AGE EN FONCTION DATE DE NAISSANCE
     } else {
       saveConsultation.patient_id = null;
       saveConsultation.patient = null;

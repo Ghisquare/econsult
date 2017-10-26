@@ -15,7 +15,10 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-ion-item-group.inline, ion-list.inline {display:flex}
+ion-item-group.inline, ion-list.inline {
+  display:flex;
+  border-bottom: 1px solid #dedede;
+}
 
 div.inline h3, div.inline p {
   display: inline;
@@ -23,11 +26,25 @@ div.inline h3, div.inline p {
   text-align: justify;
 }
 
+h3.separator {
+  border-bottom: 1px solid map-get($colors, primary);
+  margin-top: 1.6rem;
+  padding-bottom: 1rem;
+}
 
 .text-input {
-  border: 1px;
-  border-style: solid;
-  border-color: #cccccc;
+ // border: 1px;
+ // border-style: solid;
+ // border-color: #cccccc;
 }
 
 p {color: #666}
+
+ion-label {color: #999}
+
+input::placeholder, textarea::placeholder {
+  font-style: italic;
+  font-size:1.4rem;
+}
+
+.label-md[stacked] {font-size: 1.6rem;}

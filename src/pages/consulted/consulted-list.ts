@@ -6,38 +6,33 @@ import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
 import {TabsPage} from "../tabs/tabs";
 import {afficheDate} from "../../app/functions";
+import {ConsultedPage} from "./consulted-page";
 
 @Component({
-  selector: 'page-mydemands',
-  templateUrl: 'mydemands.html'
+  selector: 'page-consulted-list',
+  templateUrl: 'consulted-list.html'
 })
-export class MyDemandsPage implements OnInit {
+export class ConsultedListPage implements OnInit {
   selectedDemand: Consultation;
   demands: Consultation[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService,
+  constructor(public navCtrl: NavController,
               private authService: AuthService, private consultationService: ConsultationService) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.selectedDemand = navParams.get('demand');
   }
 
   itemTapped(event, demand) {
-    this.selectedDemand = demand;
-    console.log('itemTapped' + this.selectedDemand.id)
+    console.log("D"+demand.id);
+    this.navCtrl.push(ConsultedPage, {'demand' : demand});
   }
 
   ngOnInit(): void {
     this.consultationService.getDemandsByContact(this.authService.getUserInfo(), 0).then(consultations => {
       this.demands = consultations;
-      if(consultations.length == 1) this.selectedDemand = consultations[0];
     });
-  }
-  goHome(){
-    this.navCtrl.setRoot(TabsPage);
   }
 
   afficheDate(ts: number) {
     return afficheDate(ts);
-
   }
 }

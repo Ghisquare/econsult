@@ -1,72 +1,66 @@
-<div>
-  <div *ngIf="!consultation">
-    <form [formGroup]="consultForm" (ngSubmit)="onSubmit()" novalidate>
-      <ion-list ion-text no-lines>
-        <ion-item-group>
-          <ion-item-divider><h2 color="secondary">Choix du médecin</h2></ion-item-divider>
-            <ion-item>
-              <ion-label stacked>Spécialité</ion-label>
-              <ion-select interface="popover" formControlName="specialty">
-                <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)" >{{specialty.name}}</ion-option>
-              </ion-select>
-            </ion-item>
-            <ion-item *ngIf="contacts">
-            <ion-label stacked>Médecin</ion-label>
-            <ion-select interface="popover" formControlName="contact">
-              <ion-option *ngFor="let contact of contacts" value="{{contact.id}}" (ionSelect)="onSelectContact(contact)" [disabled]="!contact.online">{{contact.forname}} {{contact.name}} <ion-icon *ngIf="contact.online" name="wifi" icon-end></ion-icon></ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-item-group>
 
-        <!--          <specialty-select></specialty-select>
-                  <contact-select specialty="[selectedSpecialty]"></contact-select>-->
-        <ion-item-group>
-          <ion-item-divider><h2 color="secondary">Description du cas</h2></ion-item-divider>
-          <ion-item>
-            <ion-label stacked>Patient anonyme</ion-label>
-            <ion-checkbox checked="true" formControlName="anonymous_patient" (ionChange)="doAnonymous()"></ion-checkbox>
-          </ion-item>
-          <ion-item-group *ngIf="isAnonymousPatient">
-            <ion-list radio-group formControlName="sex" class="inline" no-lines>
-              <ion-list-header item-start>
-                Sexe
-              </ion-list-header>
-              <ion-item>
-                <ion-label>Masculin</ion-label>
-                <ion-radio value="0"></ion-radio>
-              </ion-item>
-              <ion-item>
-                <ion-label>Féminin</ion-label>
-                 <ion-radio value="1"></ion-radio>
-              </ion-item>
-            </ion-list>
-          <ion-item>
-            <ion-label stacked>Age</ion-label>
-            <ion-input type="number" min="0" max="125" formControlName="age"></ion-input>
-          </ion-item>
-        </ion-item-group>
-        <ion-item-group *ngIf="!isAnonymousPatient">
-          <ion-item-divider>Données du patient</ion-item-divider>
+  <div *ngIf="!closed; else thanks">
+    <form [formGroup]="consultForm" (ngSubmit)="onSubmit()" novalidate>
+      <h2 ion-text color="secondary">Choix du médecin</h2>
+      <ion-item>
+        <ion-label>Spécialité</ion-label>
+        <ion-select interface="popover" formControlName="specialty" placeholder="Sélectionner la spécialité">
+          <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)" >{{specialty.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="contacts">
+        <ion-label>Médecin</ion-label>
+        <ion-select interface="popover" formControlName="contact" placeholder="Sélectionner le médecin">
+          <ion-option *ngFor="let contact of contacts" value="{{contact.id}}" (ionSelect)="onSelectContact(contact)" [disabled]="!contact.online">{{contact.forname}} {{contact.name}} <ion-icon *ngIf="contact.online" name="wifi" icon-end></ion-icon></ion-option>
+        </ion-select>
+      </ion-item>
+      <h2 ion-text color="secondary">Description du cas</h2>
+      <ion-item>
+        <ion-label>Patient anonyme</ion-label>
+        <ion-checkbox checked="true" formControlName="anonymous_patient" (ionChange)="doAnonymous()"></ion-checkbox>
+      </ion-item>
+      <div *ngIf="isAnonymousPatient">
+        <ion-item ion-text>
+          <ion-label stacked>Sexe</ion-label>
+        </ion-item>
+      <ion-list radio-group formControlName="sex" class="inline" no-lines>
+        <ion-item>
+          <ion-label>Masculin</ion-label>
+          <ion-radio value="0"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Féminin</ion-label>
+           <ion-radio value="1"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <ion-item>
+        <ion-label>Age</ion-label>
+        <ion-input type="number" min="0" max="125" formControlName="age" placeholder="age du patient"></ion-input>
+      </ion-item>
+    </div>
+        <div *ngIf="!isAnonymousPatient">
+          <div></div>
+          <h3 ion-text color="primary" class="separator">Données du patient</h3>
           <ion-item ion-text>
-            <ion-label stacked>Nom</ion-label>
+            <ion-label>Nom</ion-label>
             <ion-input type="text" name="patient_name" required formControlName="patient_name"></ion-input>
           </ion-item>
           <ion-item ion-text>
-            <ion-label stacked>Prénom</ion-label>
+            <ion-label>Prénom</ion-label>
             <ion-input type="text" name="patient_forname" required formControlName="patient_forname"></ion-input>
           </ion-item>
           <ion-item ion-text>
-            <ion-label stacked>Numéro de sécurité sociale</ion-label>
+            <ion-label>Numéro de sécurité sociale</ion-label>
             <ion-input type="text" required formControlName="patient_identification"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>Date de naissance</ion-label>
+            <ion-label>Date de naissance</ion-label>
             <ion-datetime displayFormat="MM/DD/YYYY" formControlName="patient_birthdate"></ion-datetime>
           </ion-item>
+          <ion-item>
+            Sexe
+          </ion-item>
           <ion-list radio-group formControlName="sex" class="inline" no-lines>
-            <ion-list-header item-start>
-              Sexe
-            </ion-list-header>
             <ion-item>
               <ion-label>Masculin</ion-label>
               <ion-radio value="0"></ion-radio>
@@ -76,8 +70,15 @@
               <ion-radio value="1"></ion-radio>
             </ion-item>
           </ion-list>
-        </ion-item-group>
-        <ion-item>
+        </div>
+      <h3 ion-text color="primary" class="separator">Description clinique</h3>
+      <ion-item>
+
+        <ion-label stacked>Antécedents utiles</ion-label>
+        <ion-textarea placeholder="antécédents s'il y lieu" formControlName="antecedent"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
           <ion-label stacked>Description des symptomes </ion-label>
           <ion-textarea placeholder="décrivez le cas clinique" formControlName="description"></ion-textarea>
         </ion-item>
@@ -92,8 +93,13 @@
               <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
             </ion-select>
           </ion-item>
+
+
         </ion-item-group>
-        <ion-item>
+      <ion-item>
+        <ion-label stacked>Traitements en cours</ion-label>
+        <ion-textarea placeholder="traitements en cours s'il y lieu" formControlName="traitementEnCours"></ion-textarea>
+      </ion-item>        <ion-item>
           <ion-buttons><button type="button" ion-button color="primary"  (click)="presentActionSheet()">Ajouter une photo</button></ion-buttons>
         </ion-item>
         <ion-item *ngIf="images.length > 0">
@@ -116,18 +122,9 @@
                </ion-item-group>
            </ion-list>
 
-        <ion-item>
 
-          <ion-label stacked>Antécedents</ion-label>
-          <ion-textarea placeholder="antécédents s'il y lieu" formControlName="antecedent"></ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Traitements en cours</ion-label>
-          <ion-textarea placeholder="traitements en cours s'il y lieu" formControlName="traitementEnCours"></ion-textarea>
-        </ion-item>
 
-      </ion-item-group>
-      </ion-list>
+
       <ion-buttons>
         <button type="submit" ion-button color="secondary" icon-end>Envoyer
           <ion-icon name="send"></ion-icon></button>
@@ -139,12 +136,11 @@
         <p>Form status: {{ consultForm.status | json }}</p>
 
   </div>
-      <div *ngIf="consultation">
+  <ng-template #thanks>
         <p ion-text>Votre demande de consultation a bien été envoyée</p>
 
         <h2 ion-text color="primary">Résumé de votre demande</h2>
 
         <demand-resume [consultation]="consultation" [question]="false"></demand-resume>
     <button ion-button (click)="goHome()">OK</button>
-  </div>
-</div>
+  </ng-template>

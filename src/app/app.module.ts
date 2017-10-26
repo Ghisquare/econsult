@@ -21,7 +21,7 @@ import {LoginPage} from "../pages/login/login";
 import {HomePage} from "../pages/home/home";
 import {ConsultPage} from "../pages/consult/consult";
 import {ConsultListPage} from "../pages/consultlist/consultlist";
-import {MyDemandsPage} from "../pages/mydemands/mydemands";
+import {ConsultedListPage} from "../pages/consulted/consulted-list";
 import {TabsPage} from "../pages/tabs/tabs";
 import {RouterModule} from "@angular/router";
 import {SpecialtyService} from "../providers/specialty.service";
@@ -43,6 +43,8 @@ import {ShowPhotoPage} from "../pages/show-photo/show-photo";
 import { Pro } from '@ionic/pro';
 import {ImageService} from "../providers/image.service";
 import {ContactButtonsComponent} from "../components/contact-buttons";
+import {ConsultedPage} from "../pages/consulted/consulted-page";
+import {ResponsePage} from "../pages/myresponses/response";
 
 const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
@@ -62,9 +64,11 @@ export class MyErrorHandler implements ErrorHandler {
     LoginPage,
     HomePage,
     ConsultPage,
+    ConsultedPage,
     ConsultListPage,
-    MyDemandsPage,
+    ConsultedListPage,
     MyResponsesPage,
+    ResponsePage,
     ConsultFormComponent,
     SpecialtySelectComponent,
     ContactSelectComponent,
@@ -88,7 +92,7 @@ export class MyErrorHandler implements ErrorHandler {
       { path: '', redirectTo: '/', pathMatch: 'full' },
      // { path: 'detail/:id', component: HeroDetailComponent },
       { path: 'consult',     component: ConsultFormComponent },
-      { path: 'mydemands',     component: MyDemandsPage }
+      { path: 'consulted-list',     component: ConsultedListPage }
         ])
   ],
   bootstrap: [IonicApp],
@@ -97,9 +101,11 @@ export class MyErrorHandler implements ErrorHandler {
     LoginPage,
     HomePage,
     ConsultPage,
+    ConsultedPage,
     ConsultListPage,
-    MyDemandsPage,
+    ConsultedListPage,
     MyResponsesPage,
+    ResponsePage,
     RegisterPage,
     TabsPage,
     ShowPhotoPage

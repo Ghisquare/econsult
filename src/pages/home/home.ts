@@ -3,11 +3,13 @@ import { NavController } from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service/auth-service";
 import {User} from "../../app/model/user";
 import {ConsultPage} from "../consult/consult";
-import {MyDemandsPage} from "../mydemands/mydemands";
+import {ConsultedListPage} from "../consulted/consulted-list";
 import {LoginPage} from "../login/login";
 import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
 import {MyResponsesPage} from "../myresponses/myresponses";
+import {ConsultedPage} from "../consulted/consulted-page";
+import {ResponsePage} from "../myresponses/response";
 
 
 @Component({
@@ -38,12 +40,20 @@ export class HomePage {
   doMyDemands() {
     //push another page onto the history stack
     //causing the nav controller to animate the new page in
-    this.navCtrl.push(MyDemandsPage);
+    if(this.demands.length == 1) {
+      this.navCtrl.push(ConsultedPage, {'demand' : this.demands[0]});
+    } else {
+      this.navCtrl.push(ConsultedListPage);
+    }
   }
 
   doMyResponse() {
-    this.navCtrl.push(MyResponsesPage);
-
+    console.log("doMyResponse" + this.responses.length  )
+    if(this.responses.length == 1) {
+      this.navCtrl.push(ResponsePage, {'response' : this.responses[0]});
+    } else {
+      this.navCtrl.push(MyResponsesPage);
+    }
   }
 
 }

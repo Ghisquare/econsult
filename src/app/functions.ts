@@ -1,16 +1,13 @@
 import * as moment from 'moment';
 
 export function afficheDate(ts: number): string {
-  console.log("TS" + ts);
   var result =  moment(ts).format("DD/MM/YY HH:mm");
-  console.log("result" + result);
   return result;
 }
 
 
 export function sexText(sexCode: number): string {
     let sexText = ['Masculin', 'Féminin'];
-    console.log('getSexeText()' + sexText[sexCode]);
     return sexText[sexCode];
   };
 
@@ -37,7 +34,6 @@ export const civilities = ['M',
 
 export function age(birthdate: Date) {
   var age: number;
-  console.log("function age");
   var today = new Date();
   var tmpDate = new Date(birthdate);
   console.log("today" + today);
@@ -46,7 +42,6 @@ export function age(birthdate: Date) {
   age = today.getFullYear() - tmpDate.getFullYear();                          // Initialisation du retour
     if(today.getMonth()- tmpDate.getMonth() < 0) age = age - 1;
     if((today.getMonth()- tmpDate.getMonth() == 0) && (today.getDay()- tmpDate.getDay() < 0)) age = age - 1;
-  console.log("function age result" + age);
 
     return age;
   };
