@@ -23,7 +23,6 @@ export class DemandResumeComponent implements OnInit {
   authorSpecialty: string;
   titreMedecin: string;
   nomTitreMedecin: string;
-  statusText: string;
   symptomeUnit: string;
   images: Array<Image> = [];
   dateAffiche: string;
@@ -31,7 +30,6 @@ export class DemandResumeComponent implements OnInit {
 
   constructor(private consultationService: ConsultationService,
               private imgService: ImageService, private modalCtrl: ModalController) {
-    // If we navigated to this page, we will have an item available as a nav param
   }
 
  /* itemTapped(event, item) {
@@ -42,12 +40,13 @@ export class DemandResumeComponent implements OnInit {
   }
 */
   ngOnInit(): void {
- //   this.userService.getUsersBySpecialty(this.specialty.id).then(users => this.contacts = users);
- //   console.log("c-select.OnInit" + this.specialty.id);
+
+    console.log("DemandResumeConstruct ID" + this.consultation.id);
+
     this.imgService.getImagesByConsultationId(this.consultation.id).then(images => {
       this.images = images;
-      //console.log("images:" + images);
     });
+
 
     this.sexTexte = sexText(this.consultation.sex);
     this.authorSpecialty = getSpecialtyName(this.consultation.author.specialty_id);
@@ -66,11 +65,7 @@ export class DemandResumeComponent implements OnInit {
       this.authorSpecialty = getSpecialtyName(this.consultation.contact.specialty_id);
       this.dateAffiche =  afficheDate(this.consultation.date_response);
     }
-    if(this.consultation.rdvStatus == 0) {
-      this.statusText = responseStatus[this.consultation.rdvStatus];
-    } else {
-      this.statusText = responseStatus[1] + " " + this.consultation.rdvStatus + " " + this.consultationService.getTimeUnit(this.consultation.rdvUnit);
-    }
+
     this.symptomeUnit = this.consultationService.getTimeUnit(this.consultation.debut_symptome_unit);
   }
 

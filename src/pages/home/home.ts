@@ -20,15 +20,18 @@ export class HomePage {
 
   currentUser: User;
   demands: Consultation[];
+  reponsesInfoComp: Consultation[];
   responses: Consultation[];
   demandCount: number;
   responseCount: number;
+  responseInfoCount: number;
 
 
   constructor(public navCtrl: NavController, private authService: AuthService, private consultationService: ConsultationService) {
     this.currentUser = authService.getUserInfo();
-    this.consultationService.getDemandsByContact(this.currentUser, 0).then(consultations => {this.demands = consultations; this.demandCount = consultations.length});
-    this.consultationService.getResponsesByXchangeStatus(this.currentUser, 1).then(consultations => {this.responses = consultations; this.responseCount = consultations.length});
+    this.consultationService.getDemandsByContact(this.currentUser, "0|2").then(consultations => {this.demands = consultations; this.demandCount = consultations.length});
+    //this.consultationService.getDemandsByContact(this.currentUser, 1).then(consultations => {this.reponsesInfoComp = consultations; this.responseInfoCount = consultations.length});
+    this.consultationService.getResponsesByXchangeStatus(this.currentUser, "1|3").then(consultations => {this.responses = consultations; this.responseCount = consultations.length});
   }
 
   doConsult() {
@@ -48,6 +51,15 @@ export class HomePage {
   }
 
   doMyResponse() {
+    console.log("doMyResponse" + this.responses.length  )
+    if(this.responses.length == 1) {
+      this.navCtrl.push(ResponsePage, {'response' : this.responses[0]});
+    } else {
+      this.navCtrl.push(MyResponsesPage);
+    }
+  }
+
+  doMyResponseInfoComp() {
     console.log("doMyResponse" + this.responses.length  )
     if(this.responses.length == 1) {
       this.navCtrl.push(ResponsePage, {'response' : this.responses[0]});

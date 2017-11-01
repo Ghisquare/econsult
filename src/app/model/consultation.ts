@@ -5,6 +5,7 @@ export class Consultation {
   id: number;
 
   date_creation: number;
+  date_modified: number;
   date_response: number;
   date_close: number;
 

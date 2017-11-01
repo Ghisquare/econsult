@@ -1,0 +1,11 @@
+<ion-list no-padding>
+    <ion-item *ngFor="let message of messages">
+      <div class="inline"><h3 ion-text color="primary">envoyé par </h3><p>{{message.author.forname}} {{message.author.name}}</p></div>
+      <p ion-text> le {{afficheDate(message.date)}}</p>
+      <div class="inline" ><h3 ion-text color="secondary" >message </h3><p ion-text>
+        {{message.content}}
+      </p></div>
+    </ion-item>
+</ion-list>
+
+

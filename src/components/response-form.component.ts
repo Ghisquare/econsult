@@ -64,7 +64,7 @@ export class ResponseFormComponent implements OnInit{
         this.consultation.rdvStatus = formModel.rdv_number;
         this.consultation.rdvUnit = formModel.rdv_unit;
     }
-    this.consultation.xchangeStatus = 1;
+    this.consultation.xchangeStatus = 3;//status consultation répondu en attente fermeture
     console.log("prepareUpdateConsultation" + JSON.stringify(this.consultation));
   }
 
@@ -74,5 +74,7 @@ export class ResponseFormComponent implements OnInit{
     });
     this.loading.present();
   }
+
+
 
 }

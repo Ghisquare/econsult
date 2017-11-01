@@ -11,14 +11,35 @@
 <ion-content padding>
   <h1 ion-text color="primary">Demande de consultation</h1>
 
-  <div *ngIf="selectedDemand.xchangeStatus== 0; else responseSubmitted">
+  <div *ngIf="selectedDemand.xchangeStatus== 0 || selectedDemand.xchangeStatus == 2; else responseSubmitted">
     <demand-resume [consultation]="selectedDemand"></demand-resume>
-    <response-form [consultation]="selectedDemand"></response-form>
+    <div *ngIf="hasMessages">
+      <h2 ion-text color="secondary" *ngIf="selectedDemand.xchangeStatus == 0">Réponse de M. {{selectedDemand.author.name}}</h2>
+      <h3 ion-text color="primary" *ngIf="selectedDemand.xchangeStatus == 0">suite demande d'info complémentaire</h3>
+
+      <h2 ion-text color="secondary" *ngIf="selectedDemand.xchangeStatus == 2">Demande d'info complémentaire de M. {{selectedDemand.author.name}}</h2>
+      <message-list [messages]="messages"></message-list>
+    </div>
+    <message-form [consultation]="selectedDemand" [consulted]="true" [demand]="false" (outputMessage)="outputMessage($event)" *ngIf="selectedDemand.xchangeStatus == 2; else response"></message-form>
+
+    <ng-template #response>
+    <ion-buttons *ngIf="!infoComp">
+      <button type="button" ion-button color="primary" icon-end (click)="doInfoComp()">Demande d'info complémentaire
+        <ion-icon name="information-circle"></ion-icon></button>
+    </ion-buttons>
+    <message-form [consultation]="selectedDemand" [consulted]="true" (outputMessage)="outputMessage($event)" *ngIf="infoComp; else responseForm"></message-form>
+    <ng-template #responseForm><response-form [consultation]="selectedDemand"></response-form></ng-template>
+    </ng-template>
   </div>
   <ng-template #responseSubmitted>
     <h1 ion-text color="primary">Merci</h1>
-    <p>Votre réponse à bien été envoyé à M.{{selectedDemand.author.name}}</p>
-    <p>INSERER RESUME REPONSE</p>
+    <div *ngIf="selectedDemand.xchangeStatus== 3; else messageSubmitted"><p>Votre réponse à bien été envoyé à M.{{selectedDemand.author.name}}</p>
+    <response-resume [consultation]="selectedDemand" [own]="true"></response-resume>
+    </div>
+    <ng-template #messageSubmitted>Votre message:<br />
+      <i>{{sentMessage.content}}</i>
+      <br />
+      <p>à bien été envoyé à M.{{selectedDemand.author.name}}</p></ng-template>
     <button ion-button (click)="goHome()">OK</button>
   </ng-template>
 </ion-content>

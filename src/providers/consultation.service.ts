@@ -31,7 +31,7 @@ export class ConsultationService {
       .catch(this.handleError);
   }
 
-  getDemandsByContact(contact: User, xchangeStatus: number): Promise<Consultation[]>{
+  getDemandsByContact(contact: User, xchangeStatus): Promise<Consultation[]>{
     const url = `${this.consultationsUrl}/?contact_id=${contact.id}&xchangeStatus=${xchangeStatus}`;
     console.log('getDemandsByContact - url:?? ' + url);
     return this.http.get(url)
@@ -50,7 +50,7 @@ export class ConsultationService {
       .catch(this.handleError);
   }
 //A FAIRE FONCTION GLOBAL getConsultations (contact, status, author: boolean
-  getResponsesByXchangeStatus(author: User, status: number): Promise<Consultation[]>{
+  getResponsesByXchangeStatus(author: User, status): Promise<Consultation[]>{
     const url = `${this.consultationsUrl}/?xchangeStatus=${status}&author_id=${author.id}`;
     console.log('getResponsesByXchangeStatus - url: ' + url);
     return this.http.get(url)

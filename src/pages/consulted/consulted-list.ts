@@ -27,7 +27,7 @@ export class ConsultedListPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.consultationService.getDemandsByContact(this.authService.getUserInfo(), 0).then(consultations => {
+    this.consultationService.getDemandsByContact(this.authService.getUserInfo(), "0|2").then(consultations => {
       this.demands = consultations;
     });
   }

@@ -45,6 +45,10 @@ import {ImageService} from "../providers/image.service";
 import {ContactButtonsComponent} from "../components/contact-buttons";
 import {ConsultedPage} from "../pages/consulted/consulted-page";
 import {ResponsePage} from "../pages/myresponses/response";
+import {MessageService} from "../providers/message.service";
+import {MessageFormComponent} from "../components/messages/message-form";
+import {MessageListComponent} from "../components/messages/message-list";
+import {ResponseResumeComponent} from "../components/responses/response-resume";
 
 const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
@@ -73,9 +77,12 @@ export class MyErrorHandler implements ErrorHandler {
     SpecialtySelectComponent,
     ContactSelectComponent,
     DemandResumeComponent,
+    ResponseResumeComponent,
     PatientResumeComponent,
     ResponseFormComponent,
     ContactButtonsComponent,
+    MessageFormComponent,
+    MessageListComponent,
     TabsPage,
     LogoutButton,
     RegisterPage,
@@ -119,6 +126,7 @@ export class MyErrorHandler implements ErrorHandler {
     SpecialtyService,
     ProfessionService,
     PatientService,
+    MessageService,
     ImageService,
     CallNumber,
     File,

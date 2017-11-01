@@ -31,9 +31,3 @@
     </ion-item-group>
   </ion-list>
 
-<ion-list *ngIf="response">
-    <h2 ion-text color="secondary">Réponse de M. {{consultation.contact.name}}</h2>
-  <div class="inline"> <h3 ion-text color="primary">Diagnostic: </h3><p>{{consultation.response}} </p></div>
-  <div class="inline"><h3 *ngIf="consultation.treatment" ion-text color="primary">Traitement à initier: </h3><p>{{consultation.treatment}}</p></div>
-  <div class="inline"><h3 ion-text color="primary">Délai de consultation conseillé: </h3><p>{{statusText}}</p></div>
-

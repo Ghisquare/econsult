@@ -11,12 +11,34 @@
 <ion-content padding>
   <h1 ion-text color="primary">Réponse à votre demande de consultation</h1>
   <div *ngIf="!closed; else thanks">
-    <demand-resume [consultation]="selectedResponse" [response]="true" [question]="false"></demand-resume>
-    <button ion-button (click)="closeConsultation()">Fermer la consultation</button>
+    <demand-resume [consultation]="consultation" [response]="true" [question]="false"></demand-resume>
+    <div *ngIf="hasMessages">
+      <h2 ion-text color="secondary" *ngIf="consultation.xchangeStatus == 3">Discussion avec M. {{consultation.contact.name}}</h2>
+      <h2 ion-text color="secondary" *ngIf="consultation.xchangeStatus == 1">Demande d'info complémentaire de M. {{consultation.contact.name}}</h2>
+      <message-list [messages]="messages"></message-list>
+    </div>
+    <message-form [consultation]="consultation" [consulted]="false" [demand]="false" (outputMessage)="outputMessage($event)" *ngIf="consultation.xchangeStatus == 1; else response"></message-form>
+    <ng-template #response>
+      <response-resume [consultation]="consultation"> </response-resume>
+      <ion-buttons *ngIf="!infoComp">
+        <button ion-button (click)="closeConsultation()">Fermer la consultation
+          <ion-icon name="thumbs-up"></ion-icon></button>
+        <button type="button" ion-button color="primary" icon-end (click)="doInfoComp()">Demande d'info complémentaire
+          <ion-icon name="information-circle"></ion-icon></button>
+      </ion-buttons>
+      <message-form [consultation]="consultation" [consulted]="false" (outputMessage)="outputMessage($event)" *ngIf="infoComp"></message-form>
+
+    </ng-template>
   </div>
   <ng-template #thanks>
-    <h1 ion-text color="primary">Merci</h1>
-    <p>La consultation a été fermée</p>
+    <h2 ion-text color="secondary">Merci</h2>
+    <p ion-text *ngIf="!sentMessage; else msgSent">La consultation a été fermée</p>
+    <ng-template #msgSent>
+      Votre message:<br />
+      <i>{{sentMessage.content}}</i>
+      <br />
+      <p>à bien été envoyé à M. {{sentMessage.to.name}}</p>
+    </ng-template>
     <button ion-button (click)="goHome()">OK</button>
   </ng-template>
 </ion-content>

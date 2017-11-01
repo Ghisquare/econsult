@@ -65,6 +65,8 @@ export class InMemDataService implements InMemoryDbService {
 
     ]
 
+    const messages = [];
+
     const images = [
 //      {"uri":"1508598479095.jpg","description":"Paume de la main","consultation_id":4,"id":2},
 //      {"uri":"1508598479095.jpg","description":"Paume de la main","consultation_id":5,"id":2},
@@ -72,6 +74,6 @@ export class InMemDataService implements InMemoryDbService {
 //      {"uri":"1508598495724.jpg","description":"Dos de la main","consultation_id":5,"id":3}
     ];
 
-    return {consultations, users, specialties, professions, patients, images};
+    return {consultations, users, specialties, professions, patients, images, messages};
   }
 }

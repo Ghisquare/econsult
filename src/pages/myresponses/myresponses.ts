@@ -28,7 +28,7 @@ export class MyResponsesPage implements OnInit {
 
   ngOnInit(): void {
     console.log("call: this.consultationService.getResponsesByXchangeStatus("+this.authService.getUserInfo()+", 1)");
-    this.consultationService.getResponsesByXchangeStatus(this.authService.getUserInfo(), 1).then(consultations => {
+    this.consultationService.getResponsesByXchangeStatus(this.authService.getUserInfo(), "1|3").then(consultations => {
       this.responses = consultations;
     });
   }
