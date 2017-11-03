@@ -1,0 +1,17 @@
+<ion-navbar>
+  <ion-grid no-padding no-margin>
+    <ion-row>
+      <ion-col col1><img src="assets/img/icon40px.png" class="icon" style="height: 2.8rem" /></ion-col>
+      <ion-col col-8>
+        <ion-title ion-text><ion-icon item-start name="home" *ngIf="isHome"></ion-icon>
+
+          {{titleText}}
+        </ion-title>
+      </ion-col>
+      <ion-col col-3>
+        <logout-button></logout-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-navbar>

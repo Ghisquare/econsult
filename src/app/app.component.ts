@@ -40,7 +40,7 @@ export class MyApp {
     this.userService.getUsers().then(users => {
       this.users = users;
       //AUTO LOGIN : comment to have login
-      this.auth.login({ email: 'gb@gb.com', password: 'gb' }).subscribe(allowed => {
+      /*this.auth.login({ email: 'gb@gb.com', password: 'gb' }).subscribe(allowed => {
           if (allowed) {
 
             this.nav.setRoot(TabsPage);
@@ -50,7 +50,7 @@ export class MyApp {
         },
         error => {
           this.showError(error);
-        });
+        });*/
 
     });
   }

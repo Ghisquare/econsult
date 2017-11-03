@@ -1,3 +1,33 @@
 page-home {
 
 }
+
+.button-image {
+  background-color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.button-image div{
+  border-radius: 100%;
+  padding: 1rem;
+  max-width: 138px;
+  margin: auto;
+}
+
+.button-image.color-primary div {
+  background-color: map-get($colors, primary);;
+}
+
+.button-image.color-primary h2 {
+  color: map-get($colors, primary);;
+}
+
+.button-image.color-danger div {
+  background-color: map-get($colors, danger);;
+}
+
+.button-image.color-danger h2 {
+  color: map-get($colors, danger);;
+}
+

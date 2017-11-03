@@ -1,18 +1,48 @@
 <ion-header>
-  <ion-navbar>
-    <logout-button></logout-button>
-    <ion-title ion-text><ion-icon item-start name="home"></ion-icon>
-      E-Consult</ion-title>
-  </ion-navbar>
+  <my-navbar [titleText]="'E-Consult'" [isHome]="true"></my-navbar>
+
+
 </ion-header>
 
 <ion-content padding>
-  <h4>Welcome {{currentUser.name}}</h4>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 offset-3>
+        <img src="assets/img/logo.png"/>
+      </ion-col>
+      <ion-col col-3></ion-col>
+    </ion-row>
+  </ion-grid>
+  <h4 ion-text color="primary">Bienvenue M. {{currentUser.name}}</h4>
   <nav>
     <ion-buttons>
-      <button ion-button full (click)="doConsult()">Je demande un avis</button>
-      <button *ngIf="currentUser.user_type == 2" ion-button full (click)="doMyDemands()" [disabled]="demandCount==0" [color]="demandCount > 0 ? 'danger' : 'default'">Je donne un avis ({{demandCount}} demandes en cours)</button>
-      <button ion-button full (click)="doMyResponse()" [disabled]="responseCount==0" [color]="responseCount>0?'danger':'default'">Vous avez ({{responseCount}}) réponses</button>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+          <button full (click)="doConsult()"  class="button-image color-primary">
+            <div><img src="assets/img/icons/question.png" alt="Je consulte" /></div>
+            <h2>Je consulte</h2>
+          </button>
+          </ion-col>
+        <ion-col>
+          <button  *ngIf="currentUser.user_type == 2"
+                  full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image  color-danger' : 'button-image color-primary'">
+            <div><img src="assets/img/icons/consulted.png" alt="Je suis consulté" /></div>
+            <h2>Je suis consulté<br />
+              ({{demandCount}} demandes)
+            </h2>
+          </button>
+        </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col offset-3 col-6>
+            <button full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image  color-danger' : 'button-image color-primary'">
+              <div><img src="assets/img/icons/response.png" alt="Je suis consulté" /></div>
+              <h2>Vous avez ({{responseCount}}) réponses</h2>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-buttons>
   </nav>
 </ion-content>

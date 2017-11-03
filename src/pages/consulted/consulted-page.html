@@ -1,11 +1,5 @@
 <ion-header>
-  <ion-navbar>
-    <logout-button></logout-button>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Je donne un avis</ion-title>
-  </ion-navbar>
+  <my-navbar [titleText]="'Je suis consulté'"></my-navbar>
 </ion-header>
 
 <ion-content padding>
@@ -32,7 +26,7 @@
     </ng-template>
   </div>
   <ng-template #responseSubmitted>
-    <h1 ion-text color="primary">Merci</h1>
+    <h2 ion-text color="secondary">Merci</h2>
     <div *ngIf="selectedDemand.xchangeStatus== 3; else messageSubmitted"><p>Votre réponse à bien été envoyé à M.{{selectedDemand.author.name}}</p>
     <response-resume [consultation]="selectedDemand" [own]="true"></response-resume>
     </div>

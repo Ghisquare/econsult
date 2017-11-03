@@ -10,6 +10,7 @@ import {afficheDate} from "../../app/functions";
   selector: 'page-consult-list',
   templateUrl: 'consultlist.html'
 })
+
 export class ConsultListPage implements OnInit {
   selectedItem: any;
   consultations: Consultation[];

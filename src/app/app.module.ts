@@ -27,7 +27,8 @@ import {RouterModule} from "@angular/router";
 import {SpecialtyService} from "../providers/specialty.service";
 import {ContactSelectComponent} from "../components/contact-select";
 import {RegisterPage} from "../pages/register/register";
-import {LogoutButton} from "../components/logout-button";
+import {LogoutButton} from "../components/navigation/logout-button";
+import {MyNavbar} from "../components/navigation/my-navbar";
 import {DemandResumeComponent} from "../components/demand-resume";
 import {ResponseFormComponent} from "../components/response-form.component";
 import {MyResponsesPage} from "../pages/myresponses/myresponses";
@@ -85,6 +86,7 @@ export class MyErrorHandler implements ErrorHandler {
     MessageListComponent,
     TabsPage,
     LogoutButton,
+    MyNavbar,
     RegisterPage,
     ShowPhotoPage
   ],

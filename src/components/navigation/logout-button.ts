@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 
-import {AuthService} from "../providers/auth-service/auth-service";
+import {AuthService} from "../../providers/auth-service/auth-service";
 import {NavController} from "ionic-angular";
-import {LoginPage} from "../pages/login/login";
+import {LoginPage} from "../../pages/login/login";
 
 @Component({
   selector: 'logout-button',
@@ -14,7 +14,7 @@ export class LogoutButton {
 
   constructor(public navCtrl: NavController, private authService: AuthService) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.username= authService.getUserInfo().forname + " " + authService.getUserInfo().name;
+    this.username= authService.getUserInfo().forname[0] + authService.getUserInfo().name[0];
   }
 
  public logout() {
