@@ -34,6 +34,7 @@ export class RegisterPage implements OnInit{
   isSpecialist: boolean;
   user: User;
   identificationTitle: string = "Identification";
+  navbarTitle: string = "E-Consult - S'enregister";
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, private loadingCtrl: LoadingController,

@@ -13,24 +13,21 @@
   </ion-row>
   <ion-row>
   <ion-col>
-    <ion-list>
-      <ion-item><h2 ion-text color="secondary">Consultation en ligne entre professionnels médicaux</h2></ion-item>
-      <ion-item ion-text> <p><ion-icon name="git-merge" item-start></ion-icon>
-        Généraliste à spécialiste</p></ion-item>
-      <ion-item>   <p><ion-icon name="git-merge" item-start></ion-icon>Autre intervenants médicaux à généraliste ou spécialiste</p></ion-item>
-      <ion-item><h3 ion-text color="primary"><ion-icon name="checkmark-circle" item-start></ion-icon>Un outils de communication au service des professionnels de santé</h3></ion-item>
-    </ion-list>
+      <h2 ion-text color="secondary">Consultation en ligne entre professionnels médicaux</h2>
+      <p><ion-icon name="git-merge" item-start></ion-icon>
+        Généraliste à spécialiste</p>
+      <p><ion-icon name="git-merge" item-start></ion-icon>
+        Autre intervenants médicaux à généraliste ou spécialiste</p>
+      <h3 ion-text color="primary"><ion-icon name="checkmark-circle" item-start></ion-icon>
+        Un outils de communication au service des professionnels de santé</h3>
   </ion-col>
-  <!--
-    <ion-col></ion-col>-->
+
   </ion-row>
-  <div class="login-box">
     <form (ngSubmit)="login()" #registerForm="ngForm">
       <ion-row>
         <ion-col>
           <ion-list inset>
             <ion-list-header>Connectez-vous pour la démo</ion-list-header>
-
             <ion-item>
               <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required value="gl@gl.com"></ion-input>
             </ion-item>
@@ -40,16 +37,15 @@
             </ion-item>
 
           </ion-list>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
+          <button ion-button class="register-btn" block clear (click)="createAccount()" type="button">S'enregistrer</button>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
-         <button ion-button class="register-btn" block clear (click)="createAccount()" type="button">S'enregistrer</button>
-        </ion-col>
+         </ion-col>
       </ion-row>
 
     </form>
-  </div>
 </ion-content>
