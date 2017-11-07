@@ -68,7 +68,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.6rem;
 }
 
-.toolbar-background-md {background-color: white;}
+.toolbar-background {background-color: white;}
+.toolbar-title {
+  color: map-get($colors, primary);
+}
+
+.toolbar-ios ion-title, .toolbar-md ion-title {padding: 0 5px 1px;}
 
 .profile-button{
   border-radius: 50%;
@@ -81,8 +86,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 32px;
 }
 
-.ios{
-  ion-header {
-    margin-top: 20px;
+.ios {
+  ion-header, ion-content {
+    top: 18px;
   }
 }

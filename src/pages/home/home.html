@@ -21,18 +21,29 @@
           <ion-col>
           <button full (click)="doConsult()"  class="button-image color-primary">
             <div><img src="assets/img/icons/question.png" alt="Je consulte" /></div>
-            <h2>Je consulte</h2>
           </button>
           </ion-col>
         <ion-col>
           <button  *ngIf="currentUser.user_type == 2"
                   full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image  color-danger' : 'button-image color-primary'">
             <div><img src="assets/img/icons/consulted.png" alt="Je suis consulté" /></div>
-            <h2>Je suis consulté<br />
-              ({{demandCount}} demandes)
-            </h2>
           </button>
         </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <button full (click)="doConsult()"  class="button-image color-primary">
+              <h2>Je consulte</h2>
+            </button>
+          </ion-col>
+          <ion-col>
+            <button  *ngIf="currentUser.user_type == 2"
+                     full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image  color-danger' : 'button-image color-primary'">
+              <h2>Je suis consulté<br />
+                ({{demandCount}} demandes)
+              </h2>
+            </button>
+          </ion-col>
         </ion-row>
         <ion-row>
           <ion-col offset-3 col-6>
