@@ -14,7 +14,7 @@ export class LogoutButton {
 
   constructor(public navCtrl: NavController, private authService: AuthService) {
     // If we navigated to this page, we will have an item available as a nav param
-    this.username= authService.getUserInfo().forname[0] + authService.getUserInfo().name[0];
+    if(authService.getUserInfo()) this.username= authService.getUserInfo().forname[0] + authService.getUserInfo().name[0];
   }
 
  public logout() {
