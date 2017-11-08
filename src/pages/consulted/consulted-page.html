@@ -12,13 +12,13 @@
       <h3 ion-text color="primary" *ngIf="selectedDemand.xchangeStatus == 0">suite demande d'info complémentaire</h3>
 
       <h2 ion-text color="secondary" *ngIf="selectedDemand.xchangeStatus == 2">Demande d'info complémentaire de M. {{selectedDemand.author.name}}</h2>
-      <message-list [messages]="messages"></message-list>
+      <message-list [messages]="messages" *ngIf="hasMessages"></message-list>
     </div>
     <message-form [consultation]="selectedDemand" [consulted]="true" [demand]="false" (outputMessage)="outputMessage($event)" *ngIf="selectedDemand.xchangeStatus == 2; else response"></message-form>
 
     <ng-template #response>
     <ion-buttons *ngIf="!infoComp">
-      <button type="button" ion-button color="primary" icon-end (click)="doInfoComp()">Demande d'info complémentaire
+      <button type="button" small ion-button margin color="primary" icon-end (click)="doInfoComp()">Demande d'info complémentaire
         <ion-icon name="information-circle"></ion-icon></button>
     </ion-buttons>
     <message-form [consultation]="selectedDemand" [consulted]="true" (outputMessage)="outputMessage($event)" *ngIf="infoComp; else responseForm"></message-form>

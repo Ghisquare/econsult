@@ -25,6 +25,7 @@ export class DemandResumeComponent implements OnInit {
   nomTitreMedecin: string;
   symptomeUnit: string;
   images: Array<Image> = [];
+  hasImages: boolean = false;
   dateAffiche: string;
 
 
@@ -45,6 +46,7 @@ export class DemandResumeComponent implements OnInit {
 
     this.imgService.getImagesByConsultationId(this.consultation.id).then(images => {
       this.images = images;
+      this.hasImages =(this.images.length > 0);
     });
 
 

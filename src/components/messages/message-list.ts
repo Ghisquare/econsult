@@ -14,6 +14,7 @@ export class MessageListComponent {
   @Input() messages: Message[];
 
   constructor() {
+    console.log("MessageListConstruct");
   }
 
   afficheDate(ts: number) {

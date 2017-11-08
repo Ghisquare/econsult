@@ -19,7 +19,7 @@
   <div *ngIf="images.length > 0">
     <ion-label>Photos</ion-label>
   </div>
-  <ion-list>
+  <ion-list *ngIf="hasImages">
     <ion-item-group *ngFor="let image of images; let i = index">
       <ion-item>
         <ion-thumbnail item-start>
