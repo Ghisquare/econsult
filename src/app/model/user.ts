@@ -3,6 +3,7 @@ import {Profession} from "./profession";
 export class User {
   id: number;
   user_type: number;
+  civility: number;
   accept_patient: boolean;
   sex: number;
   birthdate: Date;
@@ -19,6 +20,7 @@ export class User {
   profession_id: number;
   profession: Profession;
   online: boolean;
+  shortName: string;
 
   init(id: number, name: string, forname: string, email: string, pwd: string, specialty_id: number, online: boolean) {
     this.id = id;

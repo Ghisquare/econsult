@@ -50,6 +50,7 @@ import {MessageService} from "../providers/message.service";
 import {MessageFormComponent} from "../components/messages/message-form";
 import {MessageListComponent} from "../components/messages/message-list";
 import {ResponseResumeComponent} from "../components/responses/response-resume";
+import {ErrorMsgComponent} from "../components/forms/error-msg";
 
 const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
@@ -88,7 +89,8 @@ export class MyErrorHandler implements ErrorHandler {
     LogoutButton,
     MyNavbar,
     RegisterPage,
-    ShowPhotoPage
+    ShowPhotoPage,
+    ErrorMsgComponent
   ],
   imports: [
     BrowserModule,

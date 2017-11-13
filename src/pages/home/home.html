@@ -1,7 +1,5 @@
 <ion-header>
   <my-navbar [titleText]="'E-Consult'" [isHome]="true"></my-navbar>
-
-
 </ion-header>
 
 <ion-content padding>
@@ -13,7 +11,7 @@
       <ion-col col-3></ion-col>
     </ion-row>
   </ion-grid>
-  <h4 ion-text color="primary">Bienvenue M. {{currentUser.name}}</h4>
+  <h4 ion-text color="primary">Bienvenue {{currentUser.shortName}}</h4>
   <nav>
     <ion-buttons>
       <ion-grid>

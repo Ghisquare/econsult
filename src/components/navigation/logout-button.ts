@@ -19,7 +19,7 @@ export class LogoutButton {
 
  public logout() {
   this.authService.logout().subscribe(succ => {
-    this.navCtrl.setRoot(LoginPage)
+    this.navCtrl.setRoot(LoginPage);
   });
  }
 }

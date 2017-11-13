@@ -17,7 +17,7 @@
 
 ion-item-group.inline, ion-list.inline {
   display:flex;
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #c8c7cc;
 }
 
 div.inline h3, div.inline p {
@@ -43,7 +43,7 @@ p {color: #666}
 
 ion-label {color: #999}
 
-input::placeholder, textarea::placeholder {
+input::placeholder, textarea::placeholder, .select-placeholder {
   font-style: italic;
   font-size:1.4rem;
 }
@@ -90,4 +90,12 @@ h1, h2, h3, h4, h5, h6 {
   ion-header, ion-content {
     top: 18px;
   }
+}
+
+ion-item-group .item-inner {
+  border: none;
+}
+
+ion-item-group.do-lines {
+  border-bottom: 0.55px solid #c8c7cc;
 }

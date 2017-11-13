@@ -28,6 +28,13 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  getUserByEmail(email: string): Promise<User> {
+    const url = `${this.usersUrl}/?email=${email}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => response.json().data as User)
+      .catch(this.handleError);
+  }
   getUsersBySpecialty(specialty_id: number): Promise<User[]> {
     const url = `${this.usersUrl}/?specialty_id=${specialty_id}`;
     console.log(url);
@@ -50,4 +57,23 @@ export class UserService {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+  public getCivilities(): Array<any> {
+    var civilities = new Array();
+    civilities[0] = "M. ";
+    civilities[1] = "Mme. ";
+    civilities[2] = "Mlle. ";
+    civilities[3] = "Dr. ";
+    civilities[4] = "Pr. ";
+    return civilities;
+  }
+
+  public getCivility(index:number) {
+    return this.getCivilities()[index];
+  }
+
+  public getShortName(user: User) {
+    return this.getCivility(user.civility) + user.name;
+  }
+
 }

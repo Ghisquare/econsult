@@ -64,6 +64,7 @@ export class LoginPage {
   }
 
   ionViewWillEnter() {
+
     let tabs = document.querySelectorAll('.tabbar');
     if ( tabs !== null ) {
       Object.keys(tabs).map((key) => {

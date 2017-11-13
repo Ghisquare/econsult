@@ -3,20 +3,20 @@
     <form [formGroup]="consultForm" (ngSubmit)="onSubmit()" novalidate>
       <h2 ion-text color="secondary">Choix du médecin</h2>
       <ion-item>
-        <ion-label>Spécialité</ion-label>
+        <ion-label stacked>Spécialité</ion-label>
         <ion-select interface="popover" formControlName="specialty" placeholder="Sélectionner la spécialité">
           <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)" >{{specialty.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="contacts">
-        <ion-label>Médecin</ion-label>
+        <ion-label stacked>Médecin</ion-label>
         <ion-select interface="popover" formControlName="contact" placeholder="Sélectionner le médecin">
           <ion-option *ngFor="let contact of contacts" value="{{contact.id}}" (ionSelect)="onSelectContact(contact)" [disabled]="!contact.online">{{contact.forname}} {{contact.name}} <ion-icon *ngIf="contact.online" name="wifi" icon-end></ion-icon></ion-option>
         </ion-select>
       </ion-item>
       <h2 ion-text color="secondary">Description du cas</h2>
       <ion-item>
-        <ion-label>Patient anonyme</ion-label>
+        <ion-label stacked>Patient anonyme</ion-label>
         <ion-checkbox checked="true" formControlName="anonymous_patient" (ionChange)="doAnonymous()"></ion-checkbox>
       </ion-item>
       <div *ngIf="isAnonymousPatient">
@@ -83,7 +83,7 @@
           <ion-textarea placeholder="décrivez le cas clinique" formControlName="description"></ion-textarea>
         </ion-item>
         <ion-item-group class="inline">
-          <ion-item>
+          <ion-item no-lines>
             <ion-label stacked>Début des symptomes</ion-label>
             <ion-input type="number" min="0" max="60" formControlName="debut_symptome"></ion-input>
           </ion-item>

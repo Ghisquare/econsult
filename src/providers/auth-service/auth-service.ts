@@ -7,7 +7,7 @@ import{UserService} from "../user.service"
 
 @Injectable()
 export class AuthService  {
-  users: User[]
+  users: User[];
   currentUser: User;
 
   constructor(private userService: UserService) {
@@ -28,6 +28,7 @@ export class AuthService  {
         console.log(user);
         let access =(user !=null);
         this.currentUser = user;
+        this.currentUser.shortName = this.userService.getShortName(this.currentUser);
 //        let access = (credentials.password === this.users[0].pwd && credentials.email === this.users[0].email);
 //        this.currentUser = this.users[0];
         observer.next(access);
