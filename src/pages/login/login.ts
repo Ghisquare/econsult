@@ -32,7 +32,7 @@ export class LoginPage {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
         if (allowed) {
-          Pro.getApp().monitoring.log('Login successfull', { level: 'info' })
+          //Pro.getApp().monitoring.log('Login successfull', { level: 'info' })
 
           this.nav.setRoot(TabsPage);
         } else {

@@ -1,5 +1,5 @@
 {
-    "name": "E-Consult",
+    "name": "net.guadeloupe-developpement.e-consult",
     "version": "0.0.1",
     "author": "Ionic Framework",
     "homepage": "http://ionicframework.com/",
@@ -33,9 +33,8 @@
         "@ionic/storage": "2.0.1",
         "angular-in-memory-web-api": "^0.3.2",
         "call-number": "^1.0.1",
-        "cordova-android": "6.2.3",
+        "cordova-android": "^6.2.3",
         "cordova-ios": "^4.4.0",
-        "cordova-plugin-add-swift-support": "^1.6.1",
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
@@ -43,7 +42,6 @@
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-filepath": "^1.1.0",
-        "cordova-plugin-ionic": "^2.0.1",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.2",
         "cordova-plugin-whitelist": "^1.3.1",
@@ -58,7 +56,7 @@
     "devDependencies": {
         "@ionic/app-scripts": "2.0.2",
         "@ionic/cli-plugin-proxy": "1.4.1",
-        "ionic": "3.15.2",
+        "ionic": "3.18.0",
         "typescript": "2.3.4"
     },
     "description": "An Ionic project",
@@ -73,14 +71,7 @@
             "cordova-plugin-camera": {},
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
-            "cordova-plugin-filepath": {},
-            "cordova-plugin-ionic": {
-                "APP_ID": "b1148716",
-                "CHANNEL_NAME": "Testchannel",
-                "UPDATE_METHOD": "auto",
-                "UPDATE_API": "https://api.ionicjs.com",
-                "MAX_STORE": "2"
-            }
+            "cordova-plugin-filepath": {}
         },
         "platforms": [
             "android",

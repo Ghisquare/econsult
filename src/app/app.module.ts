@@ -41,7 +41,7 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
-import { Pro } from '@ionic/pro';
+//import { Pro } from '@ionic/pro';
 import {ImageService} from "../providers/image.service";
 import {ContactButtonsComponent} from "../components/contact-buttons";
 import {ConsultedPage} from "../pages/consulted/consulted-page";
@@ -52,13 +52,14 @@ import {MessageListComponent} from "../components/messages/message-list";
 import {ResponseResumeComponent} from "../components/responses/response-resume";
 import {ErrorMsgComponent} from "../components/forms/error-msg";
 
-const IonicPro = Pro.init('b1148716', {
+/*const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
-});
+});*/
 
 export class MyErrorHandler implements ErrorHandler {
   handleError(err: any): void {
-    IonicPro.monitoring.handleNewError(err);
+   // IonicPro.monitoring.handleNewError(err);
+    console.log(err);
   }
 }
 

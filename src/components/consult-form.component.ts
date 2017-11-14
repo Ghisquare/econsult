@@ -120,12 +120,12 @@ export class ConsultFormComponent implements OnInit{
 
     // Get the data of an image
     this.camera.getPicture(options).then((imagePath) => {
-      Pro.getApp().monitoring.log("Take picture-sourceType" + sourceType + "path" + imagePath);
+      //Pro.getApp().monitoring.log("Take picture-sourceType" + sourceType + "path" + imagePath);
 
 
       // Special handling for Android library
       if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        Pro.getApp().monitoring.log("this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
+        //Pro.getApp().monitoring.log("this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
         this.filePath.resolveNativePath(imagePath)
           .then(filePath => {
             let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
@@ -133,7 +133,7 @@ export class ConsultFormComponent implements OnInit{
             this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
           });
       } else {
-        Pro.getApp().monitoring.log("NOT this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
+        //Pro.getApp().monitoring.log("NOT this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
 
         var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
         var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
@@ -155,18 +155,18 @@ export class ConsultFormComponent implements OnInit{
 
 // Copy the image to a local folder
   private copyFileToLocalDir(namePath, currentName, newFileName) {
-    Pro.getApp().monitoring.log("copyFileToLocalDir("+namePath+", "+currentName +", "+newFileName+")cordova.file.dataDirectory:" +cordova.file.dataDirectory);
+    //Pro.getApp().monitoring.log("copyFileToLocalDir("+namePath+", "+currentName +", "+newFileName+")cordova.file.dataDirectory:" +cordova.file.dataDirectory);
 
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
-      Pro.getApp().monitoring.log("This.copyfile success. Length" + this.images.length);
+      //Pro.getApp().monitoring.log("This.copyfile success. Length" + this.images.length);
 
       let controlName = 'image' + this.images.length;
       this.consultForm.addControl(controlName, new FormControl("", Validators.required));
       this.images.push(newFileName);
-      Pro.getApp().monitoring.log("Error while storing file.");
+      //Pro.getApp().monitoring.log("Error while storing file.");
 
     }, error => {
-      Pro.getApp().monitoring.log("Error while storing file. Length" + this.images.length);
+      //Pro.getApp().monitoring.log("Error while storing file. Length" + this.images.length);
       this.myErrorHandler.handleError(error);
       this.presentToast('Error while storing file.');
     });
