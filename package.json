@@ -1,8 +1,8 @@
 {
-    "name": "net.guadeloupe-developpement.e-consult",
+    "name": "fr.econsult.demoapp",
     "version": "0.0.1",
-    "author": "Ionic Framework",
-    "homepage": "http://ionicframework.com/",
+    "author": "Guillaume Larre",
+    "homepage": "http://econsult.fr/",
     "private": true,
     "scripts": {
         "clean": "ionic-app-scripts clean",
@@ -59,7 +59,7 @@
         "ionic": "3.18.0",
         "typescript": "2.3.4"
     },
-    "description": "An Ionic project",
+    "description": "E-Consult Demo App",
     "cordova": {
         "plugins": {
             "cordova-plugin-console": {},
