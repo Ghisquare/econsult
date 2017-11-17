@@ -232,7 +232,7 @@ export class RegisterPage implements OnInit{
     let tabs = document.querySelectorAll('.tabbar');
     if ( tabs !== null ) {
       Object.keys(tabs).map((key) => {
-        tabs[ key ].style.transform = 'translateY(56px)';
+ //       tabs[ key ].style.transform = 'translateY(56px)';
       });
     } // end if
   }
@@ -241,7 +241,7 @@ export class RegisterPage implements OnInit{
     let tabs = document.querySelectorAll('.tabbar');
     if ( tabs !== null ) {
       Object.keys(tabs).map((key) => {
-        tabs[ key ].style.transform = 'translateY(0)';
+ //       tabs[ key ].style.transform = 'translateY(0)';
       });
     } // end if
   }
