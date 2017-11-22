@@ -16,6 +16,5 @@ export class TabsPage {
   tab4Root = ConsultedListPage;
 
   constructor() {
-
   }
 }

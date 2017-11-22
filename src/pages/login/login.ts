@@ -63,22 +63,22 @@ export class LoginPage {
     alert.present(prompt);
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
 
-    let tabs = document.querySelectorAll('.tabbar');
+    let tabs = <HTMLElement>document.querySelector('.tabbar');
     if ( tabs !== null ) {
-      Object.keys(tabs).map((key) => {
-       // tabs[ key ].style.transform = 'translateY(56px)';
-      });
+      tabs.style.transform = 'translateY(56px)';
+      tabs.style.display = 'none';
+
     } // end if
   }
 
   ionViewDidLeave() {
-    let tabs = document.querySelectorAll('.tabbar');
+    let tabs = <HTMLElement>document.querySelector('.tabbar');
     if ( tabs !== null ) {
-      Object.keys(tabs).map((key) => {
-       // tabs[ key ].style.transform = 'translateY(0)';
-      });
+       tabs.style.transform = 'translateY(0)';
+       tabs.style.display = 'flex';
+
     } // end if
   }
 }

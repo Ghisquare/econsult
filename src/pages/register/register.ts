@@ -227,22 +227,23 @@ export class RegisterPage implements OnInit{
   }
 
   ionViewDidLoad() {
-    console.log('Register will enter');
 
-    let tabs = document.querySelectorAll('.tabbar');
+    let tabs = <HTMLElement>document.querySelector('.tabbar');
+    console.log('Register will enter' + JSON.stringify(tabs));
+
     if ( tabs !== null ) {
-      Object.keys(tabs).map((key) => {
- //       tabs[ key ].style.transform = 'translateY(56px)';
-      });
-    } // end if
+      console.log("tabs is not null");
+        tabs.style.transform = 'translateY(56px)';
+        tabs.style.display = 'none';
+    } else {console.log("tabs is null");}// end if
   }
 
   ionViewDidLeave() {
-    let tabs = document.querySelectorAll('.tabbar');
+    let tabs = <HTMLElement>document.querySelector('.tabbar');
     if ( tabs !== null ) {
-      Object.keys(tabs).map((key) => {
- //       tabs[ key ].style.transform = 'translateY(0)';
-      });
+        tabs.style.transform = 'translateY(0)';
+        tabs.style.display = 'flex';
+
     } // end if
   }
 
