@@ -17,6 +17,8 @@ export class ResponseFormComponent implements OnInit{
   responseForm: FormGroup;
   timeUnits: Array<any>;
   closed: boolean = false;
+  submitAttempt: boolean = false;
+
 
 
   constructor(private fb: FormBuilder, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
@@ -28,7 +30,7 @@ export class ResponseFormComponent implements OnInit{
   createForm() {
     this.responseForm = this.fb.group({
       response: ['', Validators.required ], // <--- the FormControl called "name"
-      treatment: ['', Validators.required ], // <--- the FormControl called "name"
+      treatment: ['' ], // <--- the FormControl called "name"
       status: ['', Validators.required ], // <--- the FormControl called "name"
       rdv_number: ['1', Validators.required ], // <--- the FormControl called "name"
       rdv_unit: ['0', Validators.required ], // <--- the FormControl called "name"
@@ -41,15 +43,20 @@ export class ResponseFormComponent implements OnInit{
 
   onSubmit() {
     console.log("submit form response");
-    this.showLoading()
+    this.submitAttempt = true;
 
-    this.prepareUpdateConsultation();
-    this.consultationService.update(this.consultation).then(consultation => {
-      this.loading.dismiss();
-      this.consultation = consultation;
+    if(this.responseForm.valid) {
+      this.submitAttempt = false;
+      this.showLoading();
 
-    });
-    //console.log("form submitted" + this.consultation.id);
+      this.prepareUpdateConsultation();
+      this.consultationService.update(this.consultation).then(consultation => {
+        this.loading.dismiss();
+        this.consultation = consultation;
+
+      });
+      //console.log("form submitted" + this.consultation.id);
+    }
   }
 
   prepareUpdateConsultation(){

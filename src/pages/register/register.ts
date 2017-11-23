@@ -96,8 +96,10 @@ export class RegisterPage implements OnInit{
     this.doCivilities();
     this.registerForm.controls.birthdate.setValidators(Validators.required);
     this.registerForm.controls.birthdate.updateValueAndValidity();
-    console.log('doPatient RegisterPage '+JSON.stringify(this.registerForm.controls.birthdate.valid));
-
+    this.registerForm.controls['profession'].clearValidators();
+    this.registerForm.controls.profession.updateValueAndValidity();
+    this.registerForm.controls['generalist'].clearValidators();
+    this.registerForm.controls.generalist.updateValueAndValidity();
   }
 
   doProf(){
@@ -106,6 +108,10 @@ export class RegisterPage implements OnInit{
     this.doCivilities();
     this.registerForm.controls['birthdate'].clearValidators();
     this.registerForm.controls.birthdate.updateValueAndValidity();
+    this.registerForm.controls['generalist'].clearValidators();
+    this.registerForm.controls.generalist.updateValueAndValidity();
+    this.registerForm.controls.profession.setValidators(Validators.required);
+    this.registerForm.controls.profession.updateValueAndValidity();
 
 
   }
@@ -115,6 +121,11 @@ export class RegisterPage implements OnInit{
     this.doCivilities();
     this.registerForm.controls['birthdate'].clearValidators();
     this.registerForm.controls.birthdate.updateValueAndValidity();
+    this.registerForm.controls['profession'].clearValidators();
+    this.registerForm.controls.profession.updateValueAndValidity();
+    this.registerForm.controls.generalist.setValidators(Validators.required);
+    this.registerForm.controls.generalist.updateValueAndValidity();
+
   }
 
   doCivilities(){
@@ -127,13 +138,15 @@ export class RegisterPage implements OnInit{
   }
 
   doGeneralist(){
-    console.log('doGeneralist RegisterPage'+this.selectedType);
     this.isSpecialist = false;
-  }
+    this.registerForm.controls['specialty'].clearValidators();
+    this.registerForm.controls.specialty.updateValueAndValidity();  }
 
   doSpecialist(){
-    console.log('doSpecialist RegisterPage'+this.selectedType);
     this.isSpecialist = true;
+    this.registerForm.controls.specialty.setValidators(Validators.required);
+    this.registerForm.controls.specialty.updateValueAndValidity();
+
   }
 
   showLoading() {
@@ -145,9 +158,7 @@ export class RegisterPage implements OnInit{
 
 
   onSubmit(){
-    console.log('register.onSubmit');
 
-    console.log("BDType Valid ? " + this.registerForm.controls.birthdate.valid);
     this.userTypeValid = this.registerForm.controls.userType.valid;
     this.birthdateValid = this.registerForm.controls.birthdate.valid;
 
@@ -163,7 +174,6 @@ export class RegisterPage implements OnInit{
 
       this.userService.createUser(this.user).then(user => {
         this.user = user;
-        console.log("onSubmit.promiseReturn");
         this.authService.refreshUsers();
         this.loading.dismiss();
 

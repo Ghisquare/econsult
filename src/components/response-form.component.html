@@ -1,11 +1,15 @@
 <h3 color="secondary" ion-text>Votre avis</h3>
      <form [formGroup]="responseForm" (ngSubmit)="onSubmit()" novalidate>
-      <ion-list>
+       <error-msg *ngIf="submitAttempt" text="Veuillez vérifier les données saisies."></error-msg>
+
+       <ion-list>
         <ion-item>
           <ion-label stacked>Diagnostic</ion-label>
           <ion-textarea placeholder="votre diagnostic" formControlName="response"></ion-textarea>
         </ion-item>
-        <ion-item>
+         <ion-item *ngIf="!responseForm.controls['response'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+         <ion-item>
           <ion-label stacked>Traitement à initier</ion-label>
           <ion-textarea placeholder="traitement à initier s'il y a lieu" formControlName="treatment"></ion-textarea>
         </ion-item>
@@ -16,7 +20,7 @@
          </ion-item>
         <ion-item-group>
            <ion-list class="inline" radio-group formControlName="status">
-            <ion-item ion-text *ngFor="let status of responseStatus; let i = index">
+            <ion-item ion-text *ngFor="let status of responseStatus; let i = index" no-lines>
               <ion-label>{{status}}</ion-label>
               <ion-radio value="{{i}}"></ion-radio>
             </ion-item>
@@ -32,6 +36,8 @@
               </ion-select>
             </ion-item>
           </ion-item-group>
+          <ion-item *ngIf="!responseForm.controls['status'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
         </ion-item-group>
 
 
@@ -44,10 +50,10 @@
           <ion-icon name="close"></ion-icon></button>
       </ion-buttons>
     </form>
-    <p>Form value: {{ responseForm.value | json }}</p>
-    <p>Form status: {{ responseForm.status | json }}</p>
- <!-- <div *ngIf="consultation">
-    Votre demande de consultation a bien été envoyé
-    AJOUTER RESUME DEMANDE
-    <button ion-button (click)="goHome()">OK</button>
-  </div>-->
+<!--     <p>Form value: {{ responseForm.value | json }}</p>
+   <p>Form status: {{ responseForm.status | json }}</p>
+<iv *ngIf="consultation">
+   Votre demande de consultation a bien été envoyé
+   AJOUTER RESUME DEMANDE
+   <button ion-button (click)="goHome()">OK</button>
+ </div>-->

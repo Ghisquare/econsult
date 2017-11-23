@@ -2,41 +2,48 @@
   <my-navbar [titleText]="'E-Consult'" [isHome]="true"></my-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-grid>
+<ion-content no-padding>
+  <ion-grid no-padding style="margin-bottom: 5px;">
     <ion-row>
-      <ion-col col-6 offset-3>
-        <img src="assets/img/logo.png"/>
+      <ion-col col-4 offset-4>
+        <img src="assets/img/logo.png" style="margin-top: 4px;"/>
       </ion-col>
-      <ion-col col-3></ion-col>
+      <ion-col col-4></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><h4 ion-text color="primary" style="padding-left: 16px; margin-top: 0">Bienvenue {{currentUser.shortName}}</h4></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col><img src="assets/img/homephoto.jpg" width="100%"/></ion-col>
     </ion-row>
   </ion-grid>
-  <h4 ion-text color="primary">Bienvenue {{currentUser.shortName}}</h4>
-  <nav>
-    <ion-buttons>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-          <button full (click)="doConsult()"  class="button-image color-primary">
+
+      <ion-grid no-padding>
+        <ion-row >
+          <ion-col class="consult-col">
+            <div class="arrow-right"></div>
+          <button full (click)="doConsult()"  class="button-image consult">
             <div><img src="assets/img/icons/question.png" alt="Je consulte" /></div>
           </button>
           </ion-col>
-        <ion-col>
+        <ion-col class="consulted-col">
+          <div class="arrow-left"></div>
+
           <button  *ngIf="currentUser.user_type == 2"
-                  full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image  color-danger' : 'button-image color-primary'">
+                  full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image consulted' : 'button-image'">
             <div><img src="assets/img/icons/consulted.png" alt="Je suis consulté" /></div>
           </button>
         </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col>
-            <button full (click)="doConsult()"  class="button-image color-primary">
+        <ion-row style="margin-bottom: 8px;">
+          <ion-col class="consult-col">
+            <button full (click)="doConsult()"  class="button-image consult">
               <h2>Je consulte</h2>
             </button>
           </ion-col>
-          <ion-col>
+          <ion-col class="consulted-col">
             <button  *ngIf="currentUser.user_type == 2"
-                     full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image  color-danger' : 'button-image color-primary'">
+                     full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image consulted' : 'button-image'">
               <h2>Je suis consulté<br />
                 ({{demandCount}} demandes)
               </h2>
@@ -44,14 +51,12 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col offset-3 col-6>
-            <button full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image  color-danger' : 'button-image color-primary'">
+          <ion-col class="response-col">
+            <button full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image  response' : 'button-image color-primary'">
               <div><img src="assets/img/icons/response.png" alt="Je suis consulté" /></div>
               <h2>Vous avez ({{responseCount}}) réponses</h2>
             </button>
           </ion-col>
         </ion-row>
       </ion-grid>
-    </ion-buttons>
-  </nav>
 </ion-content>

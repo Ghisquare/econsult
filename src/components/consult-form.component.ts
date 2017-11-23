@@ -1,4 +1,4 @@
-import {Component, ErrorHandler, Input, OnInit}                     from '@angular/core';
+import {Component, ErrorHandler, Inject, Input, OnInit, ViewChild}                     from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { Transfer, TransferObject } from '@ionic-native/transfer';
@@ -14,7 +14,7 @@ import {ConsultationService} from "../providers/consultation.service";
 import {AuthService} from "../providers/auth-service/auth-service";
 import {
   Loading, LoadingController, NavController, ActionSheetController, Platform,
-  ToastController, ModalController
+  ToastController, ModalController, Content
 } from "ionic-angular";
 import {TabsPage} from "../pages/tabs/tabs";
 import {Patient} from "../app/model/patient";
@@ -22,8 +22,6 @@ import {PatientService} from "../providers/patient.service";
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
 import {Image} from "../app/model/image";
 import {ImageService} from "../providers/image.service";
-import {MyErrorHandler} from "../app/app.module";
-import { Pro } from '@ionic/pro';
 import {age} from "../app/functions";
 
 
@@ -47,6 +45,9 @@ export class ConsultFormComponent implements OnInit{
   timeUnits: Array<any>;
   images: Array<string> = [];
   closed: boolean = false;
+  submitAttempt: boolean = false;
+  @ViewChild(Content) content: Content;
+
 
 
 
@@ -190,18 +191,18 @@ export class ConsultFormComponent implements OnInit{
     this.consultForm = this.fb.group({
       specialty: ['', Validators.required ], // <--- the FormControl called "name"
       contact: ['', Validators.required ], // <--- the FormControl called "name"
-      anonymous_patient:[''],
+      anonymous_patient:[true],
       age: ['', Validators.required ], // <--- the FormControl called "name"
       sex: ['', Validators.required ], // <--- the FormControl called "name"
       description: ['', Validators.required ], // <--- the FormControl called "name"
       antecedent: ['' ], // <--- the FormControl called "name"
       traitementEnCours: ['' ], // <--- the FormControl called "name"
-      debut_symptome: ['0' ], // <--- the FormControl called "name"
+      debut_symptome: ['0', Validators.required ], // <--- the FormControl called "name"
       debut_symptome_unit: ['0' ], // <--- the FormControl called "name"
-      patient_name: ['', Validators.required ],
-      patient_forname: ['', Validators.required ],
-      patient_birthdate: ['', Validators.required ],
-      patient_identification: ['', Validators.required ],
+      patient_name: ['' ],
+      patient_forname: ['' ],
+      patient_birthdate: ['' ],
+      patient_identification: [''],
 
       any: ''
     });
@@ -209,6 +210,29 @@ export class ConsultFormComponent implements OnInit{
 
   doAnonymous(){
     this.isAnonymousPatient = this.consultForm.value.anonymous_patient;
+    if (this.isAnonymousPatient) {
+      this.consultForm.controls.age.setValidators(Validators.required);
+      this.consultForm.controls.age.updateValueAndValidity();
+      this.consultForm.controls.patient_name.clearValidators();
+      this.consultForm.controls.patient_name.updateValueAndValidity();
+      this.consultForm.controls.patient_forname.clearValidators();
+      this.consultForm.controls.patient_forname.updateValueAndValidity();
+      this.consultForm.controls.patient_birthdate.clearValidators();
+      this.consultForm.controls.patient_birthdate.updateValueAndValidity();
+      this.consultForm.controls.patient_identification.clearValidators();
+      this.consultForm.controls.patient_identification.updateValueAndValidity();
+    } else {
+      this.consultForm.controls.age.clearValidators();
+      this.consultForm.controls.age.updateValueAndValidity();
+      this.consultForm.controls.patient_name.setValidators(Validators.required);
+      this.consultForm.controls.patient_name.updateValueAndValidity();
+      this.consultForm.controls.patient_forname.setValidators(Validators.required);
+      this.consultForm.controls.patient_forname.updateValueAndValidity();
+      this.consultForm.controls.patient_birthdate.setValidators(Validators.required);
+      this.consultForm.controls.patient_birthdate.updateValueAndValidity();
+      this.consultForm.controls.patient_identification.setValidators(Validators.required);
+      this.consultForm.controls.patient_identification.updateValueAndValidity();
+    }
   }
   onSelectSpecialty(specialty: Specialty): void {
     this.selectedSpecialty = specialty;
@@ -227,20 +251,28 @@ export class ConsultFormComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log("submit form");
-    this.showLoading()
+    console.log("submit form is valid ? " + this.consultForm.valid);
 
-    if(!this.isAnonymousPatient) {
-      this.patient = this.prepareSavePatient();
+    this.submitAttempt = true;
+
+    if(this.consultForm.valid) {
+      this.showLoading();
+      this.submitAttempt = false;
+      if (!this.isAnonymousPatient) {
+        this.patient = this.prepareSavePatient();
 
 
-      this.patientService.createPatient(this.patient).then(patient => {
-        this.patient = patient;
-        console.log("Patient" + JSON.stringify(patient));
+        this.patientService.createPatient(this.patient).then(patient => {
+          this.patient = patient;
+          console.log("Patient" + JSON.stringify(patient));
+          this.doSaveConsultation();
+        });
+      } else {
         this.doSaveConsultation();
-      });
+      }
     } else {
-      this.doSaveConsultation();
+      console.log("Form not valid");
+      this.content.scrollToTop();
     }
   }
 

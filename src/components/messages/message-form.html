@@ -1,10 +1,13 @@
-<h3 color="secondary" ion-text>{{titreForm}}</h3>
+<div></div>
+<h2 color="secondary" ion-text>{{titreForm}}</h2>
 <form [formGroup]="msgForm" (ngSubmit)="onSubmit()" novalidate>
   <ion-list>
     <ion-item>
       <ion-label stacked>Votre message</ion-label>
       <ion-textarea placeholder="saississez votre demande" formControlName="message"></ion-textarea>
     </ion-item>
+    <ion-item *ngIf="!msgForm.controls['message'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
   </ion-list>
   <ion-buttons>
     <button type="submit" ion-button color="secondary" icon-end>Envoyer

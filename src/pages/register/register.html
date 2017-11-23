@@ -27,7 +27,9 @@
           <ion-option *ngFor="let profession of professions" value="{{profession.id}}" (ionSelect)="onSelectProfession(profession)">{{profession.name}}</ion-option>
         </ion-select>
       </ion-item>
-      <ion-list *ngIf="selectedType == 2" radio-group formControlName="generalist" class="inline" no-lines>
+    <ion-item *ngIf="!registerForm.controls['profession'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+    <ion-list *ngIf="selectedType == 2" radio-group formControlName="generalist" class="inline" no-lines>
         <ion-item>
           <ion-label>Généraliste</ion-label>
           <ion-radio value="0" (ionSelect)="doGeneralist()"></ion-radio>
@@ -37,18 +39,22 @@
           <ion-radio value="1" (ionSelect)="doSpecialist()"></ion-radio>
         </ion-item>
       </ion-list>
-      <ion-item *ngIf="isSpecialist == true">
+    <ion-item *ngIf="!registerForm.controls['generalist'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+    <ion-item *ngIf="isSpecialist == true">
         <ion-label stacked>Spécialité</ion-label>
         <ion-select interface="popover" formControlName="specialty">
           <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)">{{specialty.name}}</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item >
+    <ion-item *ngIf="!registerForm.controls['specialty'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+    <ion-item >
         <ion-label stacked>J'accepte les demandes directes de patients</ion-label>
         <ion-checkbox formControlName="accept_patient"></ion-checkbox>
       </ion-item>
 
-      <ion-item-group class="do-lines">
+      <ion-item-group>
         <ion-item>
           Sexe
         </ion-item>
@@ -126,19 +132,19 @@
     <ion-item-group class="do-lines">
 
       <ion-item ion-text>
-        <ion-label stacked>Identifiant Skype (si utilisé) {{registerForm.controls['skype'].valid}}</ion-label>
+        <ion-label stacked>Identifiant Skype (si utilisé)</ion-label>
         <ion-input type="text" name="skype" formControlName="skype"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!registerForm.controls['skype'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+      <ion-item *ngIf="!registerForm.controls['skype'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs n'est pas valide"></error-msg></ion-item>
 
     </ion-item-group>
     <ion-item-group class="do-lines">
 
     <ion-item ion-text>
-        <ion-label stacked>Identifiant Facetime (si utilisé) {{registerForm.controls['facetime'].valid}}</ion-label>
+        <ion-label stacked>Identifiant Facetime (si utilisé)</ion-label>
         <ion-input type="text" name="facetime" formControlName="facetime"></ion-input>
       </ion-item>
-      <ion-item *ngIf="!registerForm.controls['facetime'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+      <ion-item *ngIf="!registerForm.controls['facetime'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs n'est pas valide"></error-msg></ion-item>
 
     </ion-item-group>
       <!--    <ion-item ion-text>
@@ -158,8 +164,8 @@
     </ion-buttons>
 
   </form>
-   <p>Form value: {{ registerForm.value | json }}</p>
-    <p>Form status: {{ registerForm.status | json }}</p>
+<!--   <p>Form value: {{ registerForm.value | json }}</p>
+    <p>Form status: {{ registerForm.status | json }}</p>-->
 
     <div *ngIf="user">
       Merci {{user.forname}} {{user.name}}, votre profil a bien été créé.<br />

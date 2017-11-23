@@ -41,7 +41,6 @@ import { File } from '@ionic-native/file';
 import { Transfer } from '@ionic-native/transfer';
 import { FilePath } from '@ionic-native/file-path';
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
-//import { Pro } from '@ionic/pro';
 import {ImageService} from "../providers/image.service";
 import {ContactButtonsComponent} from "../components/contact-buttons";
 import {ConsultedPage} from "../pages/consulted/consulted-page";

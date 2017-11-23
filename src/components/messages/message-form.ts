@@ -23,6 +23,7 @@ export class MessageFormComponent implements OnInit {
   msg: Message;
   private msgForm: FormGroup;
   titreForm: string;
+  submitAttempt: boolean = false;
 //  @Input() question: boolean = true;
 //  @Input() response: boolean = false;
 
@@ -75,20 +76,23 @@ export class MessageFormComponent implements OnInit {
   }
 
   onSubmit(){
-    this.showLoading()
+    this.submitAttempt = true;
 
-    this.prepareSaveMessage();
-    this.consultationService.update(this.consultation).then(consultation => {
-      this.messageService.createMessage(this.msg).then(message => {
-        this.msg = message;
+    if(this.msgForm.valid) {
+      this.showLoading()
 
-        this.loading.dismiss();
+      this.prepareSaveMessage();
+      this.consultationService.update(this.consultation).then(consultation => {
+        this.messageService.createMessage(this.msg).then(message => {
+          this.msg = message;
+
+          this.loading.dismiss();
+
+        });
 
       });
-
-    });
-    this.outputMessage.emit(this.msg);
-
+      this.outputMessage.emit(this.msg);
+    }
     //console.log("form submitted" + this.consultation.id);
 
   }
