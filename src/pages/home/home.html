@@ -27,34 +27,35 @@
           </button>
           </ion-col>
         <ion-col class="consulted-col">
-          <div class="arrow-left"></div>
 
+          <div class="arrow-left"></div>
           <button  *ngIf="currentUser.user_type == 2"
-                  full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image consulted' : 'button-image'">
-            <div><img src="assets/img/icons/consulted.png" alt="Je suis consulté" /></div>
+                  full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image consulted' : 'button-image'">
+
+            <div><img src="assets/img/icons/consulted.png" alt="Réponse(s) reçue(s)" /></div>
           </button>
         </ion-col>
         </ion-row>
         <ion-row style="margin-bottom: 8px;">
           <ion-col class="consult-col">
             <button full (click)="doConsult()"  class="button-image consult">
-              <h2>Je consulte</h2>
+              <h2>Demander un avis</h2>
             </button>
           </ion-col>
           <ion-col class="consulted-col">
             <button  *ngIf="currentUser.user_type == 2"
-                     full (click)="doMyDemands()" [disabled]="demandCount==0" [class]="demandCount > 0 ? 'button-image consulted' : 'button-image'">
-              <h2>Je suis consulté<br />
-                ({{demandCount}} demandes)
-              </h2>
+                     full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image consulted' : 'button-image'">
+              <h2>{{responseText}} ({{responseCount}})</h2>
+
             </button>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col class="response-col">
-            <button full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image  response' : 'button-image color-primary'">
+            <button full (click)="doMyDemands()" [disabled]="demandCount==0" [class]=" demandCount > 0 ? 'button-image  response' : 'button-image color-primary'">
               <div><img src="assets/img/icons/response.png" alt="Je suis consulté" /></div>
-              <h2>Vous avez ({{responseCount}}) réponses</h2>
+              <h2>Votre avis est requis<br />
+                ({{demandCount}} demandes)  </h2>
             </button>
           </ion-col>
         </ion-row>

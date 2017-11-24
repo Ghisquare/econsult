@@ -1,9 +1,11 @@
 <ion-header>
-    <my-navbar [titleText]="navbarTitle"></my-navbar>
+    <my-navbar [titleText]="'Préférences'"></my-navbar>
 </ion-header>
 
 <ion-content padding>
-  <form *ngIf="!user" [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="validate-form">
+  <form *ngIf="!formSuccess" [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="validate-form">
+
+
     <error-msg *ngIf="submitAttempt" text="Veuillez vérifier les données saisies."></error-msg>
       <ion-item-group class="do-lines">
         <ion-item no-lines>
@@ -54,7 +56,7 @@
         <ion-checkbox formControlName="accept_patient"></ion-checkbox>
       </ion-item>
 
-      <ion-item-group class="do-lines">
+      <ion-item-group>
         <ion-item>
           Sexe
         </ion-item>
@@ -167,9 +169,8 @@
 <!--   <p>Form value: {{ registerForm.value | json }}</p>
     <p>Form status: {{ registerForm.status | json }}</p>-->
 
-    <div *ngIf="user">
-      Merci {{user.forname}} {{user.name}}, votre profil a bien été créé.<br />
-      Vous pouvez maintenant utiliser l'application.
+    <div *ngIf="formSuccess">
+      Merci {{user.forname}} {{user.name}}, votre profil a bien été mis à jour.<br />
     <button ion-button (click)="goHome()">OK</button>
   </div>
 

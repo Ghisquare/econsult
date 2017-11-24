@@ -1,4 +1,25 @@
-<!--
+<ion-menu [content]="content" persistent="true" side="right">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu utilisateur</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <button menuClose ion-item (click)="doLogout()"><ion-icon name="log-out"></ion-icon>
+        Se déconnecter
+      </button>
+      <button menuClose ion-item (click)="doSettings()"><ion-icon name="settings"></ion-icon>
+        Préférences
+      </button>
+      <button menuClose ion-item><ion-icon name="close"></ion-icon>
+        Fermer
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu><!--
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus-->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

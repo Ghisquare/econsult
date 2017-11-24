@@ -52,6 +52,17 @@ export class UserService {
       .catch(this.handleError);
   }
 
+  update(user: User): Promise<User>{
+    const url = `${this.usersUrl}/${user.id}`;
+    console.log("user Update" + JSON.stringify(user));
+    return this.http
+      .put(url, JSON.stringify(user), {headers: this.headers})
+      .toPromise()
+      .then(() => user)
+      .catch(this.handleError);
+  }
+
+
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
