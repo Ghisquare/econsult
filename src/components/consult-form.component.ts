@@ -162,7 +162,7 @@ export class ConsultFormComponent implements OnInit{
       //Pro.getApp().monitoring.log("This.copyfile success. Length" + this.images.length);
 
       let controlName = 'image' + this.images.length;
-      this.consultForm.addControl(controlName, new FormControl("", Validators.required));
+      this.consultForm.addControl(controlName, new FormControl(""));
       this.images.push(newFileName);
       //Pro.getApp().monitoring.log("Error while storing file.");
 
