@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
-import {TabsPage} from "../tabs/tabs";
 import {RegisterPage} from "../register/register";
 import { Pro } from '@ionic/pro';
+import {HomePage} from "../home/home";
 
 /**
  * DevDactic tutorial for the LoginPage page.
@@ -34,7 +34,7 @@ export class LoginPage {
         if (allowed) {
           //Pro.getApp().monitoring.log('Login successfull', { level: 'info' })
 
-          this.nav.setRoot(TabsPage);
+          this.nav.setRoot(HomePage);
         } else {
           this.showError("Access Denied");
         }

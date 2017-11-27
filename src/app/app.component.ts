@@ -9,7 +9,6 @@ import {User} from "./model/user";
 import { ConsultationService } from '../providers/consultation.service';
 import {UserService} from "../providers/user.service";
 import {AuthService} from "../providers/auth-service/auth-service";
-import {TabsPage} from "../pages/tabs/tabs";
 import {SettingsPage} from "../pages/settings/settings";
 
 @Component({
@@ -54,7 +53,7 @@ export class MyApp {
       /*this.auth.login({ email: 'gb@gb.com', password: 'gb' }).subscribe(allowed => {
           if (allowed) {
 
-            this.nav.setRoot(TabsPage);
+            this.nav.setRoot(HomePage);
           } else {
             this.showError("Access Denied");
           }

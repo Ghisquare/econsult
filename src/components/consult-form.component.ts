@@ -16,13 +16,13 @@ import {
   Loading, LoadingController, NavController, ActionSheetController, Platform,
   ToastController, ModalController, Content
 } from "ionic-angular";
-import {TabsPage} from "../pages/tabs/tabs";
 import {Patient} from "../app/model/patient";
 import {PatientService} from "../providers/patient.service";
 import {ShowPhotoPage} from "../pages/show-photo/show-photo";
 import {Image} from "../app/model/image";
 import {ImageService} from "../providers/image.service";
 import {age} from "../app/functions";
+import {HomePage} from "../pages/home/home";
 
 
 declare var cordova: any;
@@ -361,7 +361,7 @@ export class ConsultFormComponent implements OnInit{
   }
 
   goHome(){
-    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.setRoot(HomePage);
   }
 
 }

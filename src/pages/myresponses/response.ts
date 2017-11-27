@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {NavController, NavParams, LoadingController, Loading} from 'ionic-angular';
 import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
-import {TabsPage} from "../tabs/tabs";
 import {afficheDate} from "../../app/functions";
 import {MessageService} from "../../providers/message.service";
 import {Message} from "../../app/model/message";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'response',
@@ -37,7 +37,7 @@ export class ResponsePage implements OnInit {
   }
 
   goHome(){
-    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.setRoot(HomePage);
   }
 
   closeConsultation(){

@@ -4,7 +4,6 @@ import {UserService} from "../../providers/user.service";
 import {AuthService} from "../../providers/auth-service/auth-service";
 import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
-import {TabsPage} from "../tabs/tabs";
 import {afficheDate} from "../../app/functions";
 import {ConsultedPage} from "./consulted-page";
 

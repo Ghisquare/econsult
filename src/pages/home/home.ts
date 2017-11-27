@@ -33,7 +33,7 @@ export class HomePage {
     this.consultationService.getResponsesByXchangeStatus(this.currentUser, "1|3").then(consultations => {
       this.responses = consultations;
       this.responseCount = consultations.length;
-      if(this.responseCount > 1) this.responseText = "Réponse reçue"; else this.responseText = "Réponses reçues";
+      if(this.responseCount <= 1) this.responseText = "Réponse reçue"; else this.responseText = "Réponses reçues";
     });
   }
 
@@ -70,5 +70,4 @@ export class HomePage {
       this.navCtrl.push(MyResponsesPage);
     }
   }
-
 }

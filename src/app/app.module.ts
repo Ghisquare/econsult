@@ -22,7 +22,6 @@ import {HomePage} from "../pages/home/home";
 import {ConsultPage} from "../pages/consult/consult";
 import {ConsultListPage} from "../pages/consultlist/consultlist";
 import {ConsultedListPage} from "../pages/consulted/consulted-list";
-import {TabsPage} from "../pages/tabs/tabs";
 import {RouterModule} from "@angular/router";
 import {SpecialtyService} from "../providers/specialty.service";
 import {ContactSelectComponent} from "../components/contact-select";
@@ -86,7 +85,6 @@ export class MyErrorHandler implements ErrorHandler {
     ContactButtonsComponent,
     MessageFormComponent,
     MessageListComponent,
-    TabsPage,
     LogoutButton,
     MyNavbar,
     RegisterPage,
@@ -98,8 +96,7 @@ export class MyErrorHandler implements ErrorHandler {
     BrowserModule,
     HttpModule,
     ReactiveFormsModule, // <-- #2 add to @NgModule imports ==> https://angular.io/guide/reactive-forms
-    IonicModule.forRoot(MyApp,
-      { tabsPlacement: 'bottom' }),
+    IonicModule.forRoot(MyApp),
     InMemoryWebApiModule.forRoot(InMemDataService),
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -120,7 +117,6 @@ export class MyErrorHandler implements ErrorHandler {
     MyResponsesPage,
     ResponsePage,
     RegisterPage,
-    TabsPage,
     ShowPhotoPage,
     SettingsPage,
   ],

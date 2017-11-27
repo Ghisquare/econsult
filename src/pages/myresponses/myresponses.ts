@@ -4,9 +4,9 @@ import {UserService} from "../../providers/user.service";
 import {AuthService} from "../../providers/auth-service/auth-service";
 import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
-import {TabsPage} from "../tabs/tabs";
 import {afficheDate} from "../../app/functions";
 import {ResponsePage} from "./response";
+import {HomePage} from "../home/home";
 
 @Component({
   selector: 'page-myresponses',
@@ -33,7 +33,7 @@ export class MyResponsesPage implements OnInit {
     });
   }
   goHome(){
-    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.setRoot(HomePage);
   }
 
   showLoading() {
