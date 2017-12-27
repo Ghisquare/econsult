@@ -1,3 +1,48 @@
-page-list {
+response, page-myresponses {
+  $colors: (
+    background: #f1911f,
+    primary: #2d3281,
+    secondary: #f1911f,
+    third: #37afda,
+    fourth: #b8bde5,
+    danger: #f12a19,
+    light: #f4f4f4,
+    dark: #222
+  );
+  $bkgcolor: 'background';
+  $toolbar-title-color: 'primary';
+
+  p, input::placeholder, textarea::placeholder, .select-placeholder, .item-md p, .item-ios p
+  {
+    color: #fff;
+  }
+
+  .item-input .label-md, .item-select .label-md, .item-datetime .label-md, .item-input .label-ios, .item-select .label-ios, .item-datetime .label-ios, .label-ios, .label-md  {
+    color: map-get($colors, primary);
+  }
+  @import '../designcommon';
+//surcharge qq détails de designcommon
+  .h2-title::before {
+    border-left: 16px solid map-get($colors, third);
+  }
+
+  .h3-title-container {
+    margin-top:8px;
+  }
+
+  .h3-title {
+    color: map-get($colors, secondary);
+  }
+
+  .h3-title::before {
+    background-color: map-get($colors, primary);
+    border: solid 1px map-get($colors, third);
+  }
+
+  .h3-title::after {
+    background-color: map-get($colors, secondary);
+  }
+
+
 
 }

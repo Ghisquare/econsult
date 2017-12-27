@@ -28,6 +28,7 @@ export class SettingsPage implements OnInit{
   registerForm: FormGroup;
   userTypes: Array<string>;
   civilities: Array<string>;
+  visibleStatus: Array<string>;
   specialties: Specialty[];
   professions: Profession[];
   selectedType: number;
@@ -43,6 +44,8 @@ export class SettingsPage implements OnInit{
   userTypeValid: boolean;
   birthdateValid: boolean;
 
+  selectOptions: any =  {cssClass: 'background-primary'};
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, private loadingCtrl: LoadingController,
                private userService: UserService, private professionService: ProfessionService, private specialtyService: SpecialtyService,
@@ -52,6 +55,7 @@ export class SettingsPage implements OnInit{
   createForm() {
     this.registerForm = this.fb.group({
       userType: [this.user.user_type, Validators.required ],
+      visible: [this.user.visible],
       profession: [this.user.profession_id], // <--- the FormControl called "name"
       generalist: [(this.user.specialty_id == 19 ? 0:1)], // <--- the FormControl called "name"
       specialty: [this.user.specialty_id],
@@ -190,6 +194,7 @@ export class SettingsPage implements OnInit{
     const formModel = this.registerForm.value;
     const user = this.user;
     user.user_type = formModel.userType;
+    user.visible = formModel.visible;
     user.sex = formModel.sex;
     if(formModel.userType == 0) user.birthdate = formModel.birthdate; else user.birthdate = null;
     user.civility = formModel.civility;
@@ -235,6 +240,7 @@ export class SettingsPage implements OnInit{
         this.professions = professions;
         this.userTypes = userTypes;
         this.civilities = this.userService.getCivilities();
+        this.visibleStatus = this.userService.getVisibleStatus();
 
         this.onSelectType(this.user.user_type);
         if(this.user.specialty_id == 19) this.doGeneralist(); else this.doSpecialist();

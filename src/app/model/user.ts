@@ -1,5 +1,6 @@
 import {Specialty} from "./specialty";
 import {Profession} from "./profession";
+
 export class User {
   id: number;
   user_type: number;
@@ -21,6 +22,7 @@ export class User {
   profession: Profession;
   online: boolean;
   shortName: string;
+  visible: number;
 
   init(id: number, name: string, forname: string, email: string, pwd: string, specialty_id: number, online: boolean) {
     this.id = id;

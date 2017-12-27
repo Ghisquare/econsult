@@ -1,21 +1,27 @@
 
 
-<h2 ion-text color="secondary">{{titreMedecin}}</h2>
-<p>{{nomTitreMedecin}}</p>
-<div class="inline"><h3 ion-text color="primary">Spécialité: </h3><p>{{authorSpecialty}}</p></div>
-<div class="inline"><h3 ion-text color="primary">Envoyé le: </h3><p>{{dateAffiche}}</p></div>
+<div class="h3-title-container">
+  <h3 ion-text [ngClass]="{'h3-title' : (question==false && response == false), 'h2-title': question==true || response==true}">{{titreMedecin}}</h3>
+  <img *ngIf="question==false  && response == false" src="assets/img/icons/patient.png" />
+</div>
+<h3 ion-text class="color-primary" style="font-size: 1.6rem">{{nomTitreMedecin}}</h3>
+<div class="inline"><h3 ion-text class="color-primary">Spécialité: </h3><p>{{authorSpecialty}}</p></div>
+<div class="inline"><h3 ion-text class="color-primary">Envoyé le: </h3><p>{{dateAffiche}}</p></div>
 
 
-<h2 ion-text color="secondary">Description du cas</h2>
+<div class="h3-title-container" style="margin-top: 10px;">
+  <h3 ion-text [ngClass]="{'h3-title' : (question==false && response == false), 'h2-title': question==true || response==true}">Description du cas</h3>
+  <img *ngIf="question==false && response == false" src="assets/img/icons/description.png" />
+</div>
 <patient-resume *ngIf="consultation.patient" [patient]="consultation.patient"></patient-resume>
 <div *ngIf="!consultation.patient">
-  <div class="inline"> <h3 ion-text color="primary">Sexe: </h3> <p>{{sexTexte}}</p></div>
-  <div class="inline"><h3 ion-text color="primary">Age: </h3> <p>{{consultation.age}}</p></div>
+  <div class="inline"> <h3 ion-text class="color-primary">Sexe: </h3> <p>{{sexTexte}}</p></div>
+  <div class="inline"><h3 ion-text class="color-primary">Age: </h3> <p>{{consultation.age}}</p></div>
 </div>
-<div class="inline"><h3 ion-text color="primary">Antécedents: </h3> <p>{{consultation.antecedent}}</p></div>
-<div class="inline"><h3 ion-text color="primary">Début des symptomes: </h3> <p>{{consultation.debut_symptome}} {{symptomeUnit}}</p></div>
-<div class="inline"><h3 ion-text color="primary">Description clinique: </h3> <p>{{consultation.description}}</p></div>
-<div class="inline"><h3 ion-text color="primary">Traitements déjà initiés: </h3> <p>{{consultation.traitementEnCours}}</p></div>
+<div class="inline"><h3 ion-text class="color-primary">Antécedents: </h3> <p>{{consultation.antecedent}}</p></div>
+<div class="inline"><h3 ion-text class="color-primary">Début des symptomes: </h3> <p>{{consultation.debut_symptome}} {{symptomeUnit}}</p></div>
+<div class="inline"><h3 ion-text class="color-primary">Description clinique: </h3> <p>{{consultation.description}}</p></div>
+<div class="inline"><h3 ion-text class="color-primary">Traitements déjà initiés: </h3> <p>{{consultation.traitementEnCours}}</p></div>
   <div *ngIf="images.length > 0">
     <ion-label>Photos</ion-label>
   </div>

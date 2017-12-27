@@ -5,12 +5,11 @@
 <ion-content padding>
   <form *ngIf="!formSuccess" [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="validate-form">
 
-
     <error-msg *ngIf="submitAttempt" text="Veuillez vérifier les données saisies."></error-msg>
       <ion-item-group class="do-lines">
         <ion-item no-lines>
           <ion-label stacked>Vous êtes</ion-label>
-          <ion-select interface="popover" formControlName="userType" placeholder="type de profil">
+          <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="userType" placeholder="type de profil">
             <ion-option ion-text *ngFor="let type of userTypes; let i = index" value="{{i}}" (ionSelect)="onSelectType(i)">{{type}}</ion-option>
           </ion-select>
         </ion-item>
@@ -25,7 +24,7 @@
       </ion-item-group>
       <ion-item *ngIf="selectedType == 1">
         <ion-label stacked>Profession</ion-label>
-        <ion-select interface="popover" formControlName="profession">
+        <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="profession">
           <ion-option *ngFor="let profession of professions" value="{{profession.id}}" (ionSelect)="onSelectProfession(profession)">{{profession.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -45,13 +44,19 @@
 
     <ion-item *ngIf="isSpecialist == true">
         <ion-label stacked>Spécialité</ion-label>
-        <ion-select interface="popover" formControlName="specialty">
+        <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="specialty">
           <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)">{{specialty.name}}</ion-option>
         </ion-select>
       </ion-item>
     <ion-item *ngIf="!registerForm.controls['specialty'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+    <ion-item>
+      <ion-label stacked>Visible par</ion-label>
+      <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="visible">
+        <ion-option *ngFor="let status of visibleStatus; let i = index" value="{{i}}">{{status}}</ion-option>
+      </ion-select>
+    </ion-item>
 
-    <ion-item >
+    <ion-item style="display: none">
         <ion-label stacked>J'accepte les demandes directes de patients</ion-label>
         <ion-checkbox formControlName="accept_patient"></ion-checkbox>
       </ion-item>
@@ -76,7 +81,7 @@
       <ion-item-group class="do-lines">
         <ion-item>
           <ion-label stacked>Civilité</ion-label>
-          <ion-select interface="popover" formControlName="civility">
+          <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="civility">
             <ion-option *ngFor="let civility of civilities; let i = index" value="{{i}}">{{civility}}</ion-option>
           </ion-select>
         </ion-item>

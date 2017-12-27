@@ -1,24 +1,30 @@
 <ion-header>
-  <my-navbar [titleText]="'Réponse'"></my-navbar>
+  <my-navbar [titleText]="'Réponse reçue'"></my-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <h1 ion-text color="primary">Réponse à votre demande de consultation</h1>
+  <div style="float: left; width: 25%; padding-right: 16px;">
+    <div class="title-image"><img src="assets/img/icons/page-response.png" alt="Réponse reçue" /></div>
+    <h1 ion-text color="primary" class="small-h1">Réponse reçue</h1>
+  </div>
   <div *ngIf="!closed; else thanks">
     <demand-resume [consultation]="consultation" [response]="true" [question]="false"></demand-resume>
     <div *ngIf="hasMessages">
-      <h2 ion-text color="secondary" *ngIf="consultation.xchangeStatus == 3">Discussion avec M. {{consultation.contact.name}}</h2>
-      <h2 ion-text color="secondary" *ngIf="consultation.xchangeStatus == 1">Demande d'info complémentaire de M. {{consultation.contact.name}}</h2>
+      <div class="h3-title-container">
+        <h3 ion-text class="h3-title" *ngIf="consultation.xchangeStatus == 3">Discussion avec M. {{consultation.contact.name}}</h3>
+        <h3 ion-text class="h3-title"  *ngIf="consultation.xchangeStatus == 1">Demande d'info complémentaire</h3>
+      </div>
       <message-list [messages]="messages"></message-list>
     </div>
     <message-form [consultation]="consultation" [consulted]="false" [demand]="false" (outputMessage)="outputMessage($event)" *ngIf="consultation.xchangeStatus == 1; else response"></message-form>
     <ng-template #response>
+      <div  style="margin-top: 8px;"></div>
       <response-resume [consultation]="consultation"> </response-resume>
       <ion-buttons *ngIf="!infoComp">
-        <button ion-button (click)="closeConsultation()">Fermer la consultation
+        <button ion-button (click)="closeConsultation()" icon-end class="button-third">Fermer la consultation
           <ion-icon name="thumbs-up"></ion-icon></button>
-        <button type="button" ion-button color="primary" icon-end (click)="doInfoComp()">Demande d'info complémentaire
+        <button type="button" ion-button icon-end class="button-fourth" (click)="doInfoComp()">Demande d'info complémentaire
           <ion-icon name="information-circle"></ion-icon></button>
       </ion-buttons>
       <message-form [consultation]="consultation" [consulted]="false" (outputMessage)="outputMessage($event)" *ngIf="infoComp"></message-form>
@@ -26,14 +32,18 @@
     </ng-template>
   </div>
   <ng-template #thanks>
-    <h2 ion-text color="secondary">Merci</h2>
+    <h2 ion-text class="h2-title">Merci</h2>
     <p ion-text *ngIf="!sentMessage; else msgSent">La consultation a été fermée</p>
     <ng-template #msgSent>
-      Votre message:<br />
-      <i>{{sentMessage.content}}</i>
-      <br />
+      <p>
+        Votre message:<br />
+        <i>{{sentMessage.content}}</i>
+      </p>
       <p>à bien été envoyé à M. {{sentMessage.to.name}}</p>
     </ng-template>
-    <button ion-button (click)="goHome()">OK</button>
+    <ion-buttons>
+      <button ion-button (click)="getResume()" class="button-primary" small icon-end>Recevoir le résume par email<ion-icon name="mail"></ion-icon></button>
+      <button ion-button (click)="goHome()" class="button-third">OK</button>
+    </ion-buttons>
   </ng-template>
 </ion-content>

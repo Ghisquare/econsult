@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {AlertController, Nav, NavController, Platform} from 'ionic-angular';
+import {AlertController, MenuController, Nav, NavController, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,6 +10,8 @@ import { ConsultationService } from '../providers/consultation.service';
 import {UserService} from "../providers/user.service";
 import {AuthService} from "../providers/auth-service/auth-service";
 import {SettingsPage} from "../pages/settings/settings";
+import {HomePage} from "../pages/home/home";
+import {EmailComposer} from "@ionic-native/email-composer";
 
 @Component({
   templateUrl: 'app.html',
@@ -27,9 +29,25 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, private alertCtrl: AlertController, private auth: AuthService, public statusBar: StatusBar, public splashScreen: SplashScreen, private consultationService: ConsultationService
-    , private userService: UserService) {
+    , private userService: UserService, public menu : MenuController, private emailComposer: EmailComposer, private alertControler: AlertController) {
     this.initializeApp();
+    this.pages = [
+      { title: 'Mode d\'emploi', component: HomePage },
+      { title: 'Qui sommes-nous', component: HomePage },
+    ];
 
+    this.menu.enable(true, 'menu1');
+    this.menu.enable(true, 'menu2');
+
+  }
+
+  public presentAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Pages de contenus',
+      subTitle: 'pages à rédiger',
+      buttons: ['ok']
+    });
+    alert.present();
   }
 
   public doLogout() {
@@ -42,6 +60,28 @@ export class MyApp {
     this.nav.push(SettingsPage);
   }
 
+  public doFeedBack() {
+    this.emailComposer.isAvailable().then((available: boolean) =>{
+      if(available) {
+        console.log('Email available');
+      } else {
+        console.log('Email not available');
+      }
+    });
+    let email = {
+      to: 'germainbarreau@hotmail.com',
+      cc: 'guillaume.larre@gmail.com',
+//      bcc: ['john@doe.com', 'jane@doe.com'],
+      subject: "EConsult - Retour sur l'utilisation de l'app",
+      body: "donnez-nous vos impressions sur votre expérience l'app E-Consult",
+      isHtml: true
+    };
+
+    this.emailComposer.open(email);
+
+
+  }
+
   getConsultations(): void {
     this.consultationService.getConsultations().then(consultations => this.consultations = consultations);
   }
@@ -50,8 +90,9 @@ export class MyApp {
     this.userService.getUsers().then(users => {
       this.users = users;
       //AUTO LOGIN : comment to have login
-      /*this.auth.login({ email: 'gb@gb.com', password: 'gb' }).subscribe(allowed => {
+      /*this.auth.login({ email: 'gl@gl.com', password: 'gl' }).subscribe(allowed => {
           if (allowed) {
+            console.log("AutoLogin");
 
             this.nav.setRoot(HomePage);
           } else {
@@ -61,7 +102,6 @@ export class MyApp {
         error => {
           this.showError(error);
         });*/
-
     });
   }
 

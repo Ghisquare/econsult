@@ -1,10 +1,51 @@
-h2 { font-size: 1.6rem }
-h3 { font-size: 1.4rem }
-.list-md[inset] {margin-top: 0; margin-bottom: 0}
-.list-header-md {margin-bottom: 0}
 
-.box-shadow {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  border: solid 1px map-get($colors, primary);
-  padding: 8px;
+page-login {
+  $colors: (
+    background: #2d3281,
+    primary:    #fff,
+    secondary:  #f1911f,
+    third:      #37afda,
+    fourth:     #365760,
+    danger:     #f12a19,
+    light:      #f4f4f4,
+    dark:       #222
+  );
+  $bkgcolor: 'background';
+  $toolbar-title-color: 'background';
+
+  @import '../designcommon';
+
+
+
+  .box-shadow {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: solid 2px map-get($colors, third);
+    border-radius: 8px;
+    background-color: white;
+    padding: 8px;
+  }
+
+  .orange-circle {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: map-get($colors, secondary);
+    display: inline-block;
+    padding: 3px;
+  }
+
+
+  .submit-btn, .register-btn {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    border: solid 2px map-get($colors, third);
+    border-radius: 8px;
+    background-color: map-get($colors, secondary);
+    color: white;
+  }
+
+  .register-btn {
+    border-color: white;
+    background-color: map-get($colors, $bkgcolor);
+    color: white;
+  }
 }

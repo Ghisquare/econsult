@@ -87,4 +87,16 @@ export class UserService {
     return this.getCivility(user.civility) + user.name;
   }
 
+  public getVisibleStatus(): Array<any> {
+    var status = new Array();
+    status[0] = "Invisible";
+    status[1] = "Professionnels uniquement";
+    status[2] = "Patients & Professionel";
+
+    return status;
+  }
+
+  public getVisibilityStatus(user: User) {
+    return this.getVisibleStatus()[user.visible];
+  }
 }

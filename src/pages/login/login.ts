@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service/auth-service';
 import {RegisterPage} from "../register/register";
 import { Pro } from '@ionic/pro';
 import {HomePage} from "../home/home";
+import {UserService} from "../../providers/user.service";
 
 /**
  * DevDactic tutorial for the LoginPage page.
@@ -16,12 +17,17 @@ import {HomePage} from "../home/home";
   selector: 'page-login',
   templateUrl: 'login.html',
 })
-export class LoginPage {
+export class LoginPage implements OnInit{
   loading: Loading;
-  registerCredentials = { email: '', password: '' };
+  registerCredentials = { email: '', password: '', visible: 2 };
+  visibleStatus: Array<string>;
+  selectOptions: any =  {cssClass: 'background-primary'};
 
-  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) { }
+  constructor(private nav: NavController, private auth: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController, private userService: UserService) { }
 
+  ngOnInit(){
+    this.visibleStatus = this.userService.getVisibleStatus();
+  }
   public createAccount() {
     this.nav.push(RegisterPage);
   }
@@ -32,9 +38,12 @@ export class LoginPage {
     this.showLoading()
     this.auth.login(this.registerCredentials).subscribe(allowed => {
         if (allowed) {
-          //Pro.getApp().monitoring.log('Login successfull', { level: 'info' })
-
-          this.nav.setRoot(HomePage);
+          console.log("Visibilité :" + this.registerCredentials.visible);
+          let user = this.auth.currentUser;
+          user.visible = this.registerCredentials.visible;
+          this.userService.update(user).then(user => {
+            this.nav.setRoot(HomePage);
+          });
         } else {
           this.showError("Access Denied");
         }

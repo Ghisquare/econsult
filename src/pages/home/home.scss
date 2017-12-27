@@ -1,71 +1,102 @@
 page-home {
 
-}
 
-.button-image {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  color: white;
-}
+  $colors: (
+    background: #2d3281,
+    primary:    #2d3281,
+    secondary:  #f1911f,
+    third:      #37afda,
+    fourth:     #365760,
+    danger:     #f12a19,
+    light:      #f4f4f4,
+    dark:       #222
+  );
 
-.button-image h2 {
-  margin-top: 0.3em;
-}
-.button-image div{
-  border-radius: 50%;
-  padding: 1rem;
-  max-width: 118px;
-  margin: auto;
-  background-color: white;
+  .menu-left-button {
+    color: map-get($colors, primary);
+  }
+  .button-image {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+  }
 
-}
+  .button-image h2 {
+    margin-top: 0.3em;
+  }
+  .button-image div {
+    border-radius: 50%;
+    padding: 1rem;
+    max-width: 118px;
+    margin: auto;
+    background-color: white;
 
-.button-image div {
-  margin-top: 8px;
-}
+  }
 
-.button-image.color-danger h2 {
-  color: map-get($colors, danger);
-}
-.consult-col,  .button-image.consult {
-  background-color: map-get($colors, primary);
-}
+  .button-image div {
+    margin-top: 8px;
+  }
 
-.consulted-col, .button-image.consulted {
-  background-color: map-get($colors, secondary);
-}
+  .button-image.color-danger h2 {
+    color: map-get($colors, danger);
+  }
+  .consult-col, .button-image.consult {
+    background-color: map-get($colors, primary);
+  }
 
-.response-col, .button-image.response {
-  background-color: map-get($colors, third);
-}
+  .consulted-col, .button-image.consulted {
+    background-color: map-get($colors, secondary);
+  }
 
-.consult-col, .consulted-col{
-  position: relative;
-}
+  .response-col, .button-image.response {
+    background-color: map-get($colors, third);
+  }
 
-.arrow-right {
-  z-index: 100;
-  position: absolute;
-  right: -20px;
-  top: 0px;
-  width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
+  .consult-col, .consulted-col {
+    position: relative;
+  }
 
-  border-left: 20px solid map-get($colors, primary);
-}
+  .arrow-right {
+    z-index: 100;
+    position: absolute;
+    right: -20px;
+    top: 0px;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
 
-.arrow-left {
-  z-index: 100;
-  position: absolute;
-  left: -20px;
-  top: 80px;
-  width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
+    border-left: 20px solid map-get($colors, primary);
+  }
 
-  border-right: 20px solid map-get($colors, secondary);
+  .arrow-left {
+    z-index: 100;
+    position: absolute;
+    left: -20px;
+    top: 80px;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+
+    border-right: 20px solid map-get($colors, secondary);
+  }
+
+  .arrow-left-bkg {
+    z-index: 99;
+    position: absolute;
+    left: -20px;
+    top: 80px;
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+
+    border-right: 20px solid rgb(221, 221, 221);
+  }
+
+  .disabled {
+    opacity: .4
+  }
 }

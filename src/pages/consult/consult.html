@@ -1,9 +1,212 @@
 <ion-header>
-  <my-navbar [titleText]="'Je consulte'"></my-navbar>
+  <my-navbar [titleText]="'Demander un avis'"></my-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <h1 ion-text color="primary">Demander un avis </h1>
-  <consult-form></consult-form>
+  <div *ngIf="!closed; else thanks">
+    <form [formGroup]="consultForm" (ngSubmit)="onSubmit()" novalidate>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <div class="title-image"><img src="assets/img/icons/question.png" alt="Demander un avis" /></div>
+            <h1 ion-text color="primary" class="small-h1">Demander un avis </h1></ion-col>
+          <ion-col col-9>
+            <error-msg *ngIf="submitAttempt" text="Veuillez vérifier les données saisies."></error-msg>
+
+            <h2 ion-text color="secondary" class="h2-title">Choix du médecin</h2>
+
+            <ion-item>
+              <ion-label stacked>Spécialité</ion-label>
+              <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="specialty" placeholder="Sélectionner la spécialité">
+                <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)" >{{specialty.name}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item *ngIf="!consultForm.controls.specialty.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+            <ion-item *ngIf="contacts">
+              <ion-label stacked>Médecin</ion-label>
+              <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="contact" placeholder="Sélectionner le médecin">
+                <ion-option *ngFor="let contact of contacts" value="{{contact.id}}" (ionSelect)="onSelectContact(contact)" [disabled]="!contact.online || contact.visible == 0">{{contact.forname}} {{contact.name}} <ion-icon *ngIf="contact.online" name="wifi" icon-end></ion-icon></ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item *ngIf="!consultForm.controls.contact.valid && submitAttempt && contacts" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+
+
+
+
+      <div><h2 ion-text color="secondary" class="h2-title">Description du cas</h2></div>
+      <div class="h3-title-container"><h3 ion-text color="primary" class="h3-title"> Description patient</h3>
+        <img src="assets/img/icons/patient.png" />
+      </div>
+
+      <ion-item>
+        <ion-label stacked>Anonyme</ion-label>
+        <ion-checkbox checked="true" formControlName="anonymous_patient" (ionChange)="doAnonymous()"></ion-checkbox>
+      </ion-item>
+      <div *ngIf="isAnonymousPatient">
+        <ion-item ion-text>
+          <ion-label stacked>Sexe</ion-label>
+        </ion-item>
+
+        <ion-list radio-group formControlName="sex" class="inline" no-lines>
+          <ion-item>
+            <ion-label>Masculin</ion-label>
+            <ion-radio value="0"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Féminin</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-item *ngIf="!consultForm.controls.sex.valid && submitAttempt && isAnonymousPatient" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+        <ion-item>
+          <ion-label stacked>Age</ion-label>
+          <ion-input type="number" min="0" max="125" formControlName="age" placeholder="age du patient"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!consultForm.controls.age.valid && submitAttempt && isAnonymousPatient" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+      </div>
+      <div *ngIf="!isAnonymousPatient">
+        <div></div>
+        <ion-item ion-text>
+          <ion-label>Nom</ion-label>
+          <ion-input type="text" name="patient_name" required formControlName="patient_name"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!consultForm.controls.patient_name.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+        <ion-item ion-text>
+          <ion-label>Prénom</ion-label>
+          <ion-input type="text" name="patient_forname" required formControlName="patient_forname"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!consultForm.controls.patient_forname.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+        <ion-item ion-text>
+          <ion-label>Numéro de sécurité sociale</ion-label>
+          <ion-input type="text" required formControlName="patient_identification"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!consultForm.controls.patient_identification.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+        <ion-item>
+          <ion-label>Date de naissance</ion-label>
+          <ion-datetime [pickerOptions]="selectOptions" displayFormat="MM/DD/YYYY" formControlName="patient_birthdate"></ion-datetime>
+        </ion-item>
+        <ion-item *ngIf="!consultForm.controls.patient_birthdate.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+        <ion-item>
+          Sexe
+        </ion-item>
+        <ion-list radio-group formControlName="sex" class="inline" no-lines>
+          <ion-item>
+            <ion-label>Masculin</ion-label>
+            <ion-radio value="0"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Féminin</ion-label>
+            <ion-radio value="1"></ion-radio>
+          </ion-item>
+        </ion-list>
+        <ion-item *ngIf="!consultForm.controls.sex.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+      </div>
+      <div class="h3-title-container" style="margin-top: 10px;">
+        <h3 ion-text color="primary" class="h3-title">Description clinique</h3>
+        <img src="assets/img/icons/description.png" />
+      </div>
+      <ion-item>
+
+        <ion-label stacked>Antécedents utiles</ion-label>
+        <ion-textarea placeholder="antécédents s'il y lieu" formControlName="antecedent"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Description des symptomes </ion-label>
+        <ion-textarea placeholder="décrivez le cas clinique" formControlName="description"></ion-textarea>
+      </ion-item>
+      <ion-item *ngIf="!consultForm.controls.description.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+      <ion-item-group class="inline">
+        <ion-item no-lines>
+          <ion-label stacked>Début des symptomes</ion-label>
+          <ion-input type="number" min="0" max="60" formControlName="debut_symptome"></ion-input>
+        </ion-item>
+        <ion-item ion-text >
+          <ion-label stacked></ion-label>
+          <ion-select [selectOptions]="selectOptions" formControlName="debut_symptome_unit" interface="popover">
+            <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
+          </ion-select>
+        </ion-item>
+
+
+      </ion-item-group>
+      <ion-item *ngIf="!consultForm.controls.debut_symptome.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+
+      <ion-item>
+        <ion-label stacked>Traitements en cours</ion-label>
+        <ion-textarea placeholder="traitements en cours s'il y lieu" formControlName="traitementEnCours"></ion-textarea>
+      </ion-item>        <ion-item>
+      <ion-buttons>
+        <button type="button" small ion-button class="button-third"  (click)="presentActionSheet()">
+          <ion-icon item-end name="camera"></ion-icon>
+          Ajouter une photo
+        </button>
+      </ion-buttons>
+    </ion-item>
+      <ion-item *ngIf="images.length > 0">
+        <ion-label>Photos</ion-label></ion-item>
+      <ion-list>
+        <ion-item-group *ngFor="let image of images; let i = index">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="{{pathForImage(image)}}">
+            </ion-thumbnail>
+            <ion-input type="text" formControlName="image{{i}}" placeholder="description de l'image"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-buttons>
+              <button ion-button (click)="deleteImage(i)" type="button" small><ion-icon item-end name="close"></ion-icon>Supprimer</button>
+              <button ion-button (click)="showImage(i)" type="button" small><ion-icon item-end name="show"></ion-icon>Voir</button>
+            </ion-buttons>
+
+          </ion-item>
+        </ion-item-group>
+      </ion-list>
+
+      <ion-buttons>
+        <button type="submit" ion-button color="secondary" icon-end>Envoyer
+          <ion-icon name="send"></ion-icon></button>
+        <button type="reset" ion-button color="light" icon-end>Effacer
+          <ion-icon name="close"></ion-icon></button>
+      </ion-buttons>
+    </form>
+    <!--       <p>Form value: {{ consultForm.value | json }}</p>
+           <p>Form status: {{ consultForm.status | json }}</p>
+   -->
+  </div>
+  <ng-template #thanks>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <div class="title-image"><img src="assets/img/icons/question.png" alt="Demander un avis" /></div>
+          <h1 ion-text color="primary" class="small-h1">Demander un avis </h1></ion-col>
+        <ion-col col-9>
+          <h2 ion-text color="secondary" class="h2-title">Merci</h2>
+
+          <p ion-text>Votre demande de consultation a bien été envoyée</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div><h2 ion-text color="secondary" class="h2-title">Résumé de votre demande</h2></div>
+
+    <demand-resume [consultation]="consultation" [question]="false"></demand-resume>
+    <button ion-button (click)="goHome()" color="secondary">OK</button>
+  </ng-template>
 </ion-content>
+
+

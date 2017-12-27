@@ -1,4 +1,5 @@
-<ion-content>
+<ion-content padding>
+  <h1 ion-text color="primary">Demander un avis </h1>
   <div *ngIf="!closed; else thanks">
     <form [formGroup]="consultForm" (ngSubmit)="onSubmit()" novalidate>
       <error-msg *ngIf="submitAttempt" text="Veuillez vérifier les données saisies."></error-msg>

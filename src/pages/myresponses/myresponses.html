@@ -1,27 +1,39 @@
 <ion-header>
-  <my-navbar [titleText]="'Liste des réponses'"></my-navbar>
+  <my-navbar [titleText]="'Réponses reçues'"></my-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <h1 ion-text color="primary">Réponses à vos demandes de consultations</h1>
-    <ion-list>
-      <button ion-item *ngFor="let response of responses" (click)="itemTapped($event, response)">
-        <div class="inline"><h3 ion-text color="primary">envoyé par </h3><p>{{response.contact.forname}} {{response.contact.name}}</p></div>
-        <div *ngIf="response.xchangeStatus==3">
-          <p ion-text> le {{afficheDate(response.date_response)}}</p>
-          <div class="inline"><h3 ion-text color="secondary" >diagnostic </h3>
-            <p ion-text>
-              {{response.response}}
-            </p>
-          </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <div class="title-image"><img src="assets/img/icons/page-response.png" alt="Réponses reçues" /></div>
+        <h1 ion-text color="primary" class="small-h1">Réponses reçues</h1>
+      </ion-col>
+      <ion-col col-9>
+        <h2 class="h2-title">Réponses</h2>
+        <br />
+        <h3 class="h3-title">En attente</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list>
+    <button ion-item *ngFor="let response of responses" (click)="itemTapped($event, response)">
+      <div class="inline"><h3 ion-text class="color-primary">envoyé par </h3><p>{{response.contact.forname}} {{response.contact.name}}</p></div>
+      <div *ngIf="response.xchangeStatus==3">
+        <p ion-text> le {{afficheDate(response.date_response)}}</p>
+        <div class="inline"><h3 ion-text class="color-third" >diagnostic </h3>
+          <p ion-text>
+            {{response.response}}
+          </p>
         </div>
-        <div *ngIf="response.xchangeStatus==1">
-          <p ion-text> le {{afficheDate(response.date_modified)}}</p>
-          <div class="inline"><h3 ion-text color="secondary" >demande d'info complémentaire </h3>
-            <p ion-text>...</p>
-          </div>
+      </div>
+      <div *ngIf="response.xchangeStatus==1">
+        <p ion-text> le {{afficheDate(response.date_modified)}}</p>
+        <div class="inline"><h3 ion-text class="color-third" >demande d'info complémentaire </h3>
+          <p ion-text>...</p>
         </div>
-      </button>
-    </ion-list>
+      </div>
+    </button>
+  </ion-list>
 </ion-content>

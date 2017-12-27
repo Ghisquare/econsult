@@ -50,6 +50,7 @@ import {MessageListComponent} from "../components/messages/message-list";
 import {ResponseResumeComponent} from "../components/responses/response-resume";
 import {ErrorMsgComponent} from "../components/forms/error-msg";
 import {SettingsPage} from "../pages/settings/settings";
+import {EmailComposer} from "@ionic-native/email-composer";
 
 /*const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
@@ -136,6 +137,7 @@ export class MyErrorHandler implements ErrorHandler {
     Transfer,
     Camera,
     FilePath,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}  ]
 })
 

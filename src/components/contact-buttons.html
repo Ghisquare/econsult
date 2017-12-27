@@ -4,8 +4,8 @@
     </ion-label>
 </ion-item>
 <ion-buttons *ngIf="showButtons">
-  <button ion-button (click)="launchTelCall()" type="button" icon-end>Appel tél <ion-icon name="call" ></ion-icon></button>
-  <a [href]="sanitizeSkype()" *ngIf="contact.skype"><button  ion-button type="button" icon-end>Appel skype <ion-icon name="logo-skype"></ion-icon></button></a>
+  <button ion-button (click)="launchTelCall()" type="button" icon-end class="button-primary">Appel tél <ion-icon name="call" ></ion-icon></button>
+  <a [href]="sanitizeSkype()" *ngIf="contact.skype"><button  ion-button type="button" icon-end class="button-primary">Appel skype <ion-icon name="logo-skype"></ion-icon></button></a>
 </ion-buttons>
 
 

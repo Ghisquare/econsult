@@ -11,7 +11,7 @@
       <ion-col col-4></ion-col>
     </ion-row>
     <ion-row>
-      <ion-col><h4 ion-text color="primary" style="padding-left: 16px; margin-top: 0">Bienvenue {{currentUser.shortName}}</h4></ion-col>
+      <ion-col><h4 ion-text color="background" style="padding-left: 16px; margin-top: 0">Bienvenue {{currentUser.shortName}}</h4></ion-col>
     </ion-row>
     <ion-row>
       <ion-col><img src="assets/img/homephoto.jpg" width="100%"/></ion-col>
@@ -27,8 +27,8 @@
           </button>
           </ion-col>
         <ion-col class="consulted-col">
-
-          <div class="arrow-left"></div>
+          <div class="arrow-left-bkg"></div>
+          <div [class]="responseCount == 0 ? 'arrow-left disabled' : 'arrow-left'"></div>
           <button  *ngIf="currentUser.user_type == 2"
                   full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image consulted' : 'button-image'">
 

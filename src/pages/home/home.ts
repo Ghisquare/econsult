@@ -54,7 +54,7 @@ export class HomePage {
   }
 
   doMyResponse() {
-    console.log("doMyResponse" + this.responses.length  )
+    console.log("doMyResponse" + this.responses.length  );
     if(this.responses.length == 1) {
       this.navCtrl.push(ResponsePage, {'response' : this.responses[0]});
     } else {

@@ -1,14 +1,26 @@
 <ion-header>
-  <my-navbar [titleText]="'Je suis consulté'"></my-navbar>
+  <my-navbar [titleText]="'Votre avis est requis'"></my-navbar>
 
 </ion-header>
 
 <ion-content padding>
-  <h1 ion-text color="primary">Consultations en attente de votre réponse</h1>
 
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <div class="title-image"><img src="assets/img/icons/page-consulted.png" alt="Votre avis est requis" /></div>
+        <h1 ion-text color="primary" class="small-h1">Votre avis est requis</h1>
+      </ion-col>
+      <ion-col col-9>
+        <h2 class="h2-title">Consultations</h2>
+        <br />
+        <h3 class="h3-title">En attente</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-list>
       <button ion-item *ngFor="let demand of demands" (click)="itemTapped($event, demand)">
-        <div class="inline"><h3 ion-text color="primary">envoyé par </h3><p>{{demand.author.forname}} {{demand.author.name}}</p></div>
+        <div class="inline"><h3 ion-text class="color-third">envoyé par </h3><p>{{demand.author.forname}} {{demand.author.name}}</p></div>
         <div *ngIf="demand.xchangeStatus == 0 && !demand.date_modified">
           <p ion-text> le {{afficheDate(demand.date_creation)}}</p>
           <div class="inline"><h3 ion-text color="secondary" >demande initiale </h3>

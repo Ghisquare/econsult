@@ -1,8 +1,14 @@
 <ion-navbar>
   <ion-grid no-padding no-margin>
     <ion-row>
-      <ion-col col1><img src="assets/img/icon40px.png" class="icon" style="height: 2.8rem" /></ion-col>
-      <ion-col col-9>
+      <ion-col col-1 no-padding>
+        <button ion-button menuToggle="left" start class="menu-left-button">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-1><img src="assets/img/icon40px.png" class="icon" style="height: 2.8rem" /></ion-col>
+
+      <ion-col col-8>
         <ion-title ion-text no-padding><ion-icon item-start name="home" *ngIf="isHome"></ion-icon>
 
           {{titleText}}

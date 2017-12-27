@@ -1,0 +1,142 @@
+.content-ios, .content-md {
+  background-color: map-get($colors, $bkgcolor);
+}
+
+.toolbar-title, .bar-button-default-ios, .bar-button-default-md {
+  color: map-get($colors, $toolbar-title-color);
+}
+
+h2 {
+  font-size: 1.4rem
+}
+h3 {
+  font-size: 1.2rem
+}
+.list-md[inset] {
+  margin-top: 0;
+  margin-bottom: 0
+}
+.list-header-md {
+  margin-bottom: 0
+}
+
+
+.list-ios[inset] ion-list-header, .list-md[inset] ion-list-header {
+  background-color: map-get($colors, $bkgcolor);
+  ion-label {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}
+
+.item-ios, .item-md {
+  background-color: map-get($colors, $bkgcolor);
+  color: white;
+}
+
+.h2-title {
+  background-color: white;
+  font-size: 1.8rem;
+  padding: 5px;
+  margin-left: 25px;
+  border-radius: 8px;
+  color: map-get($colors, secondary);
+  border: solid 2px map-get($colors, third);
+  position: relative;
+  display: inline-block;
+}
+
+.h2-title::before {
+  content: '';
+  display: block;
+  z-index: 100;
+  position: absolute;
+  left: -25px;
+  top: -4px;
+  width: 0;
+  height: 0;
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 16px solid map-get($colors, secondary);
+
+}
+
+.h3-title {
+  background-color: #b8bde5;
+  color: map-get($colors, $bkgcolor);
+  font-size: 1.8rem;
+  font-weight: normal;
+  padding: 7px;
+  border-radius: 8px;
+  position: relative;
+  display: inline-block;
+
+
+}
+
+.h3-title-container {
+  margin-top:3px;
+  display: flex;
+  flex-direction: row;
+}
+
+.h3-title-container img {
+  height: 34px;
+  margin-left: 5px;
+  margin-bottom: 3px;
+}
+
+.h3-title::before {
+  content: '';
+  display: block;
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  z-index: 100;
+  position: absolute;
+  left:-9px;
+  top: 24px;
+  background-color: map-get($colors, secondary);
+  border: solid 1px map-get($colors, third);
+}
+
+.h3-title::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 99%;
+  z-index: 99;
+  position: absolute;
+  left:-8px;
+  top: 29px;
+  background-color: map-get($colors, $bkgcolor);
+}
+
+.color-primary {
+  color: map-get($colors, primary);
+}
+
+.color-third {
+  color: map-get($colors, third);
+}
+
+.button-primary {
+  background-color: map-get($colors, primary);
+  color: #fff;
+}
+
+.button-third {
+  background-color: map-get($colors, third);
+  color: #fff;
+}
+
+.button-fourth {
+  background-color: map-get($colors, fourth);
+  color: map-get($colors, primary);
+}
+
+.profile-button {
+  color: white;
+}

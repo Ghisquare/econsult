@@ -48,12 +48,27 @@ input::placeholder, textarea::placeholder, .select-placeholder {
   font-size:1.4rem;
 }
 
-.label-md[stacked] {font-size: 1.6rem;}
+.label-md[stacked], .label-ios[stacked] {
+  font-size: 1.6rem;
+  margin-top: 5px;
+}
 
+.item-block {min-height: 1.6rem;}
 .item-radio ion-label {font-style: italic;}
 
 h1 {
   font-size: 2.2rem;
+}
+
+h1.small-h1 {
+  font-size: 1.2rem;
+}
+
+div.title-image {
+  border-radius: 50%;
+  padding: 1rem;
+  margin: auto;
+  background-color: white;
 }
 
 h2 {
@@ -70,10 +85,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .toolbar-background {background-color: white;}
 .toolbar-title {
-  color: map-get($colors, primary);
+  color: map-get($colors, background);
 }
 
 .toolbar-ios ion-title, .toolbar-md ion-title {padding: 0 5px 1px;}
+.bar-button-menutoggle-ios, .bar-button-menutoggle-md {
+  min-width: 32px;
+  margin: 0;
+}
 
 .profile-button{
   border-radius: 50%;
@@ -99,4 +118,26 @@ ion-item-group .item-inner {
 
 ion-item-group.do-lines {
   border-bottom: 0.55px solid #c8c7cc;
+}
+
+.color-primary {
+  color: map-get($colors, primary);
+}
+
+.color-fourth {
+  color: map-get($colors, fourth);
+}
+
+.background-primary .item, .background-primary .picker-wrapper, .background-primary .picker-toolbar {
+  background-color: #2d3281;
+}
+
+.button-md, .button-ios {
+  border-radius: 8px;
+}
+
+.button-third {
+  color: white;
+  background-color: map-get($colors, third);
+
 }

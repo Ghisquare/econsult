@@ -42,6 +42,7 @@ export class RegisterPage implements OnInit{
 
   userTypeValid: boolean;
   birthdateValid: boolean;
+  selectOptions: any =  {cssClass: 'background-primary'};
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, private loadingCtrl: LoadingController,

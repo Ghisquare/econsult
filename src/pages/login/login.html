@@ -4,26 +4,35 @@
  * See https://devdactic.com/login-ionic-2/ for more info
  * on login system
 -->
-<ion-content class="login-content" padding>
-  <ion-row class="logo-row">
-    <ion-col col-6 offset-3>
+<ion-content class="login-content" no-padding>
+  <ion-grid no-padding>
+    <ion-row class="logo-row" style="background-color: white">
+      <ion-col col-1>
+        <button ion-button menuToggle="left" start>
+          <ion-icon name="menu"></ion-icon></button>
+      </ion-col>
+    <ion-col col-6 offset-2>
       <img src="assets/img/logo.png"/>
     </ion-col>
     <ion-col col-3></ion-col>
   </ion-row>
-  <ion-row>
-  <ion-col class="box-shadow">
-      <h2 ion-text color="secondary">Votre outils de communication au service des professionnels de la santé</h2>
-    <p ion-text>E-consult est une application vous offrant des consultations en lignes:</p>
-      <p><ion-icon name="git-merge" item-start></ion-icon>
-        Médecins généralistes <ion-icon name="arrow-round-forward"></ion-icon> vers spécialistes</p>
-      <p><ion-icon name="git-merge" item-start></ion-icon>
-        Professionnels paramédicaux  <ion-icon name="arrow-round-forward"></ion-icon> vers médecins généralistes, ou spécialistes</p>
-  <!--    <h3 ion-text color="primary"><ion-icon name="checkmark-circle" item-start></ion-icon>
-        Un outils de communication au service des professionnels de santé</h3>-->
-  </ion-col>
-
-  </ion-row>
+  </ion-grid>
+  <ion-grid padding>
+    <ion-row>
+      <ion-col class="box-shadow">
+          <h2 ion-text color="secondary" style="text-align: center;">Bienvenue dans votre communication au service des professionnels de la santé</h2>
+        <p ion-text color="background">E-consult est une application vous offrant des consultations en lignes:</p>
+          <p  class="color-fourth">
+            <img src="assets/img/icons/consulted.png" alt="Consulter" style="float:right; width: 64px; margin-top: -16px;"/>
+            <span class="orange-circle"></span>
+            Médecins <strong>généralistes</strong> --><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> vers <strong>spécialistes</strong></p>
+          <p class="color-fourth" style="clear: both"><span class="orange-circle"></span>
+            Professionnels <strong>paramédicaux</strong>  --><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> vers médecins <strong>généralistes</strong><br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ou <strong>spécialistes</strong></p>
+      </ion-col>
+    </ion-row>
     <form (ngSubmit)="login()" #registerForm="ngForm">
       <ion-row>
         <ion-col>
@@ -36,6 +45,12 @@
             <ion-item>
               <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required value="gl"></ion-input>
             </ion-item>
+            <ion-item>
+              <ion-label stacked>Visible par</ion-label>
+              <ion-select [selectOptions]="selectOptions" name="visible" interface="popover" [(ngModel)]="registerCredentials.visible">
+                <ion-option *ngFor="let status of visibleStatus; let i = index" value="{{i}}">{{status}}</ion-option>
+              </ion-select>
+            </ion-item>
 
           </ion-list>
           <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
@@ -47,6 +62,8 @@
         <ion-col class="signup-col">
          </ion-col>
       </ion-row>
-
     </form>
+  </ion-grid>
+
+
 </ion-content>

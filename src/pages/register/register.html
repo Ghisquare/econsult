@@ -8,7 +8,7 @@
       <ion-item-group class="do-lines">
         <ion-item no-lines>
           <ion-label stacked>Vous êtes</ion-label>
-          <ion-select interface="popover" formControlName="userType" placeholder="type de profil">
+          <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="userType" placeholder="type de profil">
             <ion-option ion-text *ngFor="let type of userTypes; let i = index" value="{{i}}" (ionSelect)="onSelectType(i)">{{type}}</ion-option>
           </ion-select>
         </ion-item>
@@ -23,7 +23,7 @@
       </ion-item-group>
       <ion-item *ngIf="selectedType == 1">
         <ion-label stacked>Profession</ion-label>
-        <ion-select interface="popover" formControlName="profession">
+        <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="profession">
           <ion-option *ngFor="let profession of professions" value="{{profession.id}}" (ionSelect)="onSelectProfession(profession)">{{profession.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -43,7 +43,7 @@
 
     <ion-item *ngIf="isSpecialist == true">
         <ion-label stacked>Spécialité</ion-label>
-        <ion-select interface="popover" formControlName="specialty">
+        <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="specialty">
           <ion-option *ngFor="let specialty of specialties" value="{{specialty.id}}" (ionSelect)="onSelectSpecialty(specialty)">{{specialty.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -74,7 +74,7 @@
       <ion-item-group class="do-lines">
         <ion-item>
           <ion-label stacked>Civilité</ion-label>
-          <ion-select interface="popover" formControlName="civility">
+          <ion-select [selectOptions]="selectOptions" interface="popover" formControlName="civility">
             <ion-option *ngFor="let civility of civilities; let i = index" value="{{i}}">{{civility}}</ion-option>
           </ion-select>
         </ion-item>
