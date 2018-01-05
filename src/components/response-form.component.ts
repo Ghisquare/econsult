@@ -18,11 +18,9 @@ export class ResponseFormComponent implements OnInit{
   timeUnits: Array<any>;
   closed: boolean = false;
   submitAttempt: boolean = false;
+  selectOptions: any =  {cssClass: 'background-third'};
 
-
-
-  constructor(private fb: FormBuilder, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
-            ) { // <--- inject FormBuilder
+  constructor(private fb: FormBuilder, private consultationService: ConsultationService, private loadingCtrl: LoadingController) { // <--- inject FormBuilder
     this.createForm();
     this.timeUnits = consultationService.getTimeUnits();
   }

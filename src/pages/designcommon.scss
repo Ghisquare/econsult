@@ -36,6 +36,12 @@ h3 {
   color: white;
 }
 
+.pre-h2-title {
+  float: left;
+  width: 25%;
+  min-height: 10px;
+}
+
 .h2-title {
   background-color: white;
   font-size: 1.8rem;
@@ -46,6 +52,10 @@ h3 {
   border: solid 2px map-get($colors, third);
   position: relative;
   display: inline-block;
+}
+
+.h2-title:first-child {
+  margin-top: 0;
 }
 
 .h2-title::before {
@@ -65,6 +75,7 @@ h3 {
 
 .h3-title {
   background-color: #b8bde5;
+  margin-left: 25px;
   color: map-get($colors, $bkgcolor);
   font-size: 1.8rem;
   font-weight: normal;
@@ -80,6 +91,10 @@ h3 {
   margin-top:3px;
   display: flex;
   flex-direction: row;
+}
+
+.h3-title-container:first-child {
+  margin-top: 0;
 }
 
 .h3-title-container img {

@@ -1,7 +1,9 @@
-<ion-item>
-    <ion-label ion-text (click)="doShowButtons(!showButtons)">Contacter {{contact.forname}} {{contact.name}}
-      <ion-icon *ngIf="showButtons" name="close"></ion-icon>
+<ion-item style="display: flex">
+  <button ion-button class="color-primary"  type="button" (click)="doShowButtons(!showButtons)"  *ngIf="!showButtons">Contacter {{contact.forname}} {{contact.name}}</button>
+    <ion-label ion-text  *ngIf="showButtons" (click)="doShowButtons(!showButtons)">Contacter {{contact.forname}} {{contact.name}}
     </ion-label>
+  <button ion-button class="color-primary" *ngIf="showButtons"  type="button" (click)="doShowButtons(!showButtons)"><ion-icon name="close"></ion-icon></button>
+
 </ion-item>
 <ion-buttons *ngIf="showButtons">
   <button ion-button (click)="launchTelCall()" type="button" icon-end class="button-primary">Appel tél <ion-icon name="call" ></ion-icon></button>

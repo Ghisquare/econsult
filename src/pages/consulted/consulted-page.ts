@@ -17,6 +17,7 @@ export class ConsultedPage {
   messages: Message[];
   hasMessages: boolean = false;
 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private messageService: MessageService) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedDemand = navParams.get('demand');

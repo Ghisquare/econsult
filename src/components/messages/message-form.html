@@ -1,5 +1,6 @@
 <div></div>
-<h2 class="h2-title" ion-text>{{titreForm}}</h2>
+<div class="pre-h2-title"></div>
+<div><h2 class="h2-title" ion-text style="max-width: 62%">{{titreForm}}</h2></div>
 <form [formGroup]="msgForm" (ngSubmit)="onSubmit()" novalidate>
   <ion-list>
     <ion-item>
@@ -10,9 +11,9 @@
 
   </ion-list>
   <ion-buttons>
-    <button type="submit" ion-button color="secondary" icon-end>Envoyer
+    <button type="submit" ion-button class="button-fourth" icon-end>Envoyer
       <ion-icon name="send"></ion-icon></button>
-    <button type="reset" ion-button color="light" icon-end (click)="closeMessage()" *ngIf="demand">Annuler
+    <button type="reset" ion-button class="button-third" icon-end (click)="closeMessage()" *ngIf="demand">Annuler
       <ion-icon name="close"></ion-icon></button>
   </ion-buttons>
 </form>

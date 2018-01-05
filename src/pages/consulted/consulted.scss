@@ -21,6 +21,9 @@ page-consulted-list, page-consulted {
   }
   @import '../designcommon';
 
+  div.inline:last-child {margin-bottom: 16px;}
+
+
   //surcharge qq détails de designcommon
 
   .h3-title-container {

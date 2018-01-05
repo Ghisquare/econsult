@@ -62,6 +62,8 @@ h1 {
 
 h1.small-h1 {
   font-size: 1.2rem;
+  text-align: center;
+  margin-top: 0.5rem;
 }
 
 div.title-image {
@@ -117,7 +119,7 @@ ion-item-group .item-inner {
 }
 
 ion-item-group.do-lines {
-  border-bottom: 0.55px solid #c8c7cc;
+  //border-bottom: 0.55px solid #c8c7cc;
 }
 
 .color-primary {
@@ -132,12 +134,39 @@ ion-item-group.do-lines {
   background-color: #2d3281;
 }
 
+.background-third .item, .background-third .picker-wrapper, .background-third .picker-toolbar {
+  background-color: #a2d5ec;
+}
+
 .button-md, .button-ios {
   border-radius: 8px;
+}
+
+.item-ios.item-block .item-inner, .item-md.item-block .item-inner {
+   border-bottom: none;
+}
+
+.list-ios > .item-block:first-child , .list-md > .item-block:first-child {
+  border-top: none;
+}
+
+.list-ios > .item-block:last-child, .list-md > .item-block:last-child {
+  border-bottom: none;
+}
+
+.list-ios {margin-bottom: 8px;}
+
+ion-item-group.inline, ion-list.inline {
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .button-third {
   color: white;
   background-color: map-get($colors, third);
 
+}
+
+.first-p {
+  margin-top: 3px;
 }

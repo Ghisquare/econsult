@@ -4,10 +4,10 @@
   <h3 ion-text [ngClass]="{'h3-title' : (question==false && response == false), 'h2-title': question==true || response==true}">{{titreMedecin}}</h3>
   <img *ngIf="question==false  && response == false" src="assets/img/icons/patient.png" />
 </div>
-<h3 ion-text class="color-primary" style="font-size: 1.6rem">{{nomTitreMedecin}}</h3>
+<p ion-text class="color-primary" style="font-size: 1.6rem; margin-top: 0; margin-bottom: 0">{{nomTitreMedecin}}</p>
+
 <div class="inline"><h3 ion-text class="color-primary">Spécialité: </h3><p>{{authorSpecialty}}</p></div>
 <div class="inline"><h3 ion-text class="color-primary">Envoyé le: </h3><p>{{dateAffiche}}</p></div>
-
 
 <div class="h3-title-container" style="margin-top: 10px;">
   <h3 ion-text [ngClass]="{'h3-title' : (question==false && response == false), 'h2-title': question==true || response==true}">Description du cas</h3>

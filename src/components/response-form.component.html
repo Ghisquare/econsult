@@ -1,3 +1,4 @@
+<div class="pre-h2-title"></div>
 <h2 class="h2-title" ion-text>Votre avis</h2>
      <form [formGroup]="responseForm" (ngSubmit)="onSubmit()" novalidate>
        <error-msg *ngIf="submitAttempt" text="Veuillez vérifier les données saisies."></error-msg>
@@ -27,11 +28,11 @@
            </ion-list>
 
           <ion-item-group *ngIf="responseForm.value.status > 0" class="inline">
-            <ion-item>
+            <ion-item style="flex: 1">
               <ion-input type="number" min="0" max="60" formControlName="rdv_number"></ion-input>
             </ion-item>
-            <ion-item ion-text *ngIf="responseForm.value.status > 0" >
-              <ion-select formControlName="rdv_unit" interface="popover">
+            <ion-item ion-text *ngIf="responseForm.value.status > 0" style="flex: 2">
+              <ion-select [selectOptions]="selectOptions" formControlName="rdv_unit" interface="popover">
                 <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
               </ion-select>
             </ion-item>
@@ -44,7 +45,7 @@
        <contact-buttons [contact]="consultation.author"></contact-buttons>
        </ion-list>
        <ion-buttons>
-        <button type="submit" ion-button color="secondary" icon-end>Envoyer
+        <button type="submit" ion-button class="button-primary" icon-end>Envoyer
           <ion-icon name="send"></ion-icon></button>
         <button type="reset" ion-button color="light" icon-end>Effacer
           <ion-icon name="close"></ion-icon></button>

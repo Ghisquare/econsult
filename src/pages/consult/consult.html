@@ -31,6 +31,7 @@
               </ion-select>
             </ion-item>
             <ion-item *ngIf="!consultForm.controls.contact.valid && submitAttempt && contacts" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+            <h2 ion-text color="secondary" class="h2-title">Description du cas</h2>
           </ion-col>
         </ion-row>
 
@@ -39,7 +40,7 @@
 
 
 
-      <div><h2 ion-text color="secondary" class="h2-title">Description du cas</h2></div>
+
       <div class="h3-title-container"><h3 ion-text color="primary" class="h3-title"> Description patient</h3>
         <img src="assets/img/icons/patient.png" />
       </div>
@@ -198,11 +199,12 @@
           <h2 ion-text color="secondary" class="h2-title">Merci</h2>
 
           <p ion-text>Votre demande de consultation a bien été envoyée</p>
+          <div><h2 ion-text color="secondary" class="h2-title">Résumé de votre demande</h2></div>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <div><h2 ion-text color="secondary" class="h2-title">Résumé de votre demande</h2></div>
+
 
     <demand-resume [consultation]="consultation" [question]="false"></demand-resume>
     <button ion-button (click)="goHome()" color="secondary">OK</button>

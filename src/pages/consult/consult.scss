@@ -14,8 +14,12 @@ page-consult {
 
   p {
     color: #cccccc;
-  }
 
+
+  }
+  .item-input .label, .item-select .label, .item-datetime .label, ion-label {
+    color: #cccccc;
+  }
   @import '../designcommon';
 }
 

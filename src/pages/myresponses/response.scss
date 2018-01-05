@@ -2,7 +2,7 @@ response, page-myresponses {
   $colors: (
     background: #f1911f,
     primary: #2d3281,
-    secondary: #f1911f,
+    secondary: #2d3281,
     third: #37afda,
     fourth: #b8bde5,
     danger: #f12a19,
@@ -21,6 +21,12 @@ response, page-myresponses {
     color: map-get($colors, primary);
   }
   @import '../designcommon';
+
+  .h2-title {
+    color: map-get($colors, $bkgcolor);
+  }
+
+  div.inline:last-child {margin-bottom: 16px;}
 //surcharge qq détails de designcommon
   .h2-title::before {
     border-left: 16px solid map-get($colors, third);
@@ -40,7 +46,7 @@ response, page-myresponses {
   }
 
   .h3-title::after {
-    background-color: map-get($colors, secondary);
+    background-color: map-get($colors, $bkgcolor);
   }
 
 

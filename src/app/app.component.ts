@@ -73,7 +73,7 @@ export class MyApp {
       cc: 'guillaume.larre@gmail.com',
 //      bcc: ['john@doe.com', 'jane@doe.com'],
       subject: "EConsult - Retour sur l'utilisation de l'app",
-      body: "donnez-nous vos impressions sur votre expérience l'app E-Consult",
+      body: "Merci de nous donner vos impressions sur votre utilisation et expérience avec l'app E-consult",
       isHtml: true
     };
 
