@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -8,13 +8,17 @@ import { User } from '../app/model/user';
 @Injectable()
 export class UserService {
 
-  private usersUrl = 'api/users';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private usersUrl = 'http://localhost/app_dev.php/users.json';  // URL to web api
+  private head = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.head });
+
 
   constructor(private http: Http) { }
 
+
   getUsers(): Promise<User[]> {
-    return this.http.get(this.usersUrl)
+    console.log("UserService.getUsers");
+    return this.http.get(this.usersUrl, this.head)
       .toPromise()
       .then(response => response.json().data as User[])
       .catch(this.handleError);
@@ -22,7 +26,7 @@ export class UserService {
 
   getUser(id: number): Promise<User> {
     const url = `${this.usersUrl}/${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.head)
       .toPromise()
       .then(response => response.json().data as User)
       .catch(this.handleError);
@@ -30,23 +34,26 @@ export class UserService {
 
   getUserByEmail(email: string): Promise<User> {
     const url = `${this.usersUrl}/?email=${email}`;
-    return this.http.get(url)
+    return this.http.get(url, this.head)
       .toPromise()
       .then(response => response.json().data as User)
       .catch(this.handleError);
   }
-  getUsersBySpecialty(specialty_id: number): Promise<User[]> {
-    const url = `${this.usersUrl}/?specialty_id=${specialty_id}`;
+  getUsersBySpecialty(specialtyId: number): Promise<User[]> {
+    const url = `${this.usersUrl}/?specialtyId=${specialtyId}`;
     console.log(url);
-    return this.http.get(url)
+    return this.http.get(url, this.head)
       .toPromise()
       .then(response => response.json().data as User[])
       .catch(this.handleError);
   }
 
   createUser(user: User): Promise<User>{
-    console.log("CreateUser");
-    return this.http.post(this.usersUrl, JSON.stringify(user), this.headers)
+    console.log("CreateUser.Url" + this.usersUrl);
+    console.log("CreateUser " + user);
+    console.log("CreateUser JSON " + JSON.stringify(user));
+
+    return this.http.post(this.usersUrl, JSON.stringify(user), this.options)
       .toPromise()
       .then(response => response.json().data as User)
       .catch(this.handleError);
@@ -56,7 +63,7 @@ export class UserService {
     const url = `${this.usersUrl}/${user.id}`;
     console.log("user Update" + JSON.stringify(user));
     return this.http
-      .put(url, JSON.stringify(user), {headers: this.headers})
+      .put(url, JSON.stringify(user), this.head)
       .toPromise()
       .then(() => user)
       .catch(this.handleError);
@@ -76,6 +83,23 @@ export class UserService {
     civilities[2] = "Mlle. ";
     civilities[3] = "Dr. ";
     civilities[4] = "Pr. ";
+    return civilities;
+  }
+
+  public getSelectCivilities(): Array<any> {
+    //TO DO Bug Civility
+    var civilities = new Array();
+    civilities[0][0] = 0;
+    civilities[0][1] = "M. ";
+    civilities[1][0] = 1;
+    civilities[1][1] = "Mme. ";
+    civilities[2][0] = 2;
+    civilities[2][1] = "Mlle. ";
+    civilities[3][0] = 3;
+    civilities[3][1] = "Dr. ";
+    civilities[4][0] = 4;
+    civilities[4][1] =  "Pr. ";
+    console.log(civilities);
     return civilities;
   }
 

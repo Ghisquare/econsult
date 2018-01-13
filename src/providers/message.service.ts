@@ -8,7 +8,7 @@ import { Message } from '../app/model/message';
 @Injectable()
 export class MessageService {
 
-  private messagesUrl = 'api/messages';  // URL to web api
+  private messagesUrl = 'http://localhost/app_dev.php/messages.json';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
 
@@ -21,8 +21,8 @@ export class MessageService {
       .catch(this.handleError);
   }
 
-  getMessagesByConsultationId(consultation_id: number): Promise<Message[]> {
-    const url = `${this.messagesUrl}/?consultation_id=${consultation_id}`;
+  getMessagesByConsultationId(consultationId: number): Promise<Message[]> {
+    const url = `${this.messagesUrl}/?consultationId=${consultationId}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as Message[])

@@ -51,7 +51,7 @@
 
     <ion-item >
         <ion-label stacked>J'accepte les demandes directes de patients</ion-label>
-        <ion-checkbox formControlName="accept_patient"></ion-checkbox>
+        <ion-checkbox formControlName="acceptPatient"></ion-checkbox>
       </ion-item>
 
       <ion-item-group class="do-lines">
@@ -78,6 +78,7 @@
             <ion-option *ngFor="let civility of civilities; let i = index" value="{{i}}">{{civility}}</ion-option>
           </ion-select>
         </ion-item>
+
         <ion-item *ngIf="!registerForm.controls['civility'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
       </ion-item-group>
 
@@ -168,9 +169,24 @@
     <p>Form status: {{ registerForm.status | json }}</p>-->
 
     <div *ngIf="user">
-      Merci {{user.forname}} {{user.name}}, votre profil a bien été créé.<br />
-      Vous pouvez maintenant utiliser l'application.
-    <button ion-button (click)="goHome()">OK</button>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+            <div class="title-image"><img src="assets/img/icons/question.png" alt="Demander un avis" /></div>
+            <h1 ion-text color="primary" class="small-h1">S'enregistrer </h1></ion-col>
+          <ion-col col-9>
+            <h2 ion-text color="secondary" class="h2-title">Merci</h2>
+
+            <p ion-text>, Votre profil, {{user.forname}} {{user.name}}, a bien été créé.<br />
+              Vous pouvez maintenant utiliser l'application.</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+      <button ion-button (click)="goHome()" color="secondary">OK</button>
   </div>
+
+
+
 
 </ion-content>

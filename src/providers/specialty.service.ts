@@ -8,22 +8,26 @@ import { Specialty } from '../app/model/specialty';
 @Injectable()
 export class SpecialtyService {
 
-  private specialtiesUrl = 'api/specialties';  // URL to web api
+  private specialtiesUrl = 'http://localhost/app_dev.php/specialties.json';  // URL to web api
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
 
   getSpecialties(): Promise<Specialty[]> {
-    return this.http.get(this.specialtiesUrl)
+    return this.http.get(this.specialtiesUrl, this.headers)
       .toPromise()
-      .then(response => response.json().data as Specialty[])
+      .then(response =>
+        response.json() as Specialty[]
+
+      )
       .catch(this.handleError);
   }
 
   getSpecialty(id: number): Promise<Specialty> {
     const url = `${this.specialtiesUrl}/${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.headers)
       .toPromise()
-      .then(response => response.json().data as Specialty)
+      .then(response => response.json() as Specialty)
       .catch(this.handleError);
   }
 

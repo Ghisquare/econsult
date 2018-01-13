@@ -54,11 +54,11 @@ export class SettingsPage implements OnInit{
 
   createForm() {
     this.registerForm = this.fb.group({
-      userType: [this.user.user_type, Validators.required ],
+      userType: [this.user.userType, Validators.required ],
       visible: [this.user.visible],
-      profession: [this.user.profession_id], // <--- the FormControl called "name"
-      generalist: [(this.user.specialty_id == 19 ? 0:1)], // <--- the FormControl called "name"
-      specialty: [this.user.specialty_id],
+      profession: [this.user.professionId], // <--- the FormControl called "name"
+      generalist: [(this.user.specialtyId == 19 ? 0:1)], // <--- the FormControl called "name"
+      specialty: [this.user.specialtyId],
       birthdate: [this.user.birthdate], // <--- the FormControl called "name"
       sex: [this.user.sex, Validators.required ], // <--- the FormControl called "name"
       civility: [this.user.civility, Validators.required ], // <--- the FormControl called "name"
@@ -69,7 +69,7 @@ export class SettingsPage implements OnInit{
       tel: [this.user.tel, Validators.required ],
       skype: [this.user.skype],
       facetime: [this.user.facetime],
-      accept_patient: [this.user.accept_patient, Validators.required],
+      acceptPatient: [this.user.acceptPatient, Validators.required],
 
 
 //      email_confirm: ['', Validators.required ],
@@ -193,7 +193,7 @@ export class SettingsPage implements OnInit{
   prepareSaveUser(){
     const formModel = this.registerForm.value;
     const user = this.user;
-    user.user_type = formModel.userType;
+    user.userType = formModel.userType;
     user.visible = formModel.visible;
     user.sex = formModel.sex;
     if(formModel.userType == 0) user.birthdate = formModel.birthdate; else user.birthdate = null;
@@ -204,23 +204,23 @@ export class SettingsPage implements OnInit{
     user.identification = formModel.identification;
     user.email = formModel.email;
     user.pwd = formModel.pwd;
-    user.accept_patient = formModel.accept_patient;
+    user.acceptPatient = formModel.acceptPatient;
     user.skype = formModel.skype;
     user.facetime = formModel.facetime;
     if(formModel.userType == 1) {
-      user.profession_id = formModel.profession;
+      user.professionId = formModel.profession;
       user.profession = this.selectedProfession;
     } else {
-      user.profession_id = null;
+      user.professionId = null;
       user.profession = null
     }
     if(formModel.userType == 2 && formModel.generalist == 1) {
-      user.specialty_id = formModel.specialty;
+      user.specialtyId = formModel.specialty;
       user.specialty = this.selectedSpecialty;
     }
 
     if(formModel.userType == 2 && formModel.generalist == 0) {
-      user.specialty_id = 19;
+      user.specialtyId = 19;
       const specialty = new Specialty();
       specialty.id = 19; specialty.name = "Médecine générale";
       user.specialty = specialty;
@@ -242,8 +242,8 @@ export class SettingsPage implements OnInit{
         this.civilities = this.userService.getCivilities();
         this.visibleStatus = this.userService.getVisibleStatus();
 
-        this.onSelectType(this.user.user_type);
-        if(this.user.specialty_id == 19) this.doGeneralist(); else this.doSpecialist();
+        this.onSelectType(this.user.userType);
+        if(this.user.specialtyId == 19) this.doGeneralist(); else this.doSpecialist();
 
       });
 

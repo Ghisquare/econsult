@@ -8,7 +8,7 @@ import { Patient } from '../app/model/patient';
 @Injectable()
 export class PatientService {
 
-  private patientsUrl = 'api/patients';  // URL to web api
+  private patientsUrl = 'http://localhost/app_dev.php/patients.json';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
 

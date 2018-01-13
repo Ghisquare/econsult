@@ -10,8 +10,8 @@ import { ConsultFormComponent } from '../components/consult-form.component';
 import { SpecialtySelectComponent } from '../components/specialty-select';
 
 // Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemDataService }  from '../providers/data-services/in-memory-data.service';
+//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { InMemDataService }  from '../providers/data-services/in-memory-data.service';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -98,7 +98,7 @@ export class MyErrorHandler implements ErrorHandler {
     HttpModule,
     ReactiveFormsModule, // <-- #2 add to @NgModule imports ==> https://angular.io/guide/reactive-forms
     IonicModule.forRoot(MyApp),
-    InMemoryWebApiModule.forRoot(InMemDataService),
+//    InMemoryWebApiModule.forRoot(InMemDataService),
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },
      // { path: 'detail/:id', component: HeroDetailComponent },

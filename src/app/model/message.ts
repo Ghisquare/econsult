@@ -2,10 +2,10 @@ import {User} from "./user";
 export class Message {
   id: number;
   content: string;
-  author_id: number;
+  authorId: number;
   author: User;
-  to_id: number;
+  toId: number;
   to: User;
   date: number;
-  consultation_id: number;
+  consultationId: number;
 }

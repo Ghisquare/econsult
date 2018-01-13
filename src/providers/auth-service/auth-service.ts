@@ -11,12 +11,13 @@ export class AuthService  {
   currentUser: User;
 
   constructor(private userService: UserService) {
+    console.log("AuthService.constructor");
     this.userService.getUsers().then(users => this.users = users);
   }
 
   public refreshUsers(){
     console.log("refreshUsers");
-    this.userService.getUsers().then(users => {this.users = users; console.log(this.users);});
+    this.userService.getUsers().then(users => this.users = users);
   }
 
   public login(credentials) {

@@ -51,24 +51,24 @@ export class DemandResumeComponent implements OnInit {
 
 
     this.sexTexte = sexText(this.consultation.sex);
-    this.authorSpecialty = getSpecialtyName(this.consultation.author.specialty_id);
+    this.authorSpecialty = getSpecialtyName(this.consultation.author.specialtyId);
     if(this.question) {
       this.titreMedecin = "Médecin demandant";
       this.nomTitreMedecin = this.consultation.author.forname + " " + this.consultation.author.name;
-      this.authorSpecialty = getSpecialtyName(this.consultation.author.specialty_id);
+      this.authorSpecialty = getSpecialtyName(this.consultation.author.specialtyId);
       var options = {
         year: "numeric", month: "numeric",
         day: "numeric", hour: "2-digit", minute: "2-digit"
       };
-      this.dateAffiche = afficheDate(this.consultation.date_creation);
+      this.dateAffiche = afficheDate(this.consultation.dateCreation);
     } else {
       this.titreMedecin = "Médecin contacté";
       this.nomTitreMedecin = this.consultation.contact.forname + " " + this.consultation.contact.name;
-      this.authorSpecialty = getSpecialtyName(this.consultation.contact.specialty_id);
-      this.dateAffiche =  afficheDate(this.consultation.date_response);
+      this.authorSpecialty = getSpecialtyName(this.consultation.contact.specialtyId);
+      this.dateAffiche =  afficheDate(this.consultation.dateResponse);
     }
 
-    this.symptomeUnit = this.consultationService.getTimeUnit(this.consultation.debut_symptome_unit);
+    this.symptomeUnit = this.consultationService.getTimeUnit(this.consultation.debutSymptomeUnit);
   }
 
   public pathForImage(img) {

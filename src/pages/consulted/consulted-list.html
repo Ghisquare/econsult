@@ -21,19 +21,19 @@
   <ion-list>
       <button ion-item *ngFor="let demand of demands" (click)="itemTapped($event, demand)">
         <div class="inline"><h3 ion-text class="color-third">envoyé par </h3><p>{{demand.author.forname}} {{demand.author.name}}</p></div>
-        <div *ngIf="demand.xchangeStatus == 0 && !demand.date_modified">
-          <p ion-text> le {{afficheDate(demand.date_creation)}}</p>
+        <div *ngIf="demand.xchangeStatus == 0 && !demand.dateModified">
+          <p ion-text> le {{afficheDate(demand.dateCreation)}}</p>
           <div class="inline"><h3 ion-text color="secondary" >demande initiale </h3>
             <p ion-text>
               {{demand.description}}
             </p>
           </div>
         </div>
-        <div *ngIf="demand.xchangeStatus == 2 || demand.date_modified">
-          <p ion-text> le {{afficheDate(demand.date_modified)}}</p>
+        <div *ngIf="demand.xchangeStatus == 2 || demand.dateModified">
+          <p ion-text> le {{afficheDate(demand.dateModified)}}</p>
           <div class="inline">
             <h3 ion-text color="secondary" >
-              <span *ngIf="demand.date_modified && demand.xchangeStatus == 0; else infoResponse">réponse à votre demande d'info</span>
+              <span *ngIf="demand.dateModified && demand.xchangeStatus == 0; else infoResponse">réponse à votre demande d'info</span>
               <ng-template #infoResponse>demande d'info complémentaire</ng-template>
             </h3>
             <p ion-text>...</p>

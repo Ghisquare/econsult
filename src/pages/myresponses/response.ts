@@ -54,11 +54,11 @@ export class ResponsePage implements OnInit {
     let body = "<h1>Résumé de votre consultation</h1>";
     body += "<b>Médecin contacté: </b> " + this.consultation.contact.forname + " " + this.consultation.contact.name + "<br />";
     body += "<b>Spécialité: </b>" + this.consultation.contact.specialty.name + "<br />";
-    body += "<b>Envoyé le: </b>" + afficheDate(this.consultation.date_creation) + "<br />";
+    body += "<b>Envoyé le: </b>" + afficheDate(this.consultation.dateCreation) + "<br />";
     body += "<h2>Description du cas</h2>";
     body += "<b>Sexe: </b>" + sexText(this.consultation.sex) + "<br />";
     body += "<b>Antécédents: </b>" + this.consultation.antecedent + "<br />";
-    body += "<b>Début symptome: </b>" + this.consultation.debut_symptome + "" + this.consultationService.getTimeUnit(this.consultation.debut_symptome_unit) + "<br />";
+    body += "<b>Début symptome: </b>" + this.consultation.debutSymptome + "" + this.consultationService.getTimeUnit(this.consultation.debutSymptomeUnit) + "<br />";
     body += "<b>Description clinique: </b>" + this.consultation.description + "<br />";
     body += "<b>Traitement déjà initié: </b>" + this.consultation.traitementEnCours + "<br />";
     body += "<h2>Réponse de " + this.consultation.contact.forname + " " + this.consultation.contact.name + "</h2>";
@@ -85,7 +85,7 @@ export class ResponsePage implements OnInit {
 
     let consultation = this.consultation;
     consultation.xchangeStatus = 4;
-    consultation.date_close = Date.now();
+    consultation.dateClose = Date.now();
 
     this.consultationService.update(consultation).then(consultation => {
       this.consultation = consultation;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -10,14 +10,14 @@ import {User} from "../app/model/user";
 @Injectable()
 export class ConsultationService {
 
-  private consultationsUrl = 'api/consultations';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
-
+  private consultationsUrl = 'http://localhost/app_dev.php/consultations.json';  // URL to web api
+  private head = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.head });
 
   constructor(private http: Http) { }
 
   getConsultations(): Promise<Consultation[]> {
-    return this.http.get(this.consultationsUrl)
+    return this.http.get(this.consultationsUrl, this.head)
       .toPromise()
       .then(response => response.json().data as Consultation[])
       .catch(this.handleError);
@@ -25,16 +25,16 @@ export class ConsultationService {
 
   getConsultation(id: number): Promise<Consultation> {
     const url = `${this.consultationsUrl}/${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.head)
       .toPromise()
       .then(response => response.json().data as Consultation)
       .catch(this.handleError);
   }
 
   getDemandsByContact(contact: User, xchangeStatus): Promise<Consultation[]>{
-    const url = `${this.consultationsUrl}/?contact_id=${contact.id}&xchangeStatus=${xchangeStatus}`;
+    const url = `${this.consultationsUrl}/?contactId=${contact.id}&xchangeStatus=${xchangeStatus}`;
     console.log('getDemandsByContact - url:?? ' + url);
-    return this.http.get(url)
+    return this.http.get(url, this.head)
       .toPromise()
       .then(response => response.json().data as Consultation[])
       .catch(this.handleError);
@@ -42,18 +42,18 @@ export class ConsultationService {
   }
 
   getConsultationsByAuthorStatus(author: User, status: number): Promise<Consultation[]>{
-    const url = `${this.consultationsUrl}/?xchangeStatus=${status}&author_id=${author.id}`;
+    const url = `${this.consultationsUrl}/?xchangeStatus=${status}&authorId=${author.id}`;
     console.log('getConsultationsByAuthor - url: ' + url);
-    return this.http.get(url)
+    return this.http.get(url, this.head)
       .toPromise()
       .then(response => response.json().data as Consultation[])
       .catch(this.handleError);
   }
 //A FAIRE FONCTION GLOBAL getConsultations (contact, status, author: boolean
   getResponsesByXchangeStatus(author: User, status): Promise<Consultation[]>{
-    const url = `${this.consultationsUrl}/?xchangeStatus=${status}&author_id=${author.id}`;
+    const url = `${this.consultationsUrl}/?xchangeStatus=${status}&authorId=${author.id}`;
     console.log('getResponsesByXchangeStatus - url: ' + url);
-    return this.http.get(url)
+    return this.http.get(url, this.head)
       .toPromise()
       .then(response => response.json().data as Consultation[])
       .catch(this.handleError);
@@ -63,16 +63,16 @@ export class ConsultationService {
     const url = `${this.consultationsUrl}/${consultation.id}`;
     console.log("consultation.update" + JSON.stringify(consultation));
     return this.http
-      .put(url, JSON.stringify(consultation), {headers: this.headers})
+      .put(url, JSON.stringify(consultation), this.head)
       .toPromise()
       .then(() => consultation)
       .catch(this.handleError);
   }
 
   createConsultation(consultation: Consultation): Promise<Consultation>{
-    return this.http.post(this.consultationsUrl, JSON.stringify(consultation), this.headers)
+    return this.http.post(this.consultationsUrl, JSON.stringify(consultation), this.head)
       .toPromise()
-      .then(response => response.json().data as Consultation)
+      .then(response => response.json() as Consultation)
       .catch(this.handleError);
   }
 

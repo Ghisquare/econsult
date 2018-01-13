@@ -59,8 +59,8 @@ export class ResponseFormComponent implements OnInit{
 
   prepareUpdateConsultation(){
     const formModel = this.responseForm.value;
-    this.consultation.date_response = Date.now();
-    console.log("this.consultation.date_response" + this.consultation.date_response);
+    this.consultation.dateResponse = Date.now();
+    console.log("this.consultation.dateResponse" + this.consultation.dateResponse);
     this.consultation.response = formModel.response;
     this.consultation.treatment = formModel.treatment;
 

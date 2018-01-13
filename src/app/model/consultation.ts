@@ -4,10 +4,10 @@ import {Patient} from "./patient";
 export class Consultation {
   id: number;
 
-  date_creation: number;
-  date_modified: number;
-  date_response: number;
-  date_close: number;
+  dateCreation: number;
+  dateModified: number;
+  dateResponse: number;
+  dateClose: number;
 
   sex: number;
   age: number;
@@ -15,19 +15,19 @@ export class Consultation {
   description: string;
   antecedent: string;
   traitementEnCours: string;
-  debut_symptome: number;
-  debut_symptome_unit: number;
-  author_id: number;
+  debutSymptome: number;
+  debutSymptomeUnit: number;
+  authorId: number;
   author: User;
-  contact_id: number;
+  contactId: number;
   contact: User;
   response: string;
   treatment: string;
   rdvStatus: number;
   rdvUnit: number;
   xchangeStatus: number;
-  is_anonymous: boolean;
-  patient_id: number;
+  isAnonymous: boolean;
+  patientId: number;
   patient: Patient;
 
   //__OK antécédent >> texte

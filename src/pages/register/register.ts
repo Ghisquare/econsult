@@ -66,7 +66,7 @@ export class RegisterPage implements OnInit{
       tel: ['', Validators.required ],
       skype: [''],
       facetime: [''],
-      accept_patient: [true, Validators.required],
+      acceptPatient: [true, Validators.required],
 
 
 //      email_confirm: ['', Validators.required ],
@@ -131,6 +131,7 @@ export class RegisterPage implements OnInit{
 
   doCivilities(){
     this.civilities = this.userService.getCivilities();
+
     if(this.selectedType == 2) {
       this.civilities.splice(0, 3);
     } else {
@@ -175,6 +176,7 @@ export class RegisterPage implements OnInit{
 
       this.userService.createUser(this.user).then(user => {
         this.user = user;
+        console.log("Register.onSubmit.afterCreateUser:" + JSON.stringify(this.user));
         this.authService.refreshUsers();
         this.loading.dismiss();
 
@@ -188,46 +190,56 @@ export class RegisterPage implements OnInit{
   prepareSaveUser(){
     const formModel = this.registerForm.value;
     const user = new User();
-    user.user_type = formModel.userType;
-    user.sex = formModel.sex;
+    user.userType = formModel.userType * 1;
+    user.sex = formModel.sex * 1;
     if(formModel.userType == 0) user.birthdate = formModel.birthdate; else user.birthdate = null;
-    user.civility = formModel.civility;
+    user.civility = formModel.civility * 1;
+    if(formModel.userType == 2) user.civility = user.civility + 3;
     user.name = formModel.name;
     user.forname = formModel.forname;
     user.tel = formModel.tel;
     user.identification = formModel.identification;
     user.email = formModel.email;
     user.pwd = formModel.pwd;
-    user.accept_patient = formModel.accept_patient;
+    user.acceptPatient = formModel.acceptPatient;
     user.skype = formModel.skype;
     user.facetime = formModel.facetime;
     if(formModel.userType == 1) {
-      user.profession_id = formModel.profession;
+      user.professionId = formModel.profession;
       user.profession = this.selectedProfession;
     } else {
-      user.profession_id = null;
+      user.professionId = null;
       user.profession = null
     }
     if(formModel.userType == 2 && formModel.generalist == 1) {
-      user.specialty_id = formModel.specialty;
-      user.specialty = this.selectedSpecialty;
+      user.specialtyId = formModel.specialty * 1;
+      user.specialty = "specialties/" + this.selectedSpecialty.id;
+
     }
 
     if(formModel.userType == 2 && formModel.generalist == 0) {
-      user.specialty_id = 19;
+      user.specialtyId = 1;
       const specialty = new Specialty();
-      specialty.id = 19; specialty.name = "Médecine générale";
-      user.specialty = specialty;
+      specialty.id = 1; specialty.name = "Médecine générale";
+      user.specialty = "specialties/1";
     }
-
+    console.log("register.prepareSaveUser User: " + user);
+    console.log("register.prepareSaveUser JSON: " + JSON.stringify(user));
     return user;
   }
 
   ngOnInit(): void {
-    this.specialtyService.getSpecialties().then(specialties => this.specialties = specialties);
+    this.specialtyService.getSpecialties().then(specialties => {
+      this.specialties = specialties;
+      console.log("Register.OnInit specialties");
+      console.log(specialties);
+    }).catch(this.handleError);
     this.professionService.getProfessions().then(professions => this.professions = professions);
     this.userTypes = userTypes;
     this.civilities = this.userService.getCivilities();
+
+    console.log("Civilities" + this.civilities);
+
     this.createForm();
 
     console.log(this.registerForm.controls['skype']);
@@ -262,5 +274,9 @@ export class RegisterPage implements OnInit{
     this.content.scrollToTop();
   }
 
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred - SpecialtyService', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 
 }

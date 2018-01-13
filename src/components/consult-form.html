@@ -67,9 +67,9 @@
 
           <ion-item ion-text>
             <ion-label>Numéro de sécurité sociale</ion-label>
-            <ion-input type="text" required formControlName="patient_identification"></ion-input>
+            <ion-input type="text" required formControlName="patientIdentification"></ion-input>
           </ion-item>
-          <ion-item *ngIf="!consultForm.controls.patient_identification.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+          <ion-item *ngIf="!consultForm.controls.patientIdentification.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
 
           <ion-item>
             <ion-label>Date de naissance</ion-label>
@@ -109,18 +109,18 @@
       <ion-item-group class="inline">
           <ion-item no-lines>
             <ion-label stacked>Début des symptomes</ion-label>
-            <ion-input type="number" min="0" max="60" formControlName="debut_symptome"></ion-input>
+            <ion-input type="number" min="0" max="60" formControlName="debutSymptome"></ion-input>
           </ion-item>
           <ion-item ion-text >
             <ion-label stacked></ion-label>
-            <ion-select formControlName="debut_symptome_unit" interface="popover">
+            <ion-select formControlName="debutSymptomeUnit" interface="popover">
               <ion-option *ngFor="let unit of timeUnits; let i = index" value="{{i}}">{{unit}}</ion-option>
             </ion-select>
           </ion-item>
 
 
         </ion-item-group>
-      <ion-item *ngIf="!consultForm.controls.debut_symptome.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
+      <ion-item *ngIf="!consultForm.controls.debutSymptome.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
 
       <ion-item>
         <ion-label stacked>Traitements en cours</ion-label>

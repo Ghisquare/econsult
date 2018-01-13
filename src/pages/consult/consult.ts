@@ -197,12 +197,12 @@ export class ConsultPage implements OnInit{
       description: ['', Validators.required ], // <--- the FormControl called "name"
       antecedent: ['' ], // <--- the FormControl called "name"
       traitementEnCours: ['' ], // <--- the FormControl called "name"
-      debut_symptome: ['0', Validators.required ], // <--- the FormControl called "name"
-      debut_symptome_unit: ['0' ], // <--- the FormControl called "name"
+      debutSymptome: ['0', Validators.required ], // <--- the FormControl called "name"
+      debutSymptomeUnit: ['0' ], // <--- the FormControl called "name"
       patient_name: ['' ],
       patient_forname: ['' ],
       patient_birthdate: ['' ],
-      patient_identification: [''],
+      patientIdentification: [''],
 
       any: ''
     });
@@ -219,8 +219,8 @@ export class ConsultPage implements OnInit{
       this.consultForm.controls.patient_forname.updateValueAndValidity();
       this.consultForm.controls.patient_birthdate.clearValidators();
       this.consultForm.controls.patient_birthdate.updateValueAndValidity();
-      this.consultForm.controls.patient_identification.clearValidators();
-      this.consultForm.controls.patient_identification.updateValueAndValidity();
+      this.consultForm.controls.patientIdentification.clearValidators();
+      this.consultForm.controls.patientIdentification.updateValueAndValidity();
     } else {
       this.consultForm.controls.age.clearValidators();
       this.consultForm.controls.age.updateValueAndValidity();
@@ -230,8 +230,8 @@ export class ConsultPage implements OnInit{
       this.consultForm.controls.patient_forname.updateValueAndValidity();
       this.consultForm.controls.patient_birthdate.setValidators(Validators.required);
       this.consultForm.controls.patient_birthdate.updateValueAndValidity();
-      this.consultForm.controls.patient_identification.setValidators(Validators.required);
-      this.consultForm.controls.patient_identification.updateValueAndValidity();
+      this.consultForm.controls.patientIdentification.setValidators(Validators.required);
+      this.consultForm.controls.patientIdentification.updateValueAndValidity();
     }
   }
   onSelectSpecialty(specialty: Specialty): void {
@@ -285,7 +285,7 @@ export class ConsultPage implements OnInit{
         let saveImage = new Image();
         saveImage.uri = this.images[i];
         saveImage.description = this.consultForm.controls['image' + i].value;
-        saveImage.consultation_id = this.consultation.id;
+        saveImage.consultationId = this.consultation.id;
         console.log("Saved Image before: " + JSON.stringify(saveImage));
 
         this.imgService.createImage(saveImage).then(image => {
@@ -313,7 +313,7 @@ export class ConsultPage implements OnInit{
     savePatient.forname = formModel.patient_forname;
     savePatient.birthdate = formModel.patient_birthdate;
     savePatient.sex = formModel.sex;
-    savePatient.identification = formModel.patient_identification;
+    savePatient.identification = formModel.patientIdentification;
 
     return savePatient;
 
@@ -322,27 +322,27 @@ export class ConsultPage implements OnInit{
   prepareSaveConsultation(): Consultation{
     const formModel = this.consultForm.value;
     const saveConsultation = new Consultation();
-    saveConsultation.date_creation = Date.now();
-    console.log("DateCreation" + saveConsultation.date_creation );
+    saveConsultation.dateCreation = Date.now();
+    console.log("DateCreation" + saveConsultation.dateCreation );
     saveConsultation.sex = formModel.sex;
     saveConsultation.age = formModel.age;
     saveConsultation.description = formModel.description;
     saveConsultation.antecedent = formModel.antecedent;
     saveConsultation.traitementEnCours = formModel.traitementEnCours;
-    saveConsultation.debut_symptome = formModel.debut_symptome;
-    saveConsultation.debut_symptome_unit = formModel.debut_symptome_unit;
-    saveConsultation.author_id= this.authService.getUserInfo().id;
+    saveConsultation.debutSymptome = formModel.debutSymptome;
+    saveConsultation.debutSymptomeUnit = formModel.debutSymptomeUnit;
+    saveConsultation.authorId= this.authService.getUserInfo().id;
     saveConsultation.author= this.authService.getUserInfo();
-    saveConsultation.contact_id = formModel.contact;
+    saveConsultation.contactId = formModel.contact;
     saveConsultation.contact = this.selectedContact;
     saveConsultation.xchangeStatus = 0;
-    saveConsultation.is_anonymous = formModel.anonymous_patient;
+    saveConsultation.isAnonymous = formModel.anonymous_patient;
     if (!this.isAnonymousPatient) {
-      saveConsultation.patient_id = this.patient.id;
+      saveConsultation.patientId = this.patient.id;
       saveConsultation.patient = this.patient;
       saveConsultation.age = age(this.patient.birthdate); //A FAIRE CALCUL AGE EN FONCTION DATE DE NAISSANCE
     } else {
-      saveConsultation.patient_id = null;
+      saveConsultation.patientId = null;
       saveConsultation.patient = null;
     }
 

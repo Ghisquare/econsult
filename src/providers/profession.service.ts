@@ -8,22 +8,24 @@ import { Profession } from '../app/model/profession';
 @Injectable()
 export class ProfessionService {
 
-  private professionsUrl = 'api/professions';  // URL to web api
+  private professionsUrl = 'http://localhost/app_dev.php/professions.json';  // URL to web api
+  private headers = new Headers({'Content-Type': 'application/json'});
+
 
   constructor(private http: Http) { }
 
   getProfessions(): Promise<Profession[]> {
-    return this.http.get(this.professionsUrl)
+    return this.http.get(this.professionsUrl, this.headers)
       .toPromise()
-      .then(response => response.json().data as Profession[])
+      .then(response => response.json() as Profession[])
       .catch(this.handleError);
   }
 
   getProfession(id: number): Promise<Profession> {
     const url = `${this.professionsUrl}/${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.headers)
       .toPromise()
-      .then(response => response.json().data as Profession)
+      .then(response => response.json() as Profession)
       .catch(this.handleError);
   }
 

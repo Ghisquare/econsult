@@ -10,7 +10,7 @@ declare var cordova: any;
 @Injectable()
 export class ImageService {
 
-  private imagesUrl = 'api/images';  // URL to web api
+  private imagesUrl = 'http://localhost/app_dev.php/images.json';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
 
@@ -31,8 +31,8 @@ export class ImageService {
       .catch(this.handleError);
   }
 
-  getImagesByConsultationId( consultation_id: number): Promise<Image[]>{
-  const url = `${this.imagesUrl}/?consultation_id=${consultation_id}`;
+  getImagesByConsultationId( consultationId: number): Promise<Image[]>{
+  const url = `${this.imagesUrl}/?consultationId=${consultationId}`;
     return this.http.get(url)
       .toPromise()
       .then(response => response.json().data as Image[])

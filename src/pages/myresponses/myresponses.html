@@ -21,7 +21,7 @@
     <button ion-item *ngFor="let response of responses" (click)="itemTapped($event, response)">
       <div class="inline"><h3 ion-text class="color-primary">envoyé par </h3><p>{{response.contact.forname}} {{response.contact.name}}</p></div>
       <div *ngIf="response.xchangeStatus==3">
-        <p ion-text> le {{afficheDate(response.date_response)}}</p>
+        <p ion-text> le {{afficheDate(response.dateResponse)}}</p>
         <div class="inline"><h3 ion-text class="color-third" >diagnostic </h3>
           <p ion-text>
             {{response.response}}
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div *ngIf="response.xchangeStatus==1">
-        <p ion-text> le {{afficheDate(response.date_modified)}}</p>
+        <p ion-text> le {{afficheDate(response.dateModified)}}</p>
         <div class="inline"><h3 ion-text class="color-third" >demande d'info complémentaire </h3>
           <p ion-text>...</p>
         </div>
