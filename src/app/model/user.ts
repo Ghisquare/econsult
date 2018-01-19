@@ -1,5 +1,3 @@
-import {Specialty} from "./specialty";
-import {Profession} from "./profession";
 
 export class User {
   id: number;
@@ -19,7 +17,7 @@ export class User {
   specialtyId: number;
   specialty: any;
   professionId: number;
-  profession: Profession;
+  profession: any;
   online: boolean;
   shortName: string;
   visible: number;

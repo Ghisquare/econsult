@@ -17,15 +17,15 @@ export class MessageService {
   getMessages(): Promise<Message[]> {
     return this.http.get(this.messagesUrl)
       .toPromise()
-      .then(response => response.json().data as Message[])
+      .then(response => response.json() as Message[])
       .catch(this.handleError);
   }
 
   getMessagesByConsultationId(consultationId: number): Promise<Message[]> {
-    const url = `${this.messagesUrl}/?consultationId=${consultationId}`;
+    const url = `${this.messagesUrl}?consultationId=${consultationId}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Message[])
+      .then(response => response.json() as Message[])
       .catch(this.handleError);
   }
 
@@ -33,14 +33,14 @@ export class MessageService {
     const url = `${this.messagesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Message)
+      .then(response => response.json() as Message)
       .catch(this.handleError);
   }
 
   createMessage(message: Message): Promise<Message>{
     return this.http.post(this.messagesUrl, JSON.stringify(message), this.headers)
       .toPromise()
-      .then(response => response.json().data as Message)
+      .then(response => response.json() as Message)
       .catch(this.handleError);
   }
 

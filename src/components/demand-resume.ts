@@ -46,7 +46,8 @@ export class DemandResumeComponent implements OnInit {
 
     this.imgService.getImagesByConsultationId(this.consultation.id).then(images => {
       this.images = images;
-      this.hasImages =(this.images.length > 0);
+      console.log("DemandResumeConstruct Init images " + this.images);
+      this.hasImages =(this.images && this.images.length > 0);
     });
 
 

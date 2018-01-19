@@ -7,63 +7,62 @@ import { User } from '../app/model/user';
 
 @Injectable()
 export class UserService {
-
-  private usersUrl = 'http://localhost/app_dev.php/users.json';  // URL to web api
-  private head = new Headers({ 'Content-Type': 'application/json' });
+  private urlSfx = ".json";
+  private usersUrl = 'http://localhost/app_dev.php/users';  // URL to web api
+  private head = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
   private options = new RequestOptions({ headers: this.head });
-
 
   constructor(private http: Http) { }
 
-
   getUsers(): Promise<User[]> {
     console.log("UserService.getUsers");
-    return this.http.get(this.usersUrl, this.head)
+    return this.http.get(this.usersUrl+this.urlSfx, this.options)
       .toPromise()
-      .then(response => response.json().data as User[])
+      .then(response => response.json() as User[])
       .catch(this.handleError);
   }
 
   getUser(id: number): Promise<User> {
-    const url = `${this.usersUrl}/${id}`;
-    return this.http.get(url, this.head)
+    const url = `${this.usersUrl}/${id}`+this.urlSfx;
+    return this.http.get(url, this.options)
       .toPromise()
-      .then(response => response.json().data as User)
+      .then(response => response.json() as User)
       .catch(this.handleError);
   }
 
   getUserByEmail(email: string): Promise<User> {
-    const url = `${this.usersUrl}/?email=${email}`;
-    return this.http.get(url, this.head)
+    const url = `${this.usersUrl}${this.urlSfx}?email=${email}`;
+    return this.http.get(url, this.options)
       .toPromise()
-      .then(response => response.json().data as User)
+      .then(response => response.json() as User)
       .catch(this.handleError);
   }
   getUsersBySpecialty(specialtyId: number): Promise<User[]> {
-    const url = `${this.usersUrl}/?specialtyId=${specialtyId}`;
+    const url = `${this.usersUrl}${this.urlSfx}?specialty=${specialtyId}`;
     console.log(url);
-    return this.http.get(url, this.head)
+    return this.http.get(url, this.options)
       .toPromise()
-      .then(response => response.json().data as User[])
+      .then(response => response.json() as User[])
       .catch(this.handleError);
   }
+
 
   createUser(user: User): Promise<User>{
     console.log("CreateUser.Url" + this.usersUrl);
     console.log("CreateUser " + user);
     console.log("CreateUser JSON " + JSON.stringify(user));
 
-    return this.http.post(this.usersUrl, JSON.stringify(user), this.options)
+    return this.http.post(this.usersUrl+this.urlSfx, JSON.stringify(user), this.options)
       .toPromise()
-      .then(response => response.json().data as User)
+      .then(response => response.json() as User)
       .catch(this.handleError);
   }
 
   update(user: User): Promise<User>{
-    const url = `${this.usersUrl}/${user.id}`;
+    const url = `${this.usersUrl}/${user.id}`+this.urlSfx;
     console.log("user Update" + JSON.stringify(user));
     return this.http
-      .put(url, JSON.stringify(user), this.head)
+      .put(url, JSON.stringify(user), this.options)
       .toPromise()
       .then(() => user)
       .catch(this.handleError);

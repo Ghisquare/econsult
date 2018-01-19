@@ -28,6 +28,7 @@ export class LoginPage implements OnInit{
   ngOnInit(){
     this.visibleStatus = this.userService.getVisibleStatus();
   }
+
   public createAccount() {
     this.nav.push(RegisterPage);
   }
@@ -41,6 +42,7 @@ export class LoginPage implements OnInit{
           console.log("Visibilité :" + this.registerCredentials.visible);
           let user = this.auth.currentUser;
           user.visible = this.registerCredentials.visible;
+          user.online = true;
           this.userService.update(user).then(user => {
             this.nav.setRoot(HomePage);
           });

@@ -324,23 +324,24 @@ export class ConsultPage implements OnInit{
     const saveConsultation = new Consultation();
     saveConsultation.dateCreation = Date.now();
     console.log("DateCreation" + saveConsultation.dateCreation );
-    saveConsultation.sex = formModel.sex;
-    saveConsultation.age = formModel.age;
+
+    saveConsultation.sex = formModel.sex * 1;
+    saveConsultation.age = formModel.age * 1;
     saveConsultation.description = formModel.description;
     saveConsultation.antecedent = formModel.antecedent;
     saveConsultation.traitementEnCours = formModel.traitementEnCours;
-    saveConsultation.debutSymptome = formModel.debutSymptome;
-    saveConsultation.debutSymptomeUnit = formModel.debutSymptomeUnit;
+    saveConsultation.debutSymptome = formModel.debutSymptome * 1;
+    saveConsultation.debutSymptomeUnit = formModel.debutSymptomeUnit * 1;
     saveConsultation.authorId= this.authService.getUserInfo().id;
-    saveConsultation.author= this.authService.getUserInfo();
-    saveConsultation.contactId = formModel.contact;
-    saveConsultation.contact = this.selectedContact;
+    saveConsultation.author= "users/" + this.authService.getUserInfo().id;
+    saveConsultation.contactId = formModel.contact * 1;
+    saveConsultation.contact = "users/" + formModel.contact;
     saveConsultation.xchangeStatus = 0;
     saveConsultation.isAnonymous = formModel.anonymous_patient;
     if (!this.isAnonymousPatient) {
-      saveConsultation.patientId = this.patient.id;
-      saveConsultation.patient = this.patient;
-      saveConsultation.age = age(this.patient.birthdate); //A FAIRE CALCUL AGE EN FONCTION DATE DE NAISSANCE
+      saveConsultation.patientId = this.patient.id * 1;
+      saveConsultation.patient = "patients/" + this.patient;
+      saveConsultation.age = age(this.patient.birthdate) * 1; //A FAIRE CALCUL AGE EN FONCTION DATE DE NAISSANCE
     } else {
       saveConsultation.patientId = null;
       saveConsultation.patient = null;

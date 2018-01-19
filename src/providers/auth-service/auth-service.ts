@@ -12,7 +12,10 @@ export class AuthService  {
 
   constructor(private userService: UserService) {
     console.log("AuthService.constructor");
-    this.userService.getUsers().then(users => this.users = users);
+    this.userService.getUsers().then(users => {
+      this.users = users;
+      console.log("users" + users);
+    });
   }
 
   public refreshUsers(){
@@ -21,6 +24,8 @@ export class AuthService  {
   }
 
   public login(credentials) {
+    console.log("AuthService.login");
+    console.log(JSON.stringify(this.users));
     if (credentials.email === null || credentials.password === null) {
       return Observable.throw("Please insert credentials");
     } else {
@@ -56,9 +61,12 @@ export class AuthService  {
 
   public logout() {
     return Observable.create(observer => {
-      this.currentUser = null;
-      observer.next(true);
-      observer.complete();
+      this.currentUser.online = false;
+      this.userService.update(this.currentUser).then(user => {
+        this.currentUser = null;
+        observer.next(true);
+        observer.complete();
+      });
     });
   }
 }

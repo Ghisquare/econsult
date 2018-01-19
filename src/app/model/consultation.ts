@@ -1,13 +1,11 @@
-import {User} from "./user";
-import {Patient} from "./patient";
 
 export class Consultation {
   id: number;
 
-  dateCreation: number;
-  dateModified: number;
-  dateResponse: number;
-  dateClose: number;
+  dateCreation: any;
+  dateModified: any;
+  dateResponse: any;
+  dateClose: any;
 
   sex: number;
   age: number;
@@ -18,9 +16,9 @@ export class Consultation {
   debutSymptome: number;
   debutSymptomeUnit: number;
   authorId: number;
-  author: User;
+  author: any;
   contactId: number;
-  contact: User;
+  contact: any;
   response: string;
   treatment: string;
   rdvStatus: number;
@@ -28,7 +26,7 @@ export class Consultation {
   xchangeStatus: number;
   isAnonymous: boolean;
   patientId: number;
-  patient: Patient;
+  patient: any;
 
   //__OK antécédent >> texte
   //__OK traitement en cours >> texte

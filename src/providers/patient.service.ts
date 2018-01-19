@@ -17,7 +17,7 @@ export class PatientService {
   getPatients(): Promise<Patient[]> {
     return this.http.get(this.patientsUrl)
       .toPromise()
-      .then(response => response.json().data as Patient[])
+      .then(response => response.json() as Patient[])
       .catch(this.handleError);
   }
 
@@ -25,14 +25,14 @@ export class PatientService {
     const url = `${this.patientsUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Patient)
+      .then(response => response.json() as Patient)
       .catch(this.handleError);
   }
 
   createPatient(patient: Patient): Promise<Patient>{
     return this.http.post(this.patientsUrl, JSON.stringify(patient), this.headers)
       .toPromise()
-      .then(response => response.json().data as Patient)
+      .then(response => response.json() as Patient)
       .catch(this.handleError);
   }
 

@@ -59,8 +59,8 @@ export class RegisterPage implements OnInit{
       birthdate: [''], // <--- the FormControl called "name"
       sex: ['', Validators.required ], // <--- the FormControl called "name"
       civility: ['', Validators.required ], // <--- the FormControl called "name"
-      name: ['',  Validators.compose([Validators.minLength(2), Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required]) ],
-      forname: ['',  Validators.compose([Validators.minLength(2), Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required]) ],
+      name: ['',  Validators.compose([Validators.minLength(2), Validators.maxLength(30), Validators.pattern('[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]*'), Validators.required]) ],
+      forname: ['',  Validators.compose([Validators.minLength(2), Validators.maxLength(30), Validators.pattern('[a-zA-ZáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ ]*'), Validators.required]) ],
       identification: ['', [Validators.minLength(10), Validators.maxLength(30), Validators.pattern('[a-zA-Z0-9 ]*'), Validators.required] ],
       email: ['', Validators.compose([Validators.required, Validators.email]) /*, new UsernameValidator(this.userService).checkUsername*/ ],
       tel: ['', Validators.required ],
@@ -205,8 +205,8 @@ export class RegisterPage implements OnInit{
     user.skype = formModel.skype;
     user.facetime = formModel.facetime;
     if(formModel.userType == 1) {
-      user.professionId = formModel.profession;
-      user.profession = this.selectedProfession;
+      user.professionId = formModel.profession * 1;
+      user.profession = "professions/" + this.selectedProfession.id;
     } else {
       user.professionId = null;
       user.profession = null
@@ -246,6 +246,7 @@ export class RegisterPage implements OnInit{
   }
 
   goHome(){
+    console.log("register.goHome");
     this.navCtrl.setRoot(LoginPage);
   }
 

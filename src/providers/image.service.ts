@@ -19,7 +19,7 @@ export class ImageService {
   getImages(): Promise<Image[]> {
     return this.http.get(this.imagesUrl)
       .toPromise()
-      .then(response => response.json().data as Image[])
+      .then(response => response.json() as Image[])
       .catch(this.handleError);
   }
 
@@ -27,17 +27,17 @@ export class ImageService {
     const url = `${this.imagesUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Image)
+      .then(response => response.json() as Image)
       .catch(this.handleError);
   }
 
   getImagesByConsultationId( consultationId: number): Promise<Image[]>{
-  const url = `${this.imagesUrl}/?consultationId=${consultationId}`;
+  const url = `${this.imagesUrl}?consultationId=${consultationId}`;
+  console.log("Images service by C Id");
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Image[])
+      .then(response => response.json() as Image[])
       .catch(this.handleError);
-
   }
 
   update(image: Image): Promise<Image>{
@@ -53,7 +53,7 @@ export class ImageService {
   createImage(image: Image): Promise<Image>{
     return this.http.post(this.imagesUrl, JSON.stringify(image), this.headers)
       .toPromise()
-      .then(response => response.json().data as Image)
+      .then(response => response.json() as Image)
       .catch(this.handleError);
   }
 
