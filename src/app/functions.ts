@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
 export function afficheDate(ts: number): string {
-  var result =  moment(ts).format("DD/MM/YY HH:mm");
+  var result =  moment(ts * 1).format("DD/MM/YY HH:mm");
   return result;
 }
 

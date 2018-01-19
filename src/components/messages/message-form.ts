@@ -53,21 +53,24 @@ export class MessageFormComponent implements OnInit {
 
     this.msg = new Message();
     this.msg.content = formModel.message;
-    this.msg.date = Date.now();
+    this.msg.date = "" + Date.now();
     this.consultation.dateModified = this.msg.date;
     this.msg.consultationId = this.consultation.id;
     if(this.consulted) {
       if(this.demand) this.consultation.xchangeStatus = 1; else this.consultation.xchangeStatus = 3; // status consultation pending, waiting for info response
       this.msg.authorId = this.consultation.contactId;
-      this.msg.author = this.consultation.contact;
-      this.msg.toId = this.consultation.authorId;
-      this.msg.to = this.consultation.author;
+      this.msg.author = "/app_dev.php/users/" + this.consultation.contact.id;
+      this.msg.toId =  this.consultation.authorId;
+      this.msg.to = "/app_dev.php/users/" + this.consultation.author.id;
+      this.consultation.isResponse = true;
+
     } else {
       if(this.demand) this.consultation.xchangeStatus = 2; else this.consultation.xchangeStatus = 0;// status message sent to consulted waiting for answer
       this.msg.authorId = this.consultation.authorId;
-      this.msg.author = this.consultation.author;
+      this.msg.author = "/app_dev.php/users/" + this.consultation.author.id;
       this.msg.toId = this.consultation.contactId;
-      this.msg.to = this.consultation.contact;
+      this.msg.to = "/app_dev.php/users/" + this.consultation.contact.id;
+      this.consultation.isResponse = false;
     }
   }
 
@@ -83,6 +86,8 @@ export class MessageFormComponent implements OnInit {
 
       this.prepareSaveMessage();
       this.consultationService.update(this.consultation).then(consultation => {
+        console.log("SaveMessage:" + JSON.stringify(this.msg));
+
         this.messageService.createMessage(this.msg).then(message => {
           this.msg = message;
 

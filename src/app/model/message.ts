@@ -3,9 +3,9 @@ export class Message {
   id: number;
   content: string;
   authorId: number;
-  author: User;
+  author: any;
   toId: number;
-  to: User;
-  date: number;
+  to: any;
+  date: string;
   consultationId: number;
 }

@@ -59,17 +59,19 @@ export class ResponseFormComponent implements OnInit{
 
   prepareUpdateConsultation(){
     const formModel = this.responseForm.value;
-    this.consultation.dateResponse = Date.now();
+    this.consultation.dateResponse = "" + Date.now();
     console.log("this.consultation.dateResponse" + this.consultation.dateResponse);
     this.consultation.response = formModel.response;
     this.consultation.treatment = formModel.treatment;
 
-    if(formModel.status == 0) this.consultation.rdvStatus = formModel.status;
+    if(formModel.status == 0) this.consultation.rdvStatus = formModel.status * 1;
+
     else {
-        this.consultation.rdvStatus = formModel.rdv_number;
-        this.consultation.rdvUnit = formModel.rdv_unit;
+        this.consultation.rdvStatus = formModel.rdv_number * 1;
+        this.consultation.rdvUnit = formModel.rdv_unit * 1;
     }
     this.consultation.xchangeStatus = 3;//status consultation répondu en attente fermeture
+    this.consultation.isResponse = true;
     console.log("prepareUpdateConsultation" + JSON.stringify(this.consultation));
   }
 

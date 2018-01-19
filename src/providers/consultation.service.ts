@@ -25,7 +25,7 @@ export class ConsultationService {
   }
 
   getConsultation(id: number): Promise<Consultation> {
-    const url = `${this.consultationsUrl}/${id}` + this.urlSfx;
+    const url = `${this.consultationsUrl}/${id}${this.urlSfx}`;
     return this.http.get(url, this.options)
       .toPromise()
       .then(response => this.afterGet(response.json() as Consultation))
@@ -33,7 +33,7 @@ export class ConsultationService {
   }
 
   getDemandsByContact(contact: User, xchangeStatus): Promise<Consultation[]>{
-    const url = `${this.consultationsUrl}${this.urlSfx}?contact=${contact.id}&xchangeStatus=${xchangeStatus}`;
+    const url = `${this.consultationsUrl}${this.urlSfx}?contact=${contact.id}&isResponse=false&xchangeStatus%5Blt%5D=4`;
     console.log('getDemandsByContact - url:?? ' + url);
     return this.http.get(url, this.options)
       .toPromise()
@@ -41,6 +41,7 @@ export class ConsultationService {
       .catch(this.handleError);
 
   }
+
 
   getConsultationsByAuthorStatus(author: User, status: number): Promise<Consultation[]>{
     const url = `${this.consultationsUrl}${this.urlSfx}?xchangeStatus=${status}&author=${author.id}`;
@@ -59,6 +60,16 @@ export class ConsultationService {
       .then(response => response.json() as Consultation[])
       .catch(this.handleError);
   }
+
+  getResponsesByAuthor(author: User): Promise<Consultation[]>{
+    const url = `${this.consultationsUrl}${this.urlSfx}?isResponse=true&author=${author.id}`;
+    console.log('getResponsesByAuthor - url: ' + url);
+    return this.http.get(url, this.options)
+      .toPromise()
+      .then(response => response.json() as Consultation[])
+      .catch(this.handleError);
+  }
+
 
   update(consultation: Consultation): Promise<Consultation>{
     consultation = this.beforeSave(consultation);

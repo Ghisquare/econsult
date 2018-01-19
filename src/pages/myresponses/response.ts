@@ -85,6 +85,7 @@ export class ResponsePage implements OnInit {
 
     let consultation = this.consultation;
     consultation.xchangeStatus = 4;
+    consultation.isResponse = false;
     consultation.dateClose = Date.now();
 
     this.consultationService.update(consultation).then(consultation => {

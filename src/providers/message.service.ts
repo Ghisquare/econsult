@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,13 +9,14 @@ import { Message } from '../app/model/message';
 export class MessageService {
 
   private messagesUrl = 'http://localhost/app_dev.php/messages.json';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private head = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.head });
 
 
   constructor(private http: Http) { }
 
   getMessages(): Promise<Message[]> {
-    return this.http.get(this.messagesUrl)
+    return this.http.get(this.messagesUrl, this.options)
       .toPromise()
       .then(response => response.json() as Message[])
       .catch(this.handleError);
@@ -23,7 +24,7 @@ export class MessageService {
 
   getMessagesByConsultationId(consultationId: number): Promise<Message[]> {
     const url = `${this.messagesUrl}?consultationId=${consultationId}`;
-    return this.http.get(url)
+    return this.http.get(url, this.options)
       .toPromise()
       .then(response => response.json() as Message[])
       .catch(this.handleError);
@@ -31,14 +32,16 @@ export class MessageService {
 
   getMessage(id: number): Promise<Message> {
     const url = `${this.messagesUrl}/${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.options)
       .toPromise()
       .then(response => response.json() as Message)
       .catch(this.handleError);
   }
 
   createMessage(message: Message): Promise<Message>{
-    return this.http.post(this.messagesUrl, JSON.stringify(message), this.headers)
+    console.log("MessageService.create:");
+    console.log(JSON.stringify(message));
+    return this.http.post(this.messagesUrl, JSON.stringify(message), this.options)
       .toPromise()
       .then(response => response.json() as Message)
       .catch(this.handleError);

@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import {Consultation} from "../app/model/consultation";
 import {sexText, getSpecialtyName, afficheDate} from "../app/functions";
-import {responseStatus} from "../app/functions"
+//import {responseStatus} from "../app/functions"
 import {ConsultationService} from "../providers/consultation.service";
 import {ImageService} from "../providers/image.service";
 import {Image} from "../app/model/image";
@@ -62,11 +62,15 @@ export class DemandResumeComponent implements OnInit {
         day: "numeric", hour: "2-digit", minute: "2-digit"
       };
       this.dateAffiche = afficheDate(this.consultation.dateCreation);
+      console.log("DemandResumeConstruct date" + this.consultation.dateCreation);
     } else {
       this.titreMedecin = "Médecin contacté";
       this.nomTitreMedecin = this.consultation.contact.forname + " " + this.consultation.contact.name;
       this.authorSpecialty = getSpecialtyName(this.consultation.contact.specialtyId);
-      this.dateAffiche =  afficheDate(this.consultation.dateResponse);
+      if(this.consultation.dateResponse) this.dateAffiche =  afficheDate(this.consultation.dateResponse); else this.dateAffiche = afficheDate(this.consultation.dateCreation);
+      console.log("DemandResumeConstruct date" + this.consultation.dateResponse);
+      
+
     }
 
     this.symptomeUnit = this.consultationService.getTimeUnit(this.consultation.debutSymptomeUnit);

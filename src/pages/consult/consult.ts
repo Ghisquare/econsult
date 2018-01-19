@@ -337,6 +337,7 @@ export class ConsultPage implements OnInit{
     saveConsultation.contactId = formModel.contact * 1;
     saveConsultation.contact = "users/" + formModel.contact;
     saveConsultation.xchangeStatus = 0;
+    saveConsultation.isResponse = false;
     saveConsultation.isAnonymous = formModel.anonymous_patient;
     if (!this.isAnonymousPatient) {
       saveConsultation.patientId = this.patient.id * 1;

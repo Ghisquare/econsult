@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -9,13 +9,13 @@ import { Patient } from '../app/model/patient';
 export class PatientService {
 
   private patientsUrl = 'http://localhost/app_dev.php/patients.json';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
-
+  private head = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.head });
 
   constructor(private http: Http) { }
 
   getPatients(): Promise<Patient[]> {
-    return this.http.get(this.patientsUrl)
+    return this.http.get(this.patientsUrl, this.options)
       .toPromise()
       .then(response => response.json() as Patient[])
       .catch(this.handleError);
@@ -23,14 +23,14 @@ export class PatientService {
 
   getPatient(id: number): Promise<Patient> {
     const url = `${this.patientsUrl}/${id}`;
-    return this.http.get(url)
+    return this.http.get(url, this.options)
       .toPromise()
       .then(response => response.json() as Patient)
       .catch(this.handleError);
   }
 
   createPatient(patient: Patient): Promise<Patient>{
-    return this.http.post(this.patientsUrl, JSON.stringify(patient), this.headers)
+    return this.http.post(this.patientsUrl, JSON.stringify(patient), this.options)
       .toPromise()
       .then(response => response.json() as Patient)
       .catch(this.handleError);

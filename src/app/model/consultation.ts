@@ -24,6 +24,7 @@ export class Consultation {
   rdvStatus: number;
   rdvUnit: number;
   xchangeStatus: number;
+  isResponse: boolean;
   isAnonymous: boolean;
   patientId: number;
   patient: any;
