@@ -11,7 +11,7 @@ import {User} from "../app/model/user";
 export class ConsultationService {
 
   private urlSfx = ".json";
-  private consultationsUrl = 'http://localhost/app_dev.php/consultations';  // URL to web api
+  private consultationsUrl = 'http://ecapi.guadeloupedeveloppement.net/consultations';  // URL to web api
   private head = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.head });
 

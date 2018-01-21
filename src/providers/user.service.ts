@@ -8,7 +8,7 @@ import { User } from '../app/model/user';
 @Injectable()
 export class UserService {
   private urlSfx = ".json";
-  private usersUrl = 'http://localhost/app_dev.php/users';  // URL to web api
+  private usersUrl = 'http://ecapi.guadeloupedeveloppement.net/users';  // URL to web api
   private head = new Headers({ 'Content-Type': 'application/json', 'Accept': 'application/json' });
   private options = new RequestOptions({ headers: this.head });
 

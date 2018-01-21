@@ -10,7 +10,7 @@ declare var cordova: any;
 @Injectable()
 export class ImageService {
 
-  private imagesUrl = 'http://localhost/app_dev.php/images.json';  // URL to web api
+  private imagesUrl = 'http://ecapi.guadeloupedeveloppement.net/images.json';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
 

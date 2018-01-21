@@ -8,7 +8,7 @@ import { Profession } from '../app/model/profession';
 @Injectable()
 export class ProfessionService {
 
-  private professionsUrl = 'http://localhost/app_dev.php/professions.json';  // URL to web api
+  private professionsUrl = 'http://ecapi.guadeloupedeveloppement.net/professions.json';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
 

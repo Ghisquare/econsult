@@ -8,7 +8,7 @@ import { Patient } from '../app/model/patient';
 @Injectable()
 export class PatientService {
 
-  private patientsUrl = 'http://localhost/app_dev.php/patients.json';  // URL to web api
+  private patientsUrl = 'http://ecapi.guadeloupedeveloppement.net/patients.json';  // URL to web api
   private head = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.head });
 
@@ -30,6 +30,8 @@ export class PatientService {
   }
 
   createPatient(patient: Patient): Promise<Patient>{
+    console.log("PatientService.createPatient");
+    console.log(JSON.stringify(patient));
     return this.http.post(this.patientsUrl, JSON.stringify(patient), this.options)
       .toPromise()
       .then(response => response.json() as Patient)

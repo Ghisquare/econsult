@@ -12,9 +12,10 @@ page-home {
     dark:       #222
   );
 
-  .menu-left-button {
+  .menu-left-button, .refresher-pulling div, .refresher-refreshing div {
     color: map-get($colors, primary);
   }
+  
   .button-image {
     text-align: center;
     width: 100%;

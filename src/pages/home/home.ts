@@ -20,7 +20,6 @@ export class HomePage {
 
   currentUser: User;
   demands: Consultation[];
-  reponsesInfoComp: Consultation[];
   responses: Consultation[];
   demandCount: number;
   responseCount: number;
@@ -28,14 +27,23 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private authService: AuthService, private consultationService: ConsultationService) {
     this.currentUser = authService.getUserInfo();
-    this.consultationService.getDemandsByContact(this.currentUser, "0|2").then(consultations => {this.demands = consultations; this.demandCount = consultations.length});
-    //this.consultationService.getDemandsByContact(this.currentUser, 1).then(consultations => {this.reponsesInfoComp = consultations; this.responseInfoCount = consultations.length});
-    this.consultationService.getResponsesByAuthor(this.currentUser).then(consultations => {
-      this.responses = consultations;
-      this.responseCount = consultations.length;
-      if(this.responseCount <= 1) this.responseText = "Réponse reçue"; else this.responseText = "Réponses reçues";
+    this.doRefresh(0);
+  }
+
+  public doRefresh(refresher){
+
+    this.consultationService.getDemandsByContact(this.currentUser, "0|2").then(consultations => {
+      this.demands = consultations; this.demandCount = consultations.length;
+      this.consultationService.getResponsesByAuthor(this.currentUser).then(consultations => {
+        this.responses = consultations;
+        this.responseCount = consultations.length;
+        if(this.responseCount <= 1) this.responseText = "Réponse reçue"; else this.responseText = "Réponses reçues";
+        if(refresher != 0)
+          refresher.complete();
+      });
     });
   }
+
 
   doConsult() {
     //push another page onto the history stack

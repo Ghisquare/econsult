@@ -8,7 +8,7 @@ import { Message } from '../app/model/message';
 @Injectable()
 export class MessageService {
 
-  private messagesUrl = 'http://localhost/app_dev.php/messages.json';  // URL to web api
+  private messagesUrl = 'http://ecapi.guadeloupedeveloppement.net/messages.json';  // URL to web api
   private head = new Headers({ 'Content-Type': 'application/json' });
   private options = new RequestOptions({ headers: this.head });
 

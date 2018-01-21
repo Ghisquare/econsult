@@ -25,6 +25,7 @@ export class PatientResumeComponent implements OnInit {
  //   this.userService.getUsersBySpecialty(this.specialty.id).then(users => this.contacts = users);
  //   console.log("c-select.OnInit" + this.specialty.id);
     console.log("PatientResume Init:" + this.patient.id);
+    console.log(JSON.stringify(this.patient));
     this.sexText = sexText(this.patient.sex);
     this.age = age(this.patient.birthdate);
   }

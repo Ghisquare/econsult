@@ -13,9 +13,9 @@ export function sexText(sexCode: number): string {
 
 export function getSpecialtyName(id): string{
   var names: any[] = new Array();
-  names[3] = 'Cardiologue';
-  names[19] = 'Médecine générale';
-  names[26] = 'Ophtalmologue';
+  names[4] = 'Cardiologue';
+  names[1] = 'Médecine générale';
+  names[3] = 'Ophtalmologue';
   return names[id];
 }
 
@@ -35,7 +35,10 @@ export const civilities = ['M',
 export function age(birthdate: Date) {
   var age: number;
   var today = new Date();
+  console.log("functions.age");
+  console.log(birthdate);
   var tmpDate = new Date(birthdate);
+  console.log(tmpDate);
   console.log("today" + today);
   console.log("birthdate" + birthdate + tmpDate);
 

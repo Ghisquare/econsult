@@ -59,19 +59,21 @@ export class MessageFormComponent implements OnInit {
     if(this.consulted) {
       if(this.demand) this.consultation.xchangeStatus = 1; else this.consultation.xchangeStatus = 3; // status consultation pending, waiting for info response
       this.msg.authorId = this.consultation.contactId;
-      this.msg.author = "/app_dev.php/users/" + this.consultation.contact.id;
+      this.msg.author = "/users/" + this.consultation.contact.id;
       this.msg.toId =  this.consultation.authorId;
-      this.msg.to = "/app_dev.php/users/" + this.consultation.author.id;
+      this.msg.to = "/users/" + this.consultation.author.id;
       this.consultation.isResponse = true;
 
     } else {
       if(this.demand) this.consultation.xchangeStatus = 2; else this.consultation.xchangeStatus = 0;// status message sent to consulted waiting for answer
       this.msg.authorId = this.consultation.authorId;
-      this.msg.author = "/app_dev.php/users/" + this.consultation.author.id;
+      this.msg.author = "/users/" + this.consultation.author.id;
       this.msg.toId = this.consultation.contactId;
-      this.msg.to = "/app_dev.php/users/" + this.consultation.contact.id;
+      this.msg.to = "/users/" + this.consultation.contact.id;
       this.consultation.isResponse = false;
     }
+    console.log("message-form.preparesave");
+    console.log(JSON.stringify(this.msg));
   }
 
   closeMessage() {

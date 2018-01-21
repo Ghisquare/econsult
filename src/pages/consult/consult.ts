@@ -312,7 +312,7 @@ export class ConsultPage implements OnInit{
     savePatient.name = formModel.patient_name;
     savePatient.forname = formModel.patient_forname;
     savePatient.birthdate = formModel.patient_birthdate;
-    savePatient.sex = formModel.sex;
+    savePatient.sex = formModel.sex * 1;
     savePatient.identification = formModel.patientIdentification;
 
     return savePatient;
@@ -341,7 +341,7 @@ export class ConsultPage implements OnInit{
     saveConsultation.isAnonymous = formModel.anonymous_patient;
     if (!this.isAnonymousPatient) {
       saveConsultation.patientId = this.patient.id * 1;
-      saveConsultation.patient = "patients/" + this.patient;
+      saveConsultation.patient = "patients/" + this.patient.id;
       saveConsultation.age = age(this.patient.birthdate) * 1; //A FAIRE CALCUL AGE EN FONCTION DATE DE NAISSANCE
     } else {
       saveConsultation.patientId = null;

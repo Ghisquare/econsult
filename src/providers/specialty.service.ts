@@ -8,7 +8,7 @@ import { Specialty } from '../app/model/specialty';
 @Injectable()
 export class SpecialtyService {
 
-  private specialtiesUrl = 'http://localhost/app_dev.php/specialties.json';  // URL to web api
+  private specialtiesUrl = 'http://ecapi.guadeloupedeveloppement.net/specialties.json';  // URL to web api
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }

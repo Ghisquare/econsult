@@ -69,7 +69,7 @@ export class DemandResumeComponent implements OnInit {
       this.authorSpecialty = getSpecialtyName(this.consultation.contact.specialtyId);
       if(this.consultation.dateResponse) this.dateAffiche =  afficheDate(this.consultation.dateResponse); else this.dateAffiche = afficheDate(this.consultation.dateCreation);
       console.log("DemandResumeConstruct date" + this.consultation.dateResponse);
-      
+
 
     }
 
