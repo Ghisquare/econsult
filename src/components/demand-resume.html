@@ -29,7 +29,7 @@
     <ion-item-group *ngFor="let image of images; let i = index">
       <ion-item>
         <ion-thumbnail item-start>
-          <img src="{{pathForImage(image.uri)}}">
+          <img [src]="image.base64data">
         </ion-thumbnail>
         <p>{{image.description}}</p>
         <button ion-button (click)="showImage(i)">Agrandir</button>

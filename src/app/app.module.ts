@@ -6,7 +6,6 @@ import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { ConsultFormComponent } from '../components/consult-form.component';
 import { SpecialtySelectComponent } from '../components/specialty-select';
 
 // Imports for loading & configuring the in-memory web api
@@ -76,7 +75,6 @@ export class MyErrorHandler implements ErrorHandler {
     ConsultedListPage,
     MyResponsesPage,
     ResponsePage,
-    ConsultFormComponent,
     SpecialtySelectComponent,
     ContactSelectComponent,
     DemandResumeComponent,
@@ -102,7 +100,6 @@ export class MyErrorHandler implements ErrorHandler {
     RouterModule.forRoot([
       { path: '', redirectTo: '/', pathMatch: 'full' },
      // { path: 'detail/:id', component: HeroDetailComponent },
-      { path: 'consult',     component: ConsultFormComponent },
       { path: 'consulted-list',     component: ConsultedListPage }
         ])
   ],

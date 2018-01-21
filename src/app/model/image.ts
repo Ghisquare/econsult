@@ -3,4 +3,5 @@ export class Image {
   uri: string;
   description: string;
   consultationId: number;
+  base64data: string;
 }

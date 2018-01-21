@@ -45,7 +45,7 @@ export class ConsultPage implements OnInit{
   consultForm: FormGroup;
   isAnonymousPatient: boolean = true;
   timeUnits: Array<any>;
-  images: Array<string> = [];
+  images: Array<Image> = [];
   closed: boolean = false;
   submitAttempt: boolean = false;
   selectOptions: any =  {cssClass: 'background-primary'};
@@ -62,7 +62,7 @@ export class ConsultPage implements OnInit{
   }
 
   public deleteImage(index){
-    this.file.removeFile(cordova.file.dataDirectory, this.images[index]).then(success => {
+//    this.file.removeFile(cordova.file.dataDirectory, this.images[index]).then(success => {
       this.consultForm.removeControl('image' + this.images);
       if (index + 1 < this.images.length) {
         for(let i = index; i < this.images.length - 1; i++) {// need to move control value up
@@ -74,14 +74,14 @@ export class ConsultPage implements OnInit{
       this.consultForm.removeControl('image' + (this.images.length - 1));
 
       this.images.splice(index, 1);
-    }, error => {
+/*    }, error => {
       this.presentToast('Error while storing file.');
       console.log(cordova.file.dataDirectory + this.images[index])
-    });
+    });*/
   }
 
   public showImage(index){
-    const photoModal = this.modalCtrl.create(ShowPhotoPage, { imageFile:  this.pathForImage(this.images[index]) });
+    const photoModal = this.modalCtrl.create(ShowPhotoPage, { imageFile:  this.images[index] });
     photoModal.present();
   }
 
@@ -112,34 +112,47 @@ export class ConsultPage implements OnInit{
 
   public takePicture(sourceType) {
     // Create options for the Camera Dialog
-    var options = {
-      quality: 100,
+    var options: CameraOptions = {
+      quality: 75,
       sourceType: sourceType,
+      destinationType: this.camera.DestinationType.DATA_URL,
       saveToPhotoAlbum: false,
+      targetWidth: 600,
+      targetHeight: 600,
       correctOrientation: true
     };
 
     // Get the data of an image
-    this.camera.getPicture(options).then((imagePath) => {
+    this.camera.getPicture(options).then((imageData) => {
       //Pro.getApp().monitoring.log("Take picture-sourceType" + sourceType + "path" + imagePath);
+      let base64Image = "data:image/jpeg;base64," + imageData;
+      console.log("base64image");
+      console.log(base64Image);
+      let newImage = new Image();
+      newImage.base64data = base64Image;
+
+      let controlName = 'image' + this.images.length;
+      this.consultForm.addControl(controlName, new FormControl(""));
+      this.images.push(newImage);
 
 
-      // Special handling for Android library
-      if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
-        //Pro.getApp().monitoring.log("this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
-        this.filePath.resolveNativePath(imagePath)
-          .then(filePath => {
-            let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
-            let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
-            this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-          });
-      } else {
-        //Pro.getApp().monitoring.log("NOT this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
+      /*
+            // Special handling for Android library
+            if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+              //Pro.getApp().monitoring.log("this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
+              this.filePath.resolveNativePath(imagePath)
+                .then(filePath => {
+                  let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
+                  let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+                  this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+                });
+            } else {
+              //Pro.getApp().monitoring.log("NOT this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY");
 
-        var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
-        var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
-        this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
-      }
+              var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
+              var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+              this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
+            }*/
     }, (err) => {
       this.myErrorHandler.handleError(err);
       this.presentToast('Error while selecting image.');
@@ -147,15 +160,15 @@ export class ConsultPage implements OnInit{
   }
 
   // Create a new name for the image
-  private createFileName() {
+/*  private createFileName() {
     var d = new Date(),
       n = d.getTime(),
       newFileName =  n + ".jpg";
     return newFileName;
   }
-
+*/
 // Copy the image to a local folder
-  private copyFileToLocalDir(namePath, currentName, newFileName) {
+/*  private copyFileToLocalDir(namePath, currentName, newFileName) {
     //Pro.getApp().monitoring.log("copyFileToLocalDir("+namePath+", "+currentName +", "+newFileName+")cordova.file.dataDirectory:" +cordova.file.dataDirectory);
 
     this.file.copyFile(namePath, currentName, cordova.file.dataDirectory, newFileName).then(success => {
@@ -171,7 +184,7 @@ export class ConsultPage implements OnInit{
       this.myErrorHandler.handleError(error);
       this.presentToast('Error while storing file.');
     });
-  }
+  }*/
 
   private presentToast(text) {
     let toast = this.toastCtrl.create({
@@ -183,9 +196,9 @@ export class ConsultPage implements OnInit{
   }
 
 // Always get the accurate path to your apps folder
-  public pathForImage(img) {
+/*  public pathForImage(img) {
     return this.imgService.pathForImage(img);
-  }
+  }*/
 
   createForm() {
     this.consultForm = this.fb.group({
@@ -282,8 +295,7 @@ export class ConsultPage implements OnInit{
       this.consultation = consultation;
       console.log("ConsultationData: " + JSON.stringify(this.consultation));
       for(let i = 0; i < this.images.length; i++) {
-        let saveImage = new Image();
-        saveImage.uri = this.images[i];
+        let saveImage = this.images[i];
         saveImage.description = this.consultForm.controls['image' + i].value;
         saveImage.consultationId = this.consultation.id;
         console.log("Saved Image before: " + JSON.stringify(saveImage));

@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {NavParams, ViewController} from "ionic-angular";
+import {Image} from "../../app/model/image";
 
 
 @Component({
@@ -8,7 +9,7 @@ import {NavParams, ViewController} from "ionic-angular";
 })
 export class ShowPhotoPage  {
 
-  imageFile: string;
+  imageFile: Image;
 
   constructor(params: NavParams, private viewCtrl: ViewController) {
     this.imageFile = params.get('imageFile');

@@ -76,12 +76,10 @@ export class DemandResumeComponent implements OnInit {
     this.symptomeUnit = this.consultationService.getTimeUnit(this.consultation.debutSymptomeUnit);
   }
 
-  public pathForImage(img) {
-    return this.imgService.pathForImage(img);
-  }
+
 
   public showImage(index){
-    const photoModal = this.modalCtrl.create(ShowPhotoPage, { imageFile:  this.pathForImage(this.images[index].uri) });
+    const photoModal = this.modalCtrl.create(ShowPhotoPage, { imageFile:  this.images[index] });
     photoModal.present();
   }
 }

@@ -164,7 +164,7 @@
         <ion-item-group *ngFor="let image of images; let i = index">
           <ion-item>
             <ion-thumbnail item-start>
-              <img src="{{pathForImage(image)}}">
+              <img [src]="image.base64data">
             </ion-thumbnail>
             <ion-input type="text" formControlName="image{{i}}" placeholder="description de l'image"></ion-input>
           </ion-item>

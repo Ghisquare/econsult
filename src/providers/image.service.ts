@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -11,8 +11,8 @@ declare var cordova: any;
 export class ImageService {
 
   private imagesUrl = 'http://ecapi.guadeloupedeveloppement.net/images.json';  // URL to web api
-  private headers = new Headers({'Content-Type': 'application/json'});
-
+  private head = new Headers({ 'Content-Type': 'application/json' });
+  private options = new RequestOptions({ headers: this.head });
 
   constructor(private http: Http) { }
 
@@ -44,14 +44,14 @@ export class ImageService {
     const url = `${this.imagesUrl}/${image.id}`;
     console.log("image.update" + JSON.stringify(image));
     return this.http
-      .put(url, JSON.stringify(image), {headers: this.headers})
+      .put(url, JSON.stringify(image), this.options)
       .toPromise()
       .then(() => image)
       .catch(this.handleError);
   }
 
   createImage(image: Image): Promise<Image>{
-    return this.http.post(this.imagesUrl, JSON.stringify(image), this.headers)
+    return this.http.post(this.imagesUrl, JSON.stringify(image), this.options)
       .toPromise()
       .then(response => response.json() as Image)
       .catch(this.handleError);
