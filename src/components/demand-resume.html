@@ -6,7 +6,8 @@
 </div>
 <p ion-text class="color-primary" style="font-size: 1.6rem; margin-top: 0; margin-bottom: 0">{{nomTitreMedecin}}</p>
 
-<div class="inline"><h3 ion-text class="color-primary">Spécialité: </h3><p>{{authorSpecialty}}</p></div>
+<div class="inline" *ngIf="(!question)||(question&&consultation.author.userType==2)"><h3 ion-text class="color-primary">Spécialité: </h3><p>{{authorSpecialty}}</p></div>
+<div class="inline" *ngIf="(question&&consultation.author.userType==1)"><h3 ion-text class="color-primary">Profession: </h3><p>{{authorProfession}}</p></div>
 <div class="inline"><h3 ion-text class="color-primary">Envoyé le: </h3><p>{{dateAffiche}}</p></div>
 
 <div class="h3-title-container" style="margin-top: 10px;">

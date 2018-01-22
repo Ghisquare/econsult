@@ -39,7 +39,7 @@
         <ion-col class="consulted-col">
           <div class="arrow-left-bkg"></div>
           <div [class]="responseCount == 0 ? 'arrow-left disabled' : 'arrow-left'"></div>
-          <button  *ngIf="currentUser.userType == 2"
+          <button
                   full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image consulted' : 'button-image'">
 
             <div><img src="assets/img/icons/consulted.png" alt="Réponse(s) reçue(s)" /></div>
@@ -53,14 +53,14 @@
             </button>
           </ion-col>
           <ion-col class="consulted-col">
-            <button  *ngIf="currentUser.userType == 2"
+            <button
                      full (click)="doMyResponse()" [disabled]="responseCount==0" [class]="responseCount > 0 ? 'button-image consulted' : 'button-image'">
               <h2>{{responseText}} ({{responseCount}})</h2>
 
             </button>
           </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row  *ngIf="currentUser.userType == 2">
           <ion-col class="response-col">
             <button full (click)="doMyDemands()" [disabled]="demandCount==0" [class]=" demandCount > 0 ? 'button-image  response' : 'button-image color-primary'">
               <div><img src="assets/img/icons/response.png" alt="Je suis consulté" /></div>

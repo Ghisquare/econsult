@@ -19,6 +19,15 @@ export function getSpecialtyName(id): string{
   return names[id];
 }
 
+export function getProfessionName(id): string{
+  var names: any[] = new Array();
+  names[1] = 'Infirmier';
+  names[2] = 'Pompier';
+  names[3] = 'Kynésithérapeute';
+  return names[id];
+}
+
+
 export const responseStatus = ['Pas de consultation nécessaire',
   'Consultation avant',
   //'Consultation en urgence'

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 
 import {Consultation} from "../app/model/consultation";
-import {sexText, getSpecialtyName, afficheDate} from "../app/functions";
+import {sexText, getSpecialtyName, afficheDate, getProfessionName} from "../app/functions";
 //import {responseStatus} from "../app/functions"
 import {ConsultationService} from "../providers/consultation.service";
 import {ImageService} from "../providers/image.service";
@@ -21,6 +21,7 @@ export class DemandResumeComponent implements OnInit {
 
   sexTexte: string;
   authorSpecialty: string;
+  authorProfession: string;
   titreMedecin: string;
   nomTitreMedecin: string;
   symptomeUnit: string;
@@ -54,7 +55,15 @@ export class DemandResumeComponent implements OnInit {
     this.sexTexte = sexText(this.consultation.sex);
     this.authorSpecialty = getSpecialtyName(this.consultation.author.specialtyId);
     if(this.question) {
-      this.titreMedecin = "Médecin demandant";
+      let titreText: string;
+      switch (this.consultation.author.userType) {
+        case 0: titreText ="Patient"; break;
+        case 1: titreText = "Professionnel";
+          this.authorProfession = getProfessionName(this.consultation.author.professionId);
+          break;
+        default: titreText = "Médecin"; break;
+      }
+      this.titreMedecin = titreText + " demandant";
       this.nomTitreMedecin = this.consultation.author.forname + " " + this.consultation.author.name;
       this.authorSpecialty = getSpecialtyName(this.consultation.author.specialtyId);
       var options = {
