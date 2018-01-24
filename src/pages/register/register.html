@@ -17,7 +17,7 @@
       <ion-item-group  class="do-lines" *ngIf="selectedType == 0">
         <ion-item>
           <ion-label stacked>Date de naissance</ion-label>
-          <ion-datetime displayFormat="MM/DD/YYYY" formControlName="birthdate"></ion-datetime>
+          <ion-datetime  [pickerOptions]="selectOptions" displayFormat="MM/DD/YYYY" formControlName="birthdate" class=""></ion-datetime>
         </ion-item>
         <ion-item *ngIf="!registerForm.controls['birthdate'].valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
       </ion-item-group>
@@ -54,8 +54,8 @@
         <ion-checkbox formControlName="acceptPatient"></ion-checkbox>
       </ion-item>
 
-      <ion-item-group class="do-lines">
-        <ion-item>
+      <ion-item-group>
+        <ion-item no-border>
           Sexe
         </ion-item>
         <ion-list radio-group formControlName="sex" class="inline" no-lines>
@@ -172,12 +172,12 @@
       <ion-grid>
         <ion-row>
           <ion-col col-3>
-            <div class="title-image"><img src="assets/img/icons/question.png" alt="Demander un avis" /></div>
+            <div class="title-image"><img src="assets/img/icons/patient.png" alt="Demander un avis" /></div>
             <h1 ion-text color="primary" class="small-h1">S'enregistrer </h1></ion-col>
           <ion-col col-9>
             <h2 ion-text color="secondary" class="h2-title">Merci</h2>
 
-            <p ion-text>, Votre profil, {{user.forname}} {{user.name}}, a bien été créé.<br />
+            <p ion-text>Votre profil, {{user.forname}} {{user.name}}, a bien été créé.<br />
               Vous pouvez maintenant utiliser l'application.</p>
           </ion-col>
         </ion-row>

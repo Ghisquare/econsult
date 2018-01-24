@@ -9,8 +9,19 @@ page-consulted-list, page-consulted {
     light: #f4f4f4,
     dark: #222
   );
+
+  $border-color: 'white';
+
   $bkgcolor: 'background';
   $toolbar-title-color: 'third';
+
+  ion-item-group .item-inner,
+  ion-item-group.do-lines, ion-list.inline, ion-item-group.inline,
+  .list-ios .item-block .item-inner,
+  .list-md .item-block .item-inner
+  {
+    border-color:white;
+  }
 
   p, input::placeholder, textarea::placeholder, .select-placeholder, .item-md p, .item-ios p {
     color: #fff;

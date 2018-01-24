@@ -115,11 +115,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ion-item-group .item-inner {
-  border: none;
+ // border: none;
 }
 
 ion-item-group.do-lines {
-  //border-bottom: 0.55px solid #c8c7cc;
+ border-bottom: 0.55px solid #c8c7cc;
 }
 
 .color-primary {
@@ -143,7 +143,7 @@ ion-item-group.do-lines {
 }
 
 .item-ios.item-block .item-inner, .item-md.item-block .item-inner {
-   border-bottom: none;
+   //border-bottom: none;
 }
 
 .list-ios > .item-block:first-child , .list-md > .item-block:first-child {
@@ -156,10 +156,11 @@ ion-item-group.do-lines {
 
 .list-ios {margin-bottom: 8px;}
 
-ion-item-group.inline, ion-list.inline {
-  border-bottom: none;
+ion-item-group.inline {
+ // border-bottom: none;
   margin-bottom: 0;
 }
+
 
 .button-third {
   color: white;

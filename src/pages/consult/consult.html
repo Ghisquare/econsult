@@ -50,7 +50,7 @@
         <ion-checkbox checked="true" formControlName="anonymous_patient" (ionChange)="doAnonymous()"></ion-checkbox>
       </ion-item>
       <div *ngIf="isAnonymousPatient">
-        <ion-item ion-text>
+        <ion-item no-border>
           <ion-label stacked>Sexe</ion-label>
         </ion-item>
 
@@ -99,10 +99,10 @@
         </ion-item>
         <ion-item *ngIf="!consultForm.controls.patient_birthdate.valid && submitAttempt" no-margin no-lines><error-msg text="ce champs est obligatoire"></error-msg></ion-item>
 
-        <ion-item>
+        <ion-item no-border>
           Sexe
         </ion-item>
-        <ion-list radio-group formControlName="sex" class="inline" no-lines>
+        <ion-list radio-group formControlName="sex" class="inline do-lines" no-lines>
           <ion-item>
             <ion-label>Masculin</ion-label>
             <ion-radio value="0"></ion-radio>
