@@ -130,8 +130,12 @@ ion-item-group.do-lines {
   color: map-get($colors, fourth);
 }
 
-.background-primary .item, .background-primary .picker-wrapper, .background-primary .picker-toolbar {
+.background-primary .item, .background-primary .picker-wrapper, .background-primary .picker-toolbar, .background-primary .alert-wrapper {
   background-color: #2d3281;
+}
+
+.background-primary .alert-wrapper {
+  color: white;
 }
 
 .background-third .item, .background-third .picker-wrapper, .background-third .picker-toolbar {
@@ -170,4 +174,14 @@ ion-item-group.inline {
 
 .first-p {
   margin-top: 3px;
+}
+
+.myAlert {
+  .alert-wrapper {
+    color:  map-get($colors, dark);
+    background-color:  map-get($colors, light);
+    button {
+      color:  map-get($colors, dark);
+    }
+  }
 }

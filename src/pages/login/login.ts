@@ -47,7 +47,7 @@ export class LoginPage implements OnInit{
             this.nav.setRoot(HomePage);
           });
         } else {
-          this.showError("Access Denied");
+          this.showError("L'identifiant et le mot de passe saisis ne sont pas valide");
         }
       },
       error => {
@@ -67,8 +67,9 @@ export class LoginPage implements OnInit{
     this.loading.dismiss();
 
     let alert = this.alertCtrl.create({
-      title: 'Fail',
+      title: 'Erreur',
       subTitle: text,
+      cssClass : 'background-primary',
       buttons: ['OK']
     });
     alert.present(prompt);

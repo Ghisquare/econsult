@@ -12,6 +12,7 @@ import {AuthService} from "../providers/auth-service/auth-service";
 import {SettingsPage} from "../pages/settings/settings";
 import {HomePage} from "../pages/home/home";
 import {EmailComposer} from "@ionic-native/email-composer";
+import {SmartAudio} from "../providers/smart-audio";
 
 @Component({
   templateUrl: 'app.html',
@@ -29,7 +30,7 @@ export class MyApp {
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, private alertCtrl: AlertController, private auth: AuthService, public statusBar: StatusBar, public splashScreen: SplashScreen, private consultationService: ConsultationService
-    , private userService: UserService, public menu : MenuController, private emailComposer: EmailComposer, private alertControler: AlertController) {
+    , private userService: UserService, public menu : MenuController, private emailComposer: EmailComposer, private alertControler: AlertController, public smartAudio: SmartAudio) {
     this.initializeApp();
     this.pages = [
       { title: 'Mode d\'emploi', component: HomePage },
@@ -113,6 +114,8 @@ export class MyApp {
       this.getUsers();
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.smartAudio.preload('notification', 'assets/sounds/chime-notification.wav');
     });
   }
 

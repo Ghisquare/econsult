@@ -40,7 +40,7 @@ export class InMemDataService implements InMemoryDbService {
       {id : 17, name: 'Infectiologue'},
       {id : 18, name: 'Médecine travail'},
       {id : 20, name: 'Médecine interne'},
-      {id : 21, name: 'Médecine nue claire'},
+      {id : 21, name: 'Médecine nucléaire'},
       {id : 22, name: 'Néphrologue'},
       {id : 23, name: 'Neurologue'},
       {id : 24, name: 'Oncologue'},

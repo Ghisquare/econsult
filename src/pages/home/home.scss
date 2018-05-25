@@ -15,6 +15,9 @@ page-home {
   .menu-left-button, .refresher-pulling div, .refresher-refreshing div {
     color: map-get($colors, primary);
   }
+  .alert-md .alert-button, .alert-ios .alert-button {
+    color: map-get($colors, dark);
+  }
 
   .button-image {
     text-align: center;

@@ -51,6 +51,9 @@ import {ErrorMsgComponent} from "../components/forms/error-msg";
 import {SettingsPage} from "../pages/settings/settings";
 import {EmailComposer} from "@ionic-native/email-composer";
 
+import { SmartAudio } from '../providers/smart-audio';
+import { NativeAudio } from '@ionic-native/native-audio';
+
 /*const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
 });*/
@@ -135,6 +138,8 @@ export class MyErrorHandler implements ErrorHandler {
     Camera,
     FilePath,
     EmailComposer,
+    SmartAudio,
+    NativeAudio,
     {provide: ErrorHandler, useClass: IonicErrorHandler}  ]
 })
 
