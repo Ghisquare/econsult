@@ -6,6 +6,7 @@ import {ConsultationService} from "../../providers/consultation.service";
 import {Consultation} from "../../app/model/consultation";
 import {afficheDate} from "../../app/functions";
 import {ConsultedPage} from "./consulted-page";
+import {AlertService} from "../../providers/alert.service";
 
 @Component({
   selector: 'page-consulted-list',
@@ -16,7 +17,7 @@ export class ConsultedListPage implements OnInit {
   demands: Consultation[];
 
   constructor(public navCtrl: NavController,
-              private authService: AuthService, private consultationService: ConsultationService) {
+              private authService: AuthService, private consultationService: ConsultationService, private alertService: AlertService) {
     // If we navigated to this page, we will have an item available as a nav param
   }
 
@@ -34,4 +35,14 @@ export class ConsultedListPage implements OnInit {
   afficheDate(ts: number) {
     return afficheDate(ts);
   }
+
+
+  ionViewDidEnter() {
+    this.alertService.initRefresh();
+  }
+
+  ionViewDidLeave() {
+    this.alertService.stopRefresh();
+  }
+
 }

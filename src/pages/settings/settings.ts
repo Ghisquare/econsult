@@ -11,6 +11,7 @@ import {User} from "../../app/model/user";
 import {AuthService} from "../../providers/auth-service/auth-service";
 import {UsernameValidator} from "../../validators/username";
 import {HomePage} from "../home/home";
+import {AlertService} from "../../providers/alert.service";
 
 /**
  * Generated class for the RegisterPage page.
@@ -49,7 +50,7 @@ export class SettingsPage implements OnInit{
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private fb: FormBuilder, private loadingCtrl: LoadingController,
                private userService: UserService, private professionService: ProfessionService, private specialtyService: SpecialtyService,
-               private authService: AuthService) {
+               private authService: AuthService, private alertService: AlertService) {
   }
 
   createForm() {
@@ -258,5 +259,13 @@ export class SettingsPage implements OnInit{
 
   scrollToTop() {
     this.content.scrollToTop();
+  }
+
+  ionViewDidEnter() {
+    this.alertService.initRefresh();
+  }
+
+  ionViewDidLeave() {
+    this.alertService.stopRefresh();
   }
 }

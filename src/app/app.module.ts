@@ -3,7 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
 //import { RouterModule }   from '@angular/router';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {IonicApp, IonicErrorHandler, IonicModule, NavController} from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { SpecialtySelectComponent } from '../components/specialty-select';
@@ -53,6 +53,9 @@ import {EmailComposer} from "@ionic-native/email-composer";
 
 import { SmartAudio } from '../providers/smart-audio';
 import { NativeAudio } from '@ionic-native/native-audio';
+import {AlertService} from "../providers/alert.service";
+import {ConsultationService} from "../providers/consultation.service";
+
 
 /*const IonicPro = Pro.init('b1148716', {
   appVersion: "0.0.1"
@@ -132,6 +135,9 @@ export class MyErrorHandler implements ErrorHandler {
     PatientService,
     MessageService,
     ImageService,
+    AlertService,
+    ConsultationService,
+
     CallNumber,
     File,
     Transfer,

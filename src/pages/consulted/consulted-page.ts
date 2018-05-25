@@ -5,6 +5,7 @@ import {afficheDate} from "../../app/functions";
 import {HomePage} from "../home/home";
 import {Message} from "../../app/model/message";
 import {MessageService} from "../../providers/message.service";
+import {AlertService} from "../../providers/alert.service";
 
 @Component({
   selector: 'page-consulted',
@@ -18,7 +19,7 @@ export class ConsultedPage {
   hasMessages: boolean = false;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private messageService: MessageService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private messageService: MessageService, private alertService: AlertService) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedDemand = navParams.get('demand');
     console.log("ConsultedPage.construct D" + this.selectedDemand.id);
@@ -53,4 +54,13 @@ export class ConsultedPage {
       this.sentMessage = event;
     }
   }
+
+  ionViewDidEnter() {
+    this.alertService.initRefresh();
+  }
+
+  ionViewDidLeave() {
+    this.alertService.stopRefresh();
+  }
+
 }

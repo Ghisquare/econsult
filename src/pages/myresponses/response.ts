@@ -8,6 +8,7 @@ import {Message} from "../../app/model/message";
 import {HomePage} from "../home/home";
 import {EmailComposer} from "@ionic-native/email-composer";
 import {AuthService} from "../../providers/auth-service/auth-service";
+import {AlertService} from "../../providers/alert.service";
 
 @Component({
   selector: 'response',
@@ -25,7 +26,8 @@ export class ResponsePage implements OnInit {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private emailComposer: EmailComposer, private authService: AuthService,
-              private consultationService: ConsultationService, private loadingCtrl: LoadingController, private messageService: MessageService) {
+              private consultationService: ConsultationService, private loadingCtrl: LoadingController, private messageService: MessageService,
+              private alertService: AlertService) {
     // If we navigated to this page, we will have an item available as a nav param
     this.consultation = navParams.get('response');
   }
@@ -119,5 +121,13 @@ export class ResponsePage implements OnInit {
       this.sentMessage = event;
       this.closed = true;
     }
+  }
+
+  ionViewDidEnter() {
+    this.alertService.initRefresh();
+  }
+
+  ionViewDidLeave() {
+    this.alertService.stopRefresh();
   }
 }

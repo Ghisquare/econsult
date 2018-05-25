@@ -7,6 +7,7 @@ import {Consultation} from "../../app/model/consultation";
 import {afficheDate} from "../../app/functions";
 import {ResponsePage} from "./response";
 import {HomePage} from "../home/home";
+import {AlertService} from "../../providers/alert.service";
 
 @Component({
   selector: 'page-myresponses',
@@ -18,7 +19,7 @@ export class MyResponsesPage implements OnInit {
 
 
   constructor(public navCtrl: NavController,
-              private authService: AuthService, private consultationService: ConsultationService, private loadingCtrl: LoadingController) {
+              private authService: AuthService, private consultationService: ConsultationService, private loadingCtrl: LoadingController, private alertService: AlertService) {
   }
 
   itemTapped(event, response) {
@@ -42,8 +43,17 @@ export class MyResponsesPage implements OnInit {
     });
     this.loading.present();
   }
+
   afficheDate(ts: number) {
     return afficheDate(ts);
   }
 
+  ionViewDidEnter() {
+    this.alertService.initRefresh();
+  }
+
+  ionViewDidLeave() {
+    this.alertService.stopRefresh();
+  }
 }
+

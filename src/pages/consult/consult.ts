@@ -24,6 +24,7 @@ import {Image} from "../../app/model/image";
 import {ImageService} from "../../providers/image.service";
 import {age} from "../../app/functions";
 import {HomePage} from "../../pages/home/home";
+import {AlertService} from "../../providers/alert.service";
 
 
 declare var cordova: any;
@@ -56,7 +57,7 @@ export class ConsultPage implements OnInit{
               private authService: AuthService, private consultationService: ConsultationService, private loadingCtrl: LoadingController,
               private navCtrl: NavController, private  patientService: PatientService, private camera: Camera,
               private transfer: Transfer, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform,
-              public modalCtrl: ModalController, private imgService: ImageService, private myErrorHandler: ErrorHandler) { // <--- inject FormBuilder
+              public modalCtrl: ModalController, private imgService: ImageService, private myErrorHandler: ErrorHandler, private alertService: AlertService) { // <--- inject FormBuilder
     this.createForm();
     this.timeUnits = consultationService.getTimeUnits();
   }
@@ -378,5 +379,12 @@ export class ConsultPage implements OnInit{
     this.navCtrl.setRoot(HomePage);
   }
 
+  ionViewDidEnter() {
+    this.alertService.initRefresh();
+  }
+
+  ionViewDidLeave() {
+    this.alertService.stopRefresh();
+  }
 
 }

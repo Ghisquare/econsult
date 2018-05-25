@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavController, AlertController, Platform} from 'ionic-angular';
 import {AuthService} from "../../providers/auth-service/auth-service";
 import {User} from "../../app/model/user";
@@ -11,73 +11,55 @@ import {MyResponsesPage} from "../myresponses/myresponses";
 import {ConsultedPage} from "../consulted/consulted-page";
 import {ResponsePage} from "../myresponses/response";
 import * as moment from 'moment';
-import {SmartAudio} from "../../providers/smart-audio";
+import {AlertService} from "../../providers/alert.service";
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit{
 
   currentUser: User;
   demands: Consultation[];
   responses: Consultation[];
-  oldDemandCount: number;
   demandCount: number;
-  oldResponseCount: number;
   responseCount: number;
   responseText: string;
-  private timeoutId: number;
+  refresher: any = null;
 
 
   constructor(public navCtrl: NavController, private authService: AuthService, private consultationService: ConsultationService,
-              private alertCtrl: AlertController, public platform: Platform, public smartAudio: SmartAudio) {
+               public platform: Platform, public alertService: AlertService) {
     this.currentUser = authService.getUserInfo();
-    this.doRefresh(0);
   }
 
-  public doRefresh(refresher){
-    console.log(`Refresh at ${moment().format('LTS')}`);
-    this.oldDemandCount = this.demandCount;
-    this.oldResponseCount = this.responseCount;
+  public ngOnInit(){
+    console.log(`Home.Init at ${moment().format('LTS')}`);
 
     this.consultationService.getDemandsByContact(this.currentUser, "0|2").then(consultations => {
-      this.demands = consultations; this.demandCount = consultations.length;
+      this.demands = consultations;
+      this.demandCount = consultations.length;
+      this.alertService.demandCount = this.demandCount;
       this.consultationService.getResponsesByAuthor(this.currentUser).then(consultations => {
         this.responses = consultations;
         this.responseCount = consultations.length;
+        this.alertService.responseCount = this.responseCount;
         if(this.responseCount <= 1) this.responseText = "Réponse reçue"; else this.responseText = "Réponses reçues";
-        if(refresher != 0)
-          refresher.complete();
-
-        if(this.demandCount > this.oldDemandCount) {
-          console.log("New Demand");
-
-          let alert = this.alertCtrl.create({
-            title: 'Nouvelle demande',
-            subTitle: 'Vous avez une nouvelle demande de consultation',
-            cssClass: 'myAlert',
-
-            buttons: ['Ok']
-          });
-          alert.present();
-          this.smartAudio.play('notification');
-        }
-        if(this.responseCount > this.oldResponseCount) {
-          console.log("New Response");
-
-          let alert = this.alertCtrl.create({
-            title: 'Nouvelle réponse',
-            subTitle: 'Vous avez une nouvelle réponse',
-            cssClass: 'myAlert',
-            buttons: ['Ok']
-          });
-          alert.present();
-          this.smartAudio.play('notification');
+        if(this.refresher != null) {
+          console.log("REFRESHER" + this.refresher);
+          this.refresher.complete();
+          this.refresher = null;
         }
       });
     });
+  }
+
+  doRefresh(event: any) {
+    this.refresher = event;
+    console.log("REFRESHER" + this.refresher);
+
+    this.ngOnInit();
   }
 
 
@@ -116,20 +98,10 @@ export class HomePage {
   }
 /* Automatic view refresh */
   ionViewDidEnter() {
-    this.initRefresh();
+    this.alertService.initRefresh(true);
   }
 
   ionViewDidLeave() {
-    this.stopRefresh();
+    this.alertService.stopRefresh();
   }
-
-  private initRefresh() {
-    this.doRefresh(0);
-    this.timeoutId = setInterval(() => this.doRefresh(0), 30 * 1000);
-  }
-
-  private stopRefresh() {
-    clearInterval(this.timeoutId);
-  }
-
 }
